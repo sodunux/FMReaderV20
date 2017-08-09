@@ -1,0 +1,4 @@
+For PCB Board V2.0
+MCU set a signal for FPGA por RST.
+Push pin set AUX1,AUX2 to output.
+Auto send ATQA,uart command is  0x77.
