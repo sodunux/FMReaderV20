@@ -50,8 +50,7 @@ void EP1_OUT_Callback (void)
   if((uint32_t)iBufferRecvCnt == (10+dwTemp))
   {
     bReaderStatus = RDS_PARSER;
-	
-	OSSemPost(usb_Sem); // 发送信号量
+		OSSemPost(usb_Sem); // 发送信号量
   }
 
   SetEPRxValid(ENDP1);

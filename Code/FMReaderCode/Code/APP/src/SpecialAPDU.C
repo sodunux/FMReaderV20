@@ -22,7 +22,6 @@
 #define INDEX_DATA  0x05
 
 InternalRegister stuInRegs;
-uint8_t abIntBuffer[1024*4];    // Internal Buffer.
 uint8_t InitCmd04Flag=0;
 uint8_t InitCmd00Flag=0;
 uint8_t InitCmdFlag=0;					//0:APDU,1:Init
@@ -37,12 +36,7 @@ extern bool bTimeOut;
 *******************************************************************************/
 void InRegsInit(void)
 {
-  stuInRegs.bCurrentDevice = CURRENT_DEVICE_TDA8035;
-  // stuInRegs.bCurrentDevice = CURRENT_DEVICE_FM320;
-  stuInRegs.bATRSource = ATR_SOURCE_CARD;  
-  stuInRegs.bVoltage = CARD_VCC_3V;
-  stuInRegs.bCardPresent = SA_CARD_ABSENT;
-  stuInRegs.bIsPoweredOnCT = 1;//0;
+  stuInRegs.bCurrentDevice = CURRENT_DEVICE_CT;
 }
 
 /*******************************************************************************
@@ -125,12 +119,11 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
       if((bP1 == 0x00) && (bP2 == 0x00))
       {
         b = (*(APDUBuffer+5));        
-        if((b == 0x11) || (b == 0x21) || (b == 0x31) || (b == CURRENT_DEVICE_FM320))
+        if((b == 0x11) || (b == 0x21) || (b == 0x31) || (b == CURRENT_DEVICE_CL))
         {                                                        
           stuInRegs.bCurrentDevice = (b&0x0F);
           if(b&0x01)  // Contact card.
           {
-            stuInRegs.bVoltage = ((b>>4)&0x0F);
             CLCardPowerOff();
             bTimeoutOpen = 0;   // Suppose card will be inserted into slot again.
           }
@@ -584,7 +577,7 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 		}
 		
 		//ContactCard
-		if(stuInRegs.bCurrentDevice==CURRENT_DEVICE_TDA8035)	
+		if(stuInRegs.bCurrentDevice==CURRENT_DEVICE_CT)	
 		{
 			if(CMD2==0x01) //≥ı ºªØ01÷∏¡Ó
 			{
@@ -621,7 +614,7 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 		}
 		
 		//ContactlessCard
-		if(stuInRegs.bCurrentDevice==CURRENT_DEVICE_FM320)
+		if(stuInRegs.bCurrentDevice==CURRENT_DEVICE_CL)
 		{
 			//CRC and parity
 			//PS:FM320 parity can be disable and enable,but can't be select odd or even

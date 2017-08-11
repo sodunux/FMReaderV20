@@ -89,15 +89,15 @@ int  main (void)
 
   OSInit();/* Initialize "uC/OS-II, The Real-Time Kernel"*/
 	usb_Sem= OSSemCreate(0);
-    OSTaskCreate(
-				App_TaskStart,
-				(void*)0,
-				&App_TaskStartStk[APP_TASK_START_STK_SIZE-1],
-				APP_TASK_START_PRIO
-				);
-    OSStart();/* Start multitasking (i.e. give control to uC/OS-II)*/
+  OSTaskCreate(
+								App_TaskStart,
+								(void*)0,
+								&App_TaskStartStk[APP_TASK_START_STK_SIZE-1],
+								APP_TASK_START_PRIO
+								);
+  OSStart();/* Start multitasking (i.e. give control to uC/OS-II)*/
 
-    return (0);
+  return (0);
 }
 
 
@@ -121,7 +121,7 @@ static  void  App_TaskStart (void *p_arg)
 {
 
 
-  	(void)p_arg;
+  (void)p_arg;
 
 	BSP_Init();
 
@@ -147,7 +147,7 @@ static  void  App_TaskStart (void *p_arg)
 
 	while(1)
 	{
-	 OSTaskSuspend(OS_PRIO_SELF);
+		OSTaskSuspend(OS_PRIO_SELF);
 	}
 }
 
@@ -188,7 +188,7 @@ static void App_TaskLedCount(void *p_arg)
 				LEDShow(i+1 , Bit_SET);
 		}
 		LedCount++;
-		OSTimeDlyHMSM(0, 0, 1, 0);
+		OSTimeDlyHMSM(0, 0, 0, 500);
 	}
 
 }
@@ -215,27 +215,28 @@ static  void  App_TaskCCID (void *p_arg)
 {
    (void)p_arg;
     while (1) 
-	{
-	if(bUsbStatus == 1) //解决了win10驱动不兼容问题 gaoxuebing 2016-05-18
-     {
-		bCardSlotStatus = CCID_CARD_SLOT_PRESENT;    
+		{
+			if(bUsbStatus == 1) //解决了win10驱动不兼容问题 gaoxuebing 2016-05-18
+			{
+				bCardSlotStatus = CCID_CARD_SLOT_PRESENT;    
         CCIDCardSlotChange();           
         bUsbStatus++;
-     }
-
-		OSSemPend(usb_Sem, 0, &err); //  wait for signal usb_Sem
-		CCID_handler();
-	  OSTimeDlyHMSM(0, 0, 0, 20);
+			}
+			OSSemPend(usb_Sem, 0, &err); //  wait for signal usb_Sem
+			CCID_handler();
+			OSTimeDlyHMSM(0, 0, 0, 20);
     }
 }
 
+
+
 void CCID_handler(void)
 {
-    u8 bTemp = 0;
+  u8 bTemp = 0;
 	while(bReaderStatus != RDS_IDLE)
 	{
 		switch(bReaderStatus)      
-	    {
+	  {
 	    //RDS is short for Reader Status
 	    case RDS_PARSER:
 	      iBufferRecvCnt = 0;
@@ -251,129 +252,57 @@ void CCID_handler(void)
 	      break;	
 				
 	    case RDS_ACTION:
-		  LEDShow(3, Bit_RESET);
+				LEDShow(3, Bit_RESET);
 	      bStatus = 0;
 	      bError = 0;
 	      switch(bTemp & 0xF0)
 	      {
-	      case ACT_POWER_ON:
-
-	        if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_TDA8035)
-	        {
-				bPowerSelect = stuInRegs.bVoltage;
-				goto VIRTUAL_ATR;
-	        }
-	        else if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_FM320)
-	        {	
-	          CLCardPowerOff();
-	          bTemp = CLCardReset(abAPDUBuffer, &iAPDUBufferRecvLen);
-	          
-			  if((bTemp == CL_TCL_ATS_ERROR) || (bTemp == CL_TCL_OK))
-	            stuInRegs.bCardPresent = SA_CARD_PRESENT;
-	          else 
-	            stuInRegs.bCardPresent = SA_CARD_ABSENT;            
-	          if(bTemp != CL_TCL_OK)          
-	            goto VIRTUAL_ATR;
-	          else
-	            stuInRegs.bATRSource = ATR_SOURCE_CARD;	
-	        }	
-	        else
-	        {
-			VIRTUAL_ATR:
-				abAPDUBuffer[0] = 0x3B;        
-	          	abAPDUBuffer[1] = 0x96;
-	          	abAPDUBuffer[2] = 0x11;
-				abAPDUBuffer[3] = 0x80;
-				abAPDUBuffer[4] = 0x01;
-	          	abAPDUBuffer[5] = 0x4E;
-	          	abAPDUBuffer[6] = 0x42;
-				abAPDUBuffer[7] = 0x31;
-				abAPDUBuffer[8] = 0x30;
-				abAPDUBuffer[9] = 0x32;
-				abAPDUBuffer[10] = 0x36;
-				abAPDUBuffer[11] = 0x0F;
-	          	iAPDUBufferRecvLen = 12;	
-				stuInRegs.bATRSource = ATR_SOURCE_VIRTUAL;
-	
-	        }
+					case ACT_POWER_ON:
+						abAPDUBuffer[0] = 0x3B;        
+						abAPDUBuffer[1] = 0x96;
+						abAPDUBuffer[2] = 0x11;
+						abAPDUBuffer[3] = 0x80;
+						abAPDUBuffer[4] = 0x01;
+						abAPDUBuffer[5] = 0x4E;
+						abAPDUBuffer[6] = 0x42;
+						abAPDUBuffer[7] = 0x31;
+						abAPDUBuffer[8] = 0x30;
+						abAPDUBuffer[9] = 0x32;
+						abAPDUBuffer[10] = 0x36;
+						abAPDUBuffer[11] = 0x0F;
+						iAPDUBufferRecvLen = 12;	
 	        break;
-					
-	      case ACT_POWER_OFF:
-						
-	      break;
+					case ACT_POWER_OFF:
+						__nop();
+					break;
 				
-		//指令交换的分支
-	      case ACT_APDU_EXCHANGE:	
-	        if(abAPDUBuffer[0] == 0xFF)
-	        {
-	          SpecialAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);  
-	        }
-	        else
-	        {
-	          if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_TDA8035)
-	          {	
-	            LEDShow(3, Bit_SET);
-				bTemp = ContactCardT0APDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
-	            if(bTemp != CT_T0_OK)
-	            {
-	              iAPDUBufferRecvLen = 0;
-	              bStatus = CCID_COMMAND_STATUS_FAIL;
-	              bError = (uint8_t)CCID_ERROR_USER_DEFINED;
-	            }
-	            LEDShow(1, Bit_RESET);	
-	          }
-	          else if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_FM320)
-	          {
-	            LEDShow(2, Bit_SET);
-				bTemp = CLTCLAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
-				if(bTemp!=CL_TCL_OK)
-				{
-					iAPDUBufferRecvLen = 0;
-	              	bStatus = CCID_COMMAND_STATUS_FAIL;
-	              	bError = (uint8_t)CCID_ERROR_USER_DEFINED;
-				}
-	            LEDShow(2, Bit_RESET);
-	          }
-	        }
+					//指令交换的分支
+					case ACT_APDU_EXCHANGE:	
+						if(abAPDUBuffer[0] == 0xFF)
+						{
+							SpecialAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);  
+						}
+						else
+						{ 
+							LEDShow(3, Bit_SET);
+							if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_CT)
+								bTemp = ContactCardT0APDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
+							else 
+								bTemp = CLTCLAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);					
+							if(bTemp!=CL_TCL_OK)
+								{
+									iAPDUBufferRecvLen = 0;
+									bStatus = CCID_COMMAND_STATUS_FAIL;
+									bError = (uint8_t)CCID_ERROR_USER_DEFINED;
+								}
+							LEDShow(3, Bit_RESET);	            
+						}
+						break;
 	
-	        break;
-	
-	      case ACT_SET_PARAM:
-	
-	        if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_TDA8035)
-	        {
-	
-	          if(CCIDCardSlotCheck() == CCID_CARD_SLOT_PRESENT)
-	          {
-	            bTemp = ContactCardPPS(bmFindexDindex);                    
-	            if(bTemp != CT_T0_OK)
-	            {
-	              bStatus = (CCID_COMMAND_STATUS_TIMEOUT | CCID_ICC_STATUS_PRES_ACT);
-	              bError = (uint8_t)CCID_ERROR_USER_DEFINED;
-	            }
-	          }
-	
-	        }
-	        else if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_FM320)
-	        {
-	
-	          if(stuInRegs.bATRSource == ATR_SOURCE_CARD)
-	          {
-	            if(bmFindexDindex == 0x11)
-	              bTemp = CL_TCL_OK;
-	            else
-	              bTemp = CLCardPPS(bmFindexDindex);  
-	            
-	            bTemp = CL_TCL_OK;
-	            if(bTemp != CL_TCL_OK)
-	            {
-	              bStatus = (CCID_COMMAND_STATUS_TIMEOUT | CCID_ICC_STATUS_PRES_ACT);
-	              bError = (uint8_t)CCID_ERROR_USER_DEFINED;
-	            }
-	          }	
-	        }	
-	        break;
+					case ACT_SET_PARAM:
+						break;
 	      }
+				
 	      bReaderStatus = RDS_ORGNIZE;
 	      break;
 	//end of RDS_ACTION

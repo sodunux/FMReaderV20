@@ -23,16 +23,8 @@
 #define INS_SEND_PPSA    0xFF
 
 /* bCurrentDevice constants */
-#define CURRENT_DEVICE_TDA8035  0x01
-#define CURRENT_DEVICE_FM320   0x02
-/* bATRSource constants */
-#define ATR_SOURCE_CARD         0x01
-#define ATR_SOURCE_VIRTUAL      0x02
-
-/* bCounterValue constants */
-#define COUNTER_ENABLE  0x01
-#define COUNTER_ENABLE_ORDER  0x02
-#define COUNTER_DISABLE  0x00
+#define CURRENT_DEVICE_CT  0x01
+#define CURRENT_DEVICE_CL   0x02
 
 /* Timerout Status */
 #define TMO_STANDARD  0x01
@@ -49,18 +41,17 @@
 #define CARD_VCC_18V  3
 #define CARD_VCC_WARM 4
 
+
+
 typedef struct
 {
   uint8_t bCurrentDevice;
-  uint8_t bATRSource;
-  uint8_t bVoltage;         // Voltage supplied to contact card.
-  uint8_t bCardPresent;
-  uint8_t	bIsPoweredOnCT;	// CT Card is powered on
+
 } InternalRegister;  
 
 extern InternalRegister stuInRegs;
 
-extern uint8_t abIntBuffer[1024*4];    // Internal Buffer.
+
 extern bool bIsCTon;
 void InRegsInit(void);
 void PWMOutConfig(uint32_t ClkFrq);
