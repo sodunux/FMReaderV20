@@ -11,8 +11,8 @@
 #define INS_DATA_RECEIVE  0xC0
 #define INS_ATR_SOURCE    0x0B
 #define INS_FM_DEBUG_SIGNAL 0x0D
-#define INS_DIRECT_READ_REGISTER  0x0F
-#define INS_DIRECT_WRITE_REGISTER 0x11
+#define INS_READ_REGISTER_CL  0x0F
+#define INS_WRITE_REGISTER_CL 0x11
 #define INS_COUNTER_START   0x13
 #define INS_COUNTER_STOP   0x15
 #define INS_GET_TYPEA_PARAM 0x17
@@ -41,6 +41,12 @@
 #define CARD_VCC_18V  3
 #define CARD_VCC_WARM 4
 
+#define INDEX_INS 0x01
+#define INDEX_P1  0x02
+#define INDEX_P2  0x03
+#define INDEX_P3  0x04
+#define INDEX_DATA  0x05
+
 
 
 typedef struct
@@ -54,10 +60,13 @@ extern InternalRegister stuInRegs;
 
 extern bool bIsCTon;
 void InRegsInit(void);
-void PWMOutConfig(uint32_t ClkFrq);
 void TIM3Start(void);
 void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
-void TIM3InterruptHandler(void);
+void SpecApduCT(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+void DataTransmit(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+void DataReceive(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+
 extern uint8_t InitCmd04Flag;
 extern uint8_t InitCmd00Flag;
 extern uint8_t InitCmdFlag;//0:APDU,1:Init

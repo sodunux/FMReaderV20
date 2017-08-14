@@ -34,11 +34,6 @@
 
 #define  BSP_MODULE
 #include "includes.h"
-#include "bsp.h"
-#include "smartcard.h"
-#include "FM320.h"
-
-
 
 //u32 SystemCoreClock;
 

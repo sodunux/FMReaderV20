@@ -46,5 +46,4 @@ void CLCardPowerOff(void);
 void CLCardInit(void);
 uint8_t CLCardRegInit(void);
 
-#define CLInterruptHandler();   //SingleResponseIsr();
 #endif

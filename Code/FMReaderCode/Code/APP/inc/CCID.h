@@ -116,7 +116,6 @@ extern uint16_t  volatile iTPDUBufferSendLen, iTPDUBufferSendCnt;
 extern uint8_t  bPowerSelect;       // Index = 7
 extern uint8_t  bmFindexDindex;     // Index = 10
 
-
 void CCIDInit(void);
 uint8_t CCIDParser(uint8_t* CCIDBuffer, uint8_t* APDUBuffer, uint16_t *APDULength);
 void CCIDOrgnize(uint8_t* APDUBuffer, uint16_t APDULength, uint8_t* CCIDBuffer, uint16_t *CCIDLength);

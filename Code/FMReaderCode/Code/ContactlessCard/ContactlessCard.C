@@ -1,10 +1,4 @@
 #include "includes.h"
-#include "CCID.h"
-#include "PICCCmdConst.h"
-#include "MfErrNo.h"
-#include "ContactlessCard.h"
-#include "stm32f10x.h"
-#include "FM320.h"
 
 uint16_t const FrameSize[9] = {16, 24, 32, 40, 48, 64, 96, 128, 256};
 TCLParam stuTCLParam;
@@ -87,12 +81,12 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
 	
   /* Reset RFIC */
   bStatus = FM320_Initial_ReaderA();
-  if(bStatus != MI_OK)
+  if(bStatus != CL_TCL_OK)
     return CL_TCL_RFIC_ERROR;
 
   /* Get ATQA */  
   bStatus =ReaderA_Request(PICC_REQIDL);
-  if(bStatus != MI_OK)
+  if(bStatus != CL_TCL_OK)
     return CL_TCL_ATQ_ERROR;
   else
   	{
@@ -105,7 +99,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
   /* Anticollision 1 */
   bStatus=ReaderA_AntiCol(0);
   //bStatus = Mf500PiccCascAnticoll(PICC_ANTICOLL1, 0, &(stuTCLParam.abUID[0]));
-  if(bStatus != MI_OK)
+  if(bStatus != CL_TCL_OK)
     return CL_TCL_UID_ERROR;
   else
   	{
@@ -118,7 +112,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
   /* Selection 1 */
   bStatus=ReaderA_Select(0);
   //bStatus = Mf500PiccCascSelect(PICC_ANTICOLL1, &(stuTCLParam.abUID[0]), &(stuTCLParam.bSak));
-  if(bStatus != MI_OK)
+  if(bStatus != CL_TCL_OK)
     return CL_TCL_UID_ERROR;
   else
   	stuTCLParam.bSak=CardA_Sel_Res.SAK;
@@ -128,7 +122,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
     /* Anticollision 2 */
 	 bStatus=ReaderA_AntiCol(1);
     //bStatus = Mf500PiccCascAnticoll(PICC_ANTICOLL2, 0, &(stuTCLParam.abUID[4]));
-    if(bStatus != MI_OK)
+    if(bStatus != CL_TCL_OK)
     	return CL_TCL_UID_ERROR;
 	else
 		{
@@ -141,7 +135,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
     /* Selection 2 */
 	bStatus=ReaderA_Select(0);
     //bStatus = Mf500PiccCascSelect(PICC_ANTICOLL2, &(stuTCLParam.abUID[4]), &(stuTCLParam.bSak));
-    if(bStatus != MI_OK)
+    if(bStatus != CL_TCL_OK)
       	return CL_TCL_UID_ERROR;
 	else
 		stuTCLParam.bSak=CardA_Sel_Res.SAK;		
@@ -152,7 +146,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
     /* Anticollision 3 */
 		bStatus=ReaderA_AntiCol(2);
     //bStatus = Mf500PiccCascAnticoll(PICC_ANTICOLL3, 0, &(stuTCLParam.abUID[8]));
-    if(bStatus != MI_OK)
+    if(bStatus != CL_TCL_OK)
       return CL_TCL_UID_ERROR;
 	else
 		{
@@ -165,7 +159,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
     /* Selection 3 */    
 	  bStatus=ReaderA_Select(2);
    // bStatus = Mf500PiccCascSelect(PICC_ANTICOLL3, &(stuTCLParam.abUID[8]), &(stuTCLParam.bSak));
-    if(bStatus != MI_OK)
+    if(bStatus != CL_TCL_OK)
       return CL_TCL_UID_ERROR; 
 	else
 		stuTCLParam.bSak=CardA_Sel_Res.SAK;
@@ -174,7 +168,7 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
   /* RATS */  
 
   bStatus=ReaderA_Rats(0x08,0x00);
-  if(bStatus != MI_OK)
+  if(bStatus != CL_TCL_OK)
     return CL_TCL_ATS_ERROR;
   else
   	{
@@ -333,20 +327,7 @@ uint8_t ContactlessCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16
 //  uint8_t   bP2 = 	APDUBuffer[3];
 //  uint16_t  bP3 =   APDUBuffer[4];
 //	
-	//
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	return 0;
 	
 }
@@ -467,7 +448,7 @@ ORGNIZE_BLOCK:
 	}
 	iRecvLen=NFC_DataExStruct.nBytesReceived;
 	
-	if(bStatus != MI_OK)
+	if(bStatus != CL_TCL_OK)
   {
     bErrCnt++;
     if(bErrCnt >= ERROR_COUNTER_MAX) 

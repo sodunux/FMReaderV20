@@ -38,6 +38,7 @@ extern uint8_t volatile bT0Status;      // Reader will receive bytes or send byt
 extern uint8_t volatile bIsTimeout;     // TDA8035 Timer is overflow or not.
 
 
+
 uint8_t ContactCardPPS(uint8_t PPS1);
 uint8_t ContactCardT0APDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
 uint8_t ContactCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);

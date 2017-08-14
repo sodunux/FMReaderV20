@@ -214,6 +214,25 @@ u8 FM320_ModifyReg(u8 addr,u8 mask,u8 set)
 
 
 //***********************************************
+//函数名称：RateSel
+//函数功能：修改发送和接受速率
+//入口参数：txrata 发送速率，rxrate 接受速率
+//					0:106K;1:212K;2:424K;3:848K;
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 RateSel(u8 txrate,u8 rxrate)
+{
+	if((txrate<4)&&(rxrate<4))
+	{
+		
+	}
+	else 
+		return 1;
+}
+
+
+
+//***********************************************
 //函数名称：FM175xx_Initial_ReaderA
 //函数功能：ReaderA初始化
 //入口参数：NA
@@ -335,24 +354,7 @@ u8 FM320_Initial_ReaderA(void)
 	if(res != true)
 		return FM175XX_REG_ERR;  
 	
-//	addr = 0X04;                   //clear all interupts          
-//	regdata = 0x60;
-//	res = FM320_SetReg(addr,regdata);
-//	if(res != TRUE)
-//		return FM175XX_REG_ERR;
-//	
-//	addr = 0X02;                
-//	regdata = 0x40;
-//	res = FM320_SetReg(addr,regdata);
-//	if(res != TRUE)
-//		return FM175XX_REG_ERR;
-//	
-//	addr = 0X03;                
-//	regdata = 0x80;
-//	res = FM320_SetReg(addr,regdata);
-//	if(res != TRUE)
-//		return FM175XX_REG_ERR;
-	
+
 	return FM175XX_SUCCESS;
 }
 
@@ -762,11 +764,6 @@ u8 Write_FIFO(u8 fflen,u8* ffbuf)
 
 
 
-//中断服务程序
-u8 FM320_IRQ_Pro(u8 tag_com_irq,u8 tag_div_irq)
-{
-	return 0;
-}
 /******************************************************************************/
 //函数名：Command_Transceive
 //入口参数：

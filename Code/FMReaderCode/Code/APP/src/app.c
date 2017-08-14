@@ -53,6 +53,9 @@ uint8_t  volatile bUsbStatus = 0;
 bool bTimeOut = (bool)FALSE;
 bool bIsCTon = (bool)FALSE;
 
+
+
+
 OS_EVENT *usb_Sem;
 
 

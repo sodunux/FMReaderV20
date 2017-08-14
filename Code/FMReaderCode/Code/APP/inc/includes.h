@@ -58,10 +58,5 @@
 #include "misc.h"
 #include "smartcard.h"
 #include "FM320.h"
-
-#define SPECIAL_APDU_ENABLE
-#define CONTACT_CARD_ENABLE
-#define CONTACTLESS_CARD_ENABLE
-
-
+#include "PICCCmdConst.h"
 #endif
