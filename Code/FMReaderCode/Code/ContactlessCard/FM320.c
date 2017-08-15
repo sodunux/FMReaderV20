@@ -3,7 +3,7 @@
 const u8 RF_CMD_ANTICOL[3] = {0x93,0x95,0x97} ;
 const u8 RF_CMD_SELECT[3] = {0x93,0x95,0x97} ;
 struct TypeACardResponse CardA_Sel_Res;
-u8 RF_Data_Len;
+
 u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 
 void mDelay(u16 ms)			//实测1ms
@@ -212,6 +212,41 @@ u8 FM320_ModifyReg(u8 addr,u8 mask,u8 set)
 	return res;
 }
 
+//***********************************************
+//函数名称：ReadeA_HALT
+//函数功能：发送HALT命令
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 ReaderA_HALT()
+{
+	u8 res;	
+	u8 i;
+	u8 halt[2]={0x50,0x00};
+	
+	res = FM320_SetReg(FIFOLEVEL,PHCS_BFL_JBIT_FLUSHFIFO);	//FlushFIFO
+	if(res != true)
+		return FM175XX_REG_ERR;
+	res = FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,SET);
+	if(res != true)
+		return FM175XX_REG_ERR;
+		
+	res = Write_FIFO(0x02,halt);
+	if(res != true)
+		return FM175XX_REG_ERR;
+
+	res = FM320_SetReg(COMMAND,CMD_TRANSMIT);
+	if(res != true)
+		return FM175XX_REG_ERR;
+	
+	res = FM320_SetReg(BITFRAMING,0x80);//8Bits数据全发
+	if(res != true)
+		return FM175XX_REG_ERR;	
+	
+
+	return FM175XX_SUCCESS;
+}
+
+
 
 //***********************************************
 //函数名称：RateSel
@@ -222,12 +257,52 @@ u8 FM320_ModifyReg(u8 addr,u8 mask,u8 set)
 //***********************************************
 u8 RateSel(u8 txrate,u8 rxrate)
 {
+	u8 ret,regdata;
+	u8 res;
 	if((txrate<4)&&(rxrate<4))
 	{
+		res=FM320_GetReg(TXMODE,&regdata);
+		if(res != true)
+			return FM175XX_REG_ERR;
+		regdata=(regdata&0x8F)|(txrate<<4);
+		res=FM320_SetReg(TXMODE,regdata);
+		if(res != true)
+			return FM175XX_REG_ERR;		
 		
+		res=FM320_GetReg(RXMODE,&regdata);
+		if(res != true)
+			return FM175XX_REG_ERR;
+		regdata=(regdata&0x8F)|(rxrate<<4);
+		res=FM320_SetReg(RXMODE,regdata);
+		if(res != true)
+			return FM175XX_REG_ERR;				
+		
+		return FM175XX_SUCCESS;
 	}
 	else 
-		return 1;
+		return FM175XX_TRANS_ERR;
+	
+	return ret;
+}
+
+//***********************************************
+//函数名称：FM320_Enter_Idle
+//函数功能：进入IDLE(取消当前命令)
+//入口参数：NA
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_Enter_Idle()
+{
+	u8 regdata,res;
+	
+	res=FM320_GetReg(COMMAND,&regdata);
+	if(res != true)
+		return FM175XX_REG_ERR;
+	regdata=regdata&0xF0;
+	res=FM320_SetReg(COMMAND,regdata);
+	if(res != true)
+		return FM175XX_REG_ERR;
+	return FM175XX_SUCCESS;
 }
 
 
@@ -612,6 +687,7 @@ u8 ReaderA_AntiCol(u8 size)
 	res = 0;
 	for(i=0;i<4;i++) 
 	{
+		//CardA_Sel_Res.UID[size*4+i] = *(NFC_DataExStruct.pExBuf+i) ;
 		CardA_Sel_Res.UID[size*3+i] = *(NFC_DataExStruct.pExBuf+i) ;
 		res ^= *(NFC_DataExStruct.pExBuf+i);
 	}
@@ -719,26 +795,6 @@ u8 FM320_ResetAllReg(void)
 
 	return FM175xx_DEBUG_OK;
 }
-
-////During soft power-down, all register values, the FIFO buffer  content 
-////and the configuration keep their current contents.
-////*******************************************************
-////函数名称：FM175xx_SPD
-////函数功能：Soft Power Down
-////出口参数：u8  true：写成功   false:写失败
-////********************************************************
-//u8 FM175xx_SPD(void)
-//{
-//	u8 addr,mask,set;
-//	u8 res;
-//	addr = COMMAND;   //里面进入SoftPowerDown,但寄存器值、FIFO都不会变
-//	mask = BIT4;
-//	set  = 1;
-//	res = FM320_ModifyReg(addr,mask,set);
-//	if(res != true)
-//	return FM175xx_REG_ERR;	
-//	return FM175xx_DEBUG_OK;
-//}
 
 //*******************************************************
 //函数名称：Write_FIFO

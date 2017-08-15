@@ -2,7 +2,7 @@
 #define _FM320_H_
 /**************includes***************/
 
-#include "stm32f10x.h"
+#include "includes.h"   
 
 /****************FM320 Regs Define**********/
 #define  PAGE0           0x00    //Page register in page 0
@@ -484,16 +484,16 @@ typedef struct   //used in Command_Transceive
 
 extern const u8 RF_CMD_ANTICOL[3];
 extern const u8 RF_CMD_SELECT[3];
-extern u8 RF_Data_Len;
+
 
 #define  RF_DATA_BUF_LEN 255  
 extern u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 extern u8 FM175xx_CurFunc;       	//当前FM320功能
 extern bool FM175xx_Card_Actived;
-extern u8 RF_Data_Len;
+
 extern u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 extern struct TypeACardResponse CardA_Sel_Res;
-extern u8 RF_Data_Len;
+
 extern u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 
 
@@ -517,13 +517,15 @@ u8 ReaderA_AntiCol(u8 size);
 u8 ReaderA_Select(u8 size);
 u8 ReaderA_Rats(u8 FSDI,u8 CCID);
 u8 RateSel(u8 txrate,u8 rxrate);
-
-
+u8 FM320_Enter_Idle();
+u8 ReaderA_HALT();
+u8 FM320_Authent();
 //end of FM320_Reader Functions
 
 //FM320_Basic Functions
 u8 FM320_ResetAllReg(void);
 u8 Write_FIFO(u8 fflen,u8* ffbuf);
+
 u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct);
 //end of FM320_Basic Functions
 

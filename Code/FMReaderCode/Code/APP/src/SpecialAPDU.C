@@ -35,6 +35,7 @@ void SetStatusWords(uint8_t *APDUBuffer, uint16_t SW)
 
 void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
+	uint8_t ret,i;
 	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
   uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
   uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
@@ -47,42 +48,211 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 	switch(iParam)
 	{
 		case 0x010001: //MI_FieldON
+			if(pData[0]) //¿ª³¡
+			{
+				FM320_POWERON;
+				ret=FM320_Initial_ReaderA();
+				if(ret)
+				{
+					SetStatusWords(APDUBuffer, 0x6700);	
+					*APDURecvLen = 2;						
+				}					
+			}
+			else 
+				FM320_POWEROFF;
 			break;
 		case 0x010102: //ReqA
+			ret=ReaderA_Request(PICC_REQIDL);
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;	
+			}
+				
+			else
+			{
+				APDUBuffer[0]=CardA_Sel_Res.ATQA[0];
+				APDUBuffer[1]=CardA_Sel_Res.ATQA[1];
+				APDUBuffer[2]=0x90;
+				APDUBuffer[3]=0x00;
+				*APDURecvLen = 4;	
+			}
 			break;
 		case 0x010206://MI_ANTICOLL1
+			ret=ReaderA_AntiCol(0);
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;	
+			}
+			else	
+			{
+				for(i=0;i<4;i++)
+				{
+					APDUBuffer[i]=CardA_Sel_Res.UID[i];
+					
+				}
+				APDUBuffer[4]=APDUBuffer[0]^APDUBuffer[1]^APDUBuffer[2]^APDUBuffer[3];
+				APDUBuffer[5]=0x90;
+				APDUBuffer[6]=0x00;
+				*APDURecvLen = 7;			
+			}
 			break;
 		case 0x012206://MI_ANTICOLL2
+			ret=ReaderA_AntiCol(1);
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;	
+			}
+			else	
+			{
+				for(i=0;i<4;i++)
+				APDUBuffer[i]=CardA_Sel_Res.UID[i+3];
+				
+				APDUBuffer[4]=APDUBuffer[0]^APDUBuffer[1]^APDUBuffer[2]^APDUBuffer[3];
+				APDUBuffer[5]=0x90;
+				APDUBuffer[6]=0x00;
+				*APDURecvLen = 7;			
+			}			
 			break;
 		case 0x013206://MI_ANTICOLL3
+			ret=ReaderA_AntiCol(2);
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;	
+			}
+			else	
+			{
+				for(i=0;i<4;i++)
+				APDUBuffer[i]=CardA_Sel_Res.UID[i+6];
+				APDUBuffer[4]=APDUBuffer[0]^APDUBuffer[1]^APDUBuffer[2]^APDUBuffer[3];
+				APDUBuffer[5]=0x90;
+				APDUBuffer[6]=0x00;
+				*APDURecvLen = 7;			
+			}				
 			break;
 		case 0x010301://MI_SEL1
+			ret=ReaderA_Select(0);	
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;						
+			}
+			else 
+			{
+				APDUBuffer[0]=CardA_Sel_Res.SAK;
+				APDUBuffer[1]=0x90;
+				APDUBuffer[2]=0x00;
+				*APDURecvLen = 3;					
+			}
 			break;
 		case 0x012301://MI_SEL2
+			ret=ReaderA_Select(1);	
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;						
+			}
+			else 
+			{
+				APDUBuffer[0]=CardA_Sel_Res.SAK;
+				APDUBuffer[1]=0x90;
+				APDUBuffer[2]=0x00;
+				*APDURecvLen = 3;					
+			}
 			break;
 		case 0x013301://MI_SEL3
+			ret=ReaderA_Select(2);	
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;						
+			}
+			else 
+			{
+				APDUBuffer[0]=CardA_Sel_Res.SAK;
+				APDUBuffer[1]=0x90;
+				APDUBuffer[2]=0x00;
+				*APDURecvLen = 3;					
+			}
 			break;
+			
 		case 0x010401://Rats
+			ret=ReaderA_Rats(8,1);
+			if(!ret)
+			{
+				if(!CardA_Sel_Res.ATSLEN)
+				{
+					*APDUBuffer=0x67;
+					*(APDUBuffer+1)	=0x00;
+					*APDURecvLen=2;
+				}
+				else
+				{
+					for(i=0;i<CardA_Sel_Res.ATSLEN;i++)
+					{
+						*(APDUBuffer+i) = CardA_Sel_Res.ATS[i];
+					}
+						SetStatusWords(APDUBuffer+CardA_Sel_Res.ATSLEN, 0x9000);
+						*APDURecvLen = CardA_Sel_Res.ATSLEN+2;
+				}
+			}
+			else
+			{
+				*APDUBuffer=0x67;
+				*(APDUBuffer+1)	=0x00;
+				*APDURecvLen=2;
+			}			
 			break;
-		case 0x010501://MI_RDBLOCK
-			break;
-		case 0x010611://MI_WRITEBLOCK
-			break;
+
 		case 0x010701://MI_HALT
-			break;
-		case 0x010801://MI_BAUDRATE
+			ret=ReaderA_HALT();
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);	
+				*APDURecvLen = 2;						
+			}	
 			break;
 		case 0x010B03://MI_REQB
+				//TODO
 			break;
 		case 0x010A02://MI_WUPA
+			ret=ReaderA_Request(PICC_REQALL);
+			if(ret)
+			{
+				SetStatusWords(APDUBuffer, 0x6700);
+				*APDURecvLen = 2;	
+			}
+				
+			else
+			{
+				APDUBuffer[0]=CardA_Sel_Res.ATQA[0];
+				APDUBuffer[1]=CardA_Sel_Res.ATQA[1];
+				APDUBuffer[2]=0x90;
+				APDUBuffer[3]=0x00;
+				*APDURecvLen = 4;	
+			}
+			break;
+			
+		case 0x010501://MI_RDBLOCK
+			//TODO
+			break;
+		case 0x010611://MI_WRITEBLOCK
+			//TODO
 			break;
 		case 0x011105://MI_IncBlock
+			//TODO
 			break;
 		case 0x011205: //MI_DecBlock 
+			//TODO
 			break;
 		case 0x011301://MI_Restore
+			//TODO
 			break;
 		case 0x011401: //MI_Transfer
+			//TODO
 			break;
 		default:
 			break;
@@ -161,7 +331,7 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
   uint8_t   *pData = (APDUBuffer+INDEX_DATA);
 	
 	uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
-	APDURecvLen=0;
+	*APDURecvLen=0;
 	
 	switch(bINS)
 	{

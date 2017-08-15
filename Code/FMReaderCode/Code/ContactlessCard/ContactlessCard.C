@@ -271,6 +271,13 @@ uint8_t CLCardPPS(uint8_t PPS1)
 	NFC_DataExStruct.pExBuf=Buffer; 
 	NFC_DataExStruct.nBytesToSend=3;
 	NFC_DataExStruct.nBytesReceived=0;
+	res = FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,SET);
+	if(res != true)
+		return FM175XX_REG_ERR;
+	res = FM320_ModifyReg(RXMODE,PHCS_BFL_JBIT_RXCRCEN,SET);
+	if(res != true)
+		return FM175XX_REG_ERR;
+	
 	bStatus=Command_Transceive(&NFC_DataExStruct);
 	if(!NFC_DataExStruct.nBytesReceived)
 		return CL_TCL_PPS_ERROR;
@@ -320,16 +327,7 @@ uint8_t CLCardPPS(uint8_t PPS1)
 *******************************************************************************/
 uint8_t ContactlessCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
-	//0x30 0x31 0x32 0x33 0x34 0x35 0xA0 0xA1 0xA2	
-//	uint8_t 	bCLA =	APDUBuffer[0];
-//	uint8_t   bINS =  APDUBuffer[1];
-//  uint8_t   bP1 = 	APDUBuffer[2];
-//  uint8_t   bP2 = 	APDUBuffer[3];
-//  uint16_t  bP3 =   APDUBuffer[4];
-//	
-
 	return 0;
-	
 }
 
 /*******************************************************************************
@@ -441,7 +439,6 @@ ORGNIZE_BLOCK:
 	NFC_DataExStruct.pExBuf=abTPDUBuffer;
 	NFC_DataExStruct.nBytesToSend=iSendLen;
 	bStatus=Command_Transceive(&NFC_DataExStruct);	
- // !bStatus = Mf500PiccExchangeBlock(abTPDUBuffer, iSendLen, abBuffer, &iRecvLen, 1, stuTCLParam.lFWT);
   for(b=0;b<NFC_DataExStruct.nBytesReceived;b++)
 	{
 		abBuffer[b]=NFC_DataExStruct.pExBuf[b];		
