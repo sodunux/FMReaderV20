@@ -1,247 +1,8 @@
 #include "includes.h"
 
 uint16_t const FrameSize[9] = {16, 24, 32, 40, 48, 64, 96, 128, 256};
-TCLParam stuTCLParam;
 
 
-/*******************************************************************************
-* Function Name  : CLCardInit.
-* Description    : Variables of contactless card initialization.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void CLCardInit(void)
-{
-  uint8_t b;
-  //初始化结构体
-  for(b=0; b<2; b++)
-  stuTCLParam.abATQ[b] = 0;
-  stuTCLParam.bATQLen = 0;  
-  stuTCLParam.bUIDLevel = 0;
-
-  for(b=0; b<12; b++)
-  	stuTCLParam.abUID[b] = 0;
-  stuTCLParam.bSak = 0;
-
-  for(b=0; b<32; b++)
-  	stuTCLParam.abATS[b] = 0;
-  stuTCLParam.iATSLen = 0;
-
-  stuTCLParam.bFSCI = 8;  
-  stuTCLParam.bDRC = 0;
-  stuTCLParam.bDSC = 0;
-  stuTCLParam.bFWI = 12; //4
-  stuTCLParam.lFWT = 1<<12;	//16
-  stuTCLParam.bSFGI = 8;
-  stuTCLParam.bNADEn = 0;
-  stuTCLParam.bCIDEn = 1;
-
-  stuTCLParam.bINFLen = 254;
-  stuTCLParam.bBlockNum = 0;
-  //PRTCL=0;
-	for(b=0;b<2;b++)
-	{
-		CardA_Sel_Res.ATQA[b]=0;
-	}
-	for(b=0;b<12;b++)
-	{
-		CardA_Sel_Res.UID[b]=0;
-	}
-	for(b=0;b<32;b++)
-	{
-		CardA_Sel_Res.ATS[b]=0;
-	}
-	CardA_Sel_Res.ATSLEN=0;
-	CardA_Sel_Res.SAK=0;
-
-  CLCardRegInit();
-}
-
-/*******************************************************************************
-* Function Name  : CLCardReset.
-* Description    : Contactless card reset process.
-* Input          : None
-* Output         : APDUBuffer   : ATR bytes received are here.
-                   APDURecvLen  : How many bytes received.
-* Return         : CL_TCL_OK, 
-                   CL_TCL_ATQ_ERROR, 
-                   CL_TCL_UID_ERROR,
-                   CL_TCL_ATS_ERROR,
-                   CL_TCL_RFIC_ERROR
-*******************************************************************************/
-uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
-{
-	
-  int8_t    bStatus;
-  uint8_t   b;
-  uint8_t   bT0;
-  uint8_t 	i;
-  CLCardInit();  
-	
-  /* Reset RFIC */
-  bStatus = FM320_Initial_ReaderA();
-  if(bStatus != CL_TCL_OK)
-    return CL_TCL_RFIC_ERROR;
-
-  /* Get ATQA */  
-  bStatus =ReaderA_Request(PICC_REQIDL);
-  if(bStatus != CL_TCL_OK)
-    return CL_TCL_ATQ_ERROR;
-  else
-  	{
-	  stuTCLParam.abATQ[0]=CardA_Sel_Res.ATQA[0];
-	  stuTCLParam.abATQ[1]=CardA_Sel_Res.ATQA[1];
-	  stuTCLParam.bUIDLevel = (stuTCLParam.abATQ[1]>>6)+1;
-  	}
-
-  
-  /* Anticollision 1 */
-  bStatus=ReaderA_AntiCol(0);
-  //bStatus = Mf500PiccCascAnticoll(PICC_ANTICOLL1, 0, &(stuTCLParam.abUID[0]));
-  if(bStatus != CL_TCL_OK)
-    return CL_TCL_UID_ERROR;
-  else
-  	{
-  		for(i=0;i<4;i++)
-			{
-				stuTCLParam.abUID[i]=CardA_Sel_Res.UID[i];
-			}		
-  	}
-
-  /* Selection 1 */
-  bStatus=ReaderA_Select(0);
-  //bStatus = Mf500PiccCascSelect(PICC_ANTICOLL1, &(stuTCLParam.abUID[0]), &(stuTCLParam.bSak));
-  if(bStatus != CL_TCL_OK)
-    return CL_TCL_UID_ERROR;
-  else
-  	stuTCLParam.bSak=CardA_Sel_Res.SAK;
-  	
-  if(stuTCLParam.bUIDLevel > 1)
-  {
-    /* Anticollision 2 */
-	 bStatus=ReaderA_AntiCol(1);
-    //bStatus = Mf500PiccCascAnticoll(PICC_ANTICOLL2, 0, &(stuTCLParam.abUID[4]));
-    if(bStatus != CL_TCL_OK)
-    	return CL_TCL_UID_ERROR;
-	else
-		{
-			for(i=4;i<8;i++)
-			{
-				stuTCLParam.abUID[i]=CardA_Sel_Res.UID[i];
-			}	
-		}
-
-    /* Selection 2 */
-	bStatus=ReaderA_Select(0);
-    //bStatus = Mf500PiccCascSelect(PICC_ANTICOLL2, &(stuTCLParam.abUID[4]), &(stuTCLParam.bSak));
-    if(bStatus != CL_TCL_OK)
-      	return CL_TCL_UID_ERROR;
-	else
-		stuTCLParam.bSak=CardA_Sel_Res.SAK;		
-  }
-
-  if(stuTCLParam.bUIDLevel > 2)
-  {
-    /* Anticollision 3 */
-		bStatus=ReaderA_AntiCol(2);
-    //bStatus = Mf500PiccCascAnticoll(PICC_ANTICOLL3, 0, &(stuTCLParam.abUID[8]));
-    if(bStatus != CL_TCL_OK)
-      return CL_TCL_UID_ERROR;
-	else
-		{
-			for(i=8;i<12;i++)
-			{
-				stuTCLParam.abUID[i]=CardA_Sel_Res.UID[i];
-			}	
-		}
-
-    /* Selection 3 */    
-	  bStatus=ReaderA_Select(2);
-   // bStatus = Mf500PiccCascSelect(PICC_ANTICOLL3, &(stuTCLParam.abUID[8]), &(stuTCLParam.bSak));
-    if(bStatus != CL_TCL_OK)
-      return CL_TCL_UID_ERROR; 
-	else
-		stuTCLParam.bSak=CardA_Sel_Res.SAK;
-  }
-
-  /* RATS */  
-
-  bStatus=ReaderA_Rats(0x08,0x00);
-  if(bStatus != CL_TCL_OK)
-    return CL_TCL_ATS_ERROR;
-  else
-  	{
-  		stuTCLParam.iATSLen=CardA_Sel_Res.ATSLEN;
-			for(i=0;i<stuTCLParam.iATSLen;i++)
-			{
-				APDUBuffer[i]=CardA_Sel_Res.ATS[i];
-			}
-  	}
-
-  /* Parser ATS*/                  
-  memcpy(&(stuTCLParam.abATS[0]), APDUBuffer, stuTCLParam.iATSLen);
-  bT0 = (*(APDUBuffer+1));
-  stuTCLParam.bFSCI = (bT0&0x0F);
-  if(bT0&0x10)
-  {
-    b = (*(APDUBuffer+2));
-    stuTCLParam.bDRC = (b&0x0F);
-    stuTCLParam.bDSC = ((b&0xF0)>>4);
-  }
-  if(bT0&0x20)
-  {
-    b = (*(APDUBuffer+3));
-    stuTCLParam.bSFGI = (b&0x0F);
-    stuTCLParam.bFWI = ((b&0xF0)>>4);
-    stuTCLParam.lFWT = 1;
-    stuTCLParam.lFWT <<= stuTCLParam.bFWI;
-  }
-  if(bT0&0x40)
-  {
-    b = (*(APDUBuffer+4));
-    if(b&0x01)
-      stuTCLParam.bNADEn = 1;
-    else
-      stuTCLParam.bNADEn = 0;      
-    if(b&0x02)
-      stuTCLParam.bCIDEn = 1;
-    else
-      stuTCLParam.bCIDEn = 0;
-  }
-  /* Information field length */
-  // stuTCLParam.bINFLen = 254;
-  stuTCLParam.bINFLen = 253;
-  // stuTCLParam.bINFLen = 29;
-  if(stuTCLParam.bFSCI < 8)
-    stuTCLParam.bINFLen = (uint8_t)(FrameSize[stuTCLParam.bFSCI]-3);  // 1 PCB byte + 2 CRC bytes
-  stuTCLParam.bINFLen -= stuTCLParam.bNADEn;
-  stuTCLParam.bINFLen -= stuTCLParam.bCIDEn;
-
-  /* Orgnize ATR */
-  *APDUBuffer = 0x3B;
-  *(APDUBuffer+1) = 0x96;
-  *(APDUBuffer+2) = 0x11;
-  *(APDUBuffer+3) = 0x80;
-  *(APDUBuffer+4) = 0x01;
-  *(APDUBuffer+5) = 'F';
-  *(APDUBuffer+6) = 'M';
-  *(APDUBuffer+7) = '3';
-  *(APDUBuffer+8) = '4';
-  *(APDUBuffer+9) = '9';
-  *(APDUBuffer+10) = '6';
-  if(stuTCLParam.bDSC&0x04)
-    *(APDUBuffer+2) = 0x18;
-  else if(stuTCLParam.bDSC&0x02)
-    *(APDUBuffer+2) = 0x94;
-  else if(stuTCLParam.bDSC&0x01)
-    *(APDUBuffer+2) = 0x13;
-  *(APDUBuffer+11) = 0;
-  for(b=1; b<11; b++)
-    *(APDUBuffer+11) ^= *(APDUBuffer+b);
-  *APDURecvLen = 12;
-  return CL_TCL_OK;
-}
 
 /*******************************************************************************
 * Function Name  : CLCardPPS.
@@ -256,64 +17,8 @@ uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen)
 *******************************************************************************/
 uint8_t CLCardPPS(uint8_t PPS1)
 {
-	uint8_t DRI,DSI;
-	uint8_t addr,regdata,res;
-	uint8_t Buffer[10];
-	
-	NFC_DataExTypeDef NFC_DataExStruct;
-	
-	DRI=PPS1&0x03; 				//PCD->PICC
-	DSI=(PPS1&0x0c)>>2;		//PICC->PCD
-	
-	Buffer[0]=0xD1; 			//PPSS
-	Buffer[1]=0x11;      	//PPS0
-	Buffer[2]=PPS1;
-	NFC_DataExStruct.pExBuf=Buffer; 
-	NFC_DataExStruct.nBytesToSend=3;
-	NFC_DataExStruct.nBytesReceived=0;
-	res = FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,SET);
-	if(res != true)
-		return FM175XX_REG_ERR;
-	res = FM320_ModifyReg(RXMODE,PHCS_BFL_JBIT_RXCRCEN,SET);
-	if(res != true)
-		return FM175XX_REG_ERR;
-	
-	bStatus=Command_Transceive(&NFC_DataExStruct);
-	if(!NFC_DataExStruct.nBytesReceived)
-		return CL_TCL_PPS_ERROR;
-	if(NFC_DataExStruct.pExBuf[0]==(0xD1))
-	{
-		addr = TXMODE;
-		res = FM320_GetReg(addr,&regdata);//读取TXMODE寄存器数据
-		if(res != true)
-			return FM175XX_REG_ERR;
-		regdata = (regdata&0xcf)|(DRI<<4);
-		res = FM320_SetReg(addr,regdata); //设置DR PCD-PICC
-		if(res != true)
-			return FM175XX_REG_ERR;
-		
-		addr = RXMODE;
-		res = FM320_GetReg(addr,&regdata);//读取RXMODE寄存器数据
-		if(res != true)
-			return FM175XX_REG_ERR;		
-		regdata = (regdata&0xcf)|(DSI<<4);
-		res = FM320_SetReg(addr,regdata);  //设置DS  PICC-PCD
-		if(res != true)
-			return FM175XX_REG_ERR;		
-		
-		return CL_TCL_OK;	
-	}
-	else
-		return CL_TCL_PPS_ERROR;
+		return FM320_PPS(PPS1);
 }
-
-#define BLOCK_TYPE_I     0x10
-#define BLOCK_TYPE_RACK  0x21
-#define BLOCK_TYPE_RNAK  0x22
-#define BLOCK_TYPE_SWTX  0x31
-
-#define ERROR_COUNTER_MAX 0x03
-
 
 /*******************************************************************************
 * Function Name  : ContactlessCardInitCmd.
@@ -353,6 +58,7 @@ uint8_t CLTCLAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvL
   uint16_t  iTemp;
   uint8_t   bErrCnt = 0;
   NFC_DataExTypeDef NFC_DataExStruct;//FM320
+	TCLParam stuTCLParam;
 	
   /* Orgnize first I-Block */
   bSendBlockType = BLOCK_TYPE_I;
@@ -438,7 +144,7 @@ ORGNIZE_BLOCK:
 
 	NFC_DataExStruct.pExBuf=abTPDUBuffer;
 	NFC_DataExStruct.nBytesToSend=iSendLen;
-	bStatus=Command_Transceive(&NFC_DataExStruct);	
+	bStatus=FM320_Command_Transceive(&NFC_DataExStruct);	
   for(b=0;b<NFC_DataExStruct.nBytesReceived;b++)
 	{
 		abBuffer[b]=NFC_DataExStruct.pExBuf[b];		
@@ -518,23 +224,6 @@ ORGNIZE_BLOCK:
   return CL_TCL_OK;
 }
 
-/*******************************************************************************
-* Function Name  : CLCardRegInit.
-* Description    : Variables of contactless card initialization.
-* Input          : None
-* Output         : TRUE, FALSE
-* Return         : None
-*******************************************************************************/
-uint8_t CLCardRegInit(void)
-{
-	u8 res;
-	res=FM320_ResetAllReg();//复位FM320所有的寄存器
-	FM320_Initial_ReaderA();
-	if(res==FALSE)
-		return FALSE;
-	else 
-		return TRUE;
-}
 
 /*******************************************************************************
 * Function Name  : CLCardPowerOff.
@@ -546,5 +235,4 @@ uint8_t CLCardRegInit(void)
 void CLCardPowerOff(void)
 {
 	FM320_POWEROFF;//FM320硬件复位功能
-	//FM320_SPD();//启动FM320软件复位功能。
 }

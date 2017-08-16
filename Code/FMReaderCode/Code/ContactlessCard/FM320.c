@@ -6,7 +6,7 @@ struct TypeACardResponse CardA_Sel_Res;
 
 u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 
-void mDelay(u16 ms)			//实测1ms
+void FM320_mDelay(u16 ms)			//实测1ms
 {
 	u32	i;
 	u16 j;
@@ -17,7 +17,7 @@ void mDelay(u16 ms)			//实测1ms
 	}
 }
 
-void uDelay(u16 us)			//实测1us
+void FM320_uDelay(u16 us)			//实测1us
 {
 	u32	i;
 	u16 j;
@@ -81,7 +81,7 @@ void FM320_SPIConfig(void)
 //入口参数：addr:目标寄存器地址   regdata:读取的值
 //出口参数：u8  true：读取成功   false:失败
 //***********************************************
-u8 FM320_GetReg(u8 addr,u8* regdata)
+bool FM320_GetReg(u8 addr,u8* regdata)
 {	
 	u16 i;
 
@@ -100,7 +100,7 @@ u8 FM320_GetReg(u8 addr,u8* regdata)
 			*regdata = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
 			break;
 		}
-		uDelay(1);
+		FM320_uDelay(1);
 	}
 	if(i >= SPI_TIME_OUT)
 	{
@@ -118,7 +118,7 @@ u8 FM320_GetReg(u8 addr,u8* regdata)
 			FM320_NSS_SET;
 			return true;
 		}
-		uDelay(1);
+		FM320_uDelay(1);
 	}
 		
 	FM320_NSS_SET;
@@ -131,7 +131,7 @@ u8 FM320_GetReg(u8 addr,u8* regdata)
 //入口参数：addr:目标寄存器地址   regdata:要写入的值
 //出口参数：u8  true：写成功   false:写失败
 //***********************************************
-u8 FM320_SetReg(u8 addr,u8 regdata)
+bool FM320_SetReg(u8 addr,u8 regdata)
 {
 	
 	u16 i;
@@ -152,7 +152,7 @@ u8 FM320_SetReg(u8 addr,u8 regdata)
 			temp = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
 			break;
 		}
-		uDelay(1);
+		FM320_uDelay(1);
 	}
 	if(i >= SPI_TIME_OUT)
 	{
@@ -169,7 +169,7 @@ u8 FM320_SetReg(u8 addr,u8 regdata)
 			temp = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
 			break;
 		}
-		uDelay(1);
+		FM320_uDelay(1);
 	}
 	if(i >= SPI_TIME_OUT)
 	{
@@ -188,7 +188,7 @@ u8 FM320_SetReg(u8 addr,u8 regdata)
 //         set:  0:标志的位清零   其它:标志的位置起
 //出口参数：u8  true：写成功   false:写失败
 //********************************************************
-u8 FM320_ModifyReg(u8 addr,u8 mask,u8 set)
+bool FM320_ModifyReg(u8 addr,u8 mask,u8 set)
 {
 	u8 res;
 	u8 regdata;
@@ -213,49 +213,313 @@ u8 FM320_ModifyReg(u8 addr,u8 mask,u8 set)
 }
 
 //***********************************************
-//函数名称：ReadeA_HALT
-//函数功能：发送HALT命令
+//函数名称：FM320_PPS
+//函数功能：PPS操作
 //出口参数：u8  0：成功   others:失败
 //***********************************************
-u8 ReaderA_HALT()
+u8 FM320_PPS(u8 PPS1)
 {
-	u8 res;	
-	u8 i;
-	u8 halt[2]={0x50,0x00};
+	uint8_t DRI,DSI;
+	uint8_t addr,regdata,res;
+	uint8_t Buffer[10];
 	
-	res = FM320_SetReg(FIFOLEVEL,PHCS_BFL_JBIT_FLUSHFIFO);	//FlushFIFO
-	if(res != true)
-		return FM175XX_REG_ERR;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	
+	DRI=PPS1&0x03; 				//PCD->PICC
+	DSI=(PPS1&0x0c)>>2;		//PICC->PCD
+	
+	Buffer[0]=0xD1; 			//PPSS
+	Buffer[1]=0x11;      	//PPS0
+	Buffer[2]=PPS1;
+	
+	NFC_DataExStruct.pExBuf=Buffer; 
+	NFC_DataExStruct.nBytesToSend=3;
+	NFC_DataExStruct.nBytesReceived=0;
 	res = FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,SET);
 	if(res != true)
 		return FM175XX_REG_ERR;
-		
-	res = Write_FIFO(0x02,halt);
-	if(res != true)
-		return FM175XX_REG_ERR;
-
-	res = FM320_SetReg(COMMAND,CMD_TRANSMIT);
+	res = FM320_ModifyReg(RXMODE,PHCS_BFL_JBIT_RXCRCEN,SET);
 	if(res != true)
 		return FM175XX_REG_ERR;
 	
-	res = FM320_SetReg(BITFRAMING,0x80);//8Bits数据全发
+	bStatus=FM320_Command_Transceive(&NFC_DataExStruct);
+	if(!NFC_DataExStruct.nBytesReceived)
+		return CL_TCL_PPS_ERROR;
+	if(NFC_DataExStruct.pExBuf[0]==(0xD1))
+	{
+		addr = TXMODE;
+		res = FM320_GetReg(addr,&regdata);//读取TXMODE寄存器数据
+		if(res != true)
+			return FM175XX_REG_ERR;
+		regdata = (regdata&0xcf)|(DRI<<4);
+		res = FM320_SetReg(addr,regdata); //设置DR PCD-PICC
+		if(res != true)
+			return FM175XX_REG_ERR;
+		
+		addr = RXMODE;
+		res = FM320_GetReg(addr,&regdata);//读取RXMODE寄存器数据
+		if(res != true)
+			return FM175XX_REG_ERR;		
+		regdata = (regdata&0xcf)|(DSI<<4);
+		res = FM320_SetReg(addr,regdata);  //设置DS  PICC-PCD
+		if(res != true)
+			return FM175XX_REG_ERR;		
+		
+		return CL_TCL_OK;	
+	}
+	else
+		return CL_TCL_PPS_ERROR;
+}
+
+
+//***********************************************
+//函数名称：FM320_Authent
+//函数功能：认证Mifare卡
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_Authent(MiAuthTpeDef miauth)
+{
+	u8 res,regdata;
+	u8 fifo[12];
+	res = FM320_SetReg(FIFOLEVEL,PHCS_BFL_JBIT_FLUSHFIFO);	//FlushFIFO
+	if(res != true)
+		return FM175XX_REG_ERR;
+	fifo[0]=miauth.keytype;
+	fifo[1]=miauth.block;
+	fifo[2]=miauth.key[0];
+	fifo[3]=miauth.key[1];
+	fifo[4]=miauth.key[2];
+	fifo[5]=miauth.key[3];
+	fifo[6]=miauth.key[4];	
+	fifo[7]=miauth.key[5];	
+	fifo[8]=miauth.UID[0];
+	fifo[9]=miauth.UID[1];	
+	fifo[10]=miauth.UID[2];
+	fifo[11]=miauth.UID[3];
+	res = FM320_Write_FIFO(12,fifo);
 	if(res != true)
 		return FM175XX_REG_ERR;	
-	
+	res = FM320_SetReg(COMMAND,CMD_AUTHENT);
+	if(res != true)
+		return FM175XX_REG_ERR;	
+	FM320_mDelay(10);
+	res=FM320_GetReg(STATUS2,&regdata);
+	if(res != true)
+		return FM175XX_REG_ERR;	
+	if(!(regdata&BIT3))
+	{
+		FM320_SetReg(COMMAND,CMD_IDLE);
+		return FM175XX_REG_ERR;
+	}
+	else
+		return FM175XX_SUCCESS;	
+}
 
-	return FM175XX_SUCCESS;
+//***********************************************
+//函数名称：FM320_MiRead
+//函数功能：Mifare Read
+//入口参数：block号；读出的数据(长度要大于 16)
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_MiRead(u8 block,u8 *readbuf)
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0x30;
+	fifo[1]=block;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(NFC_DataExStruct.nBytesReceived==0)
+		return FM175XX_REG_ERR;
+	for(i=0;i<16;i++)
+	{
+		readbuf[i]=fifo[i];
+	}
+	return FM175XX_SUCCESS;	
+}
+
+//***********************************************
+//函数名称：FM320_MiWrite
+//函数功能：Mifare Read
+//入口参数：block号；写入的数据(长度要大于 16)
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_MiWrite(u8 block,u8 *writebuf)
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0xA0;
+	fifo[1]=block;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(!NFC_DataExStruct.nBytesReceived)
+		return FM175XX_REG_ERR;
+	else 
+	{
+		NFC_DataExStruct.pExBuf =	writebuf;
+		NFC_DataExStruct.nBytesToSend	  =	0x10;
+		NFC_DataExStruct.nBytesReceived = 0x00;
+		FM320_Command_Transceive(&NFC_DataExStruct);
+		if(NFC_DataExStruct.pExBuf[0]!=0x0A)
+			return FM175XX_REG_ERR;
+		else 
+			return FM175XX_SUCCESS;
+	}
+	
+}
+
+//***********************************************
+//函数名称：FM320_MiIncrement
+//函数功能：Increment
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_MiIncrement(u8 block,u32 incdat)
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0xC1;
+	fifo[1]=block;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(!NFC_DataExStruct.nBytesReceived)
+		return FM175XX_REG_ERR;
+	else 
+	{
+		fifo[0]=(u8)incdat;
+		fifo[1]=(u8)(incdat>>8);
+		fifo[2]=(u8)(incdat>>16);
+		fifo[3]=(u8)(incdat>>24);		
+		NFC_DataExStruct.pExBuf =	fifo;
+		NFC_DataExStruct.nBytesToSend	  =	0x04;
+		NFC_DataExStruct.nBytesReceived = 0x00;
+		FM320_Command_Transceive(&NFC_DataExStruct);
+		return FM175XX_SUCCESS;
+	}
+}
+
+
+//***********************************************
+//函数名称：FM320_MiDecrement
+//函数功能：FM320_MiDecrement
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_MiDecrement(u8 block,u32 decdat)
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0xC0;
+	fifo[1]=block;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(!NFC_DataExStruct.nBytesReceived)
+		return FM175XX_REG_ERR;
+	else 
+	{
+		fifo[0]=(u8)decdat;
+		fifo[1]=(u8)(decdat>>8);
+		fifo[2]=(u8)(decdat>>16);
+		fifo[3]=(u8)(decdat>>24);		
+		NFC_DataExStruct.pExBuf =	fifo;
+		NFC_DataExStruct.nBytesToSend	  =	0x04;
+		NFC_DataExStruct.nBytesReceived = 0x00;
+		FM320_Command_Transceive(&NFC_DataExStruct);
+		return FM175XX_SUCCESS;
+	}
+	
+}
+//***********************************************
+//函数名称：FM320_MiRestore
+//函数功能：FM320_MiRestore
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_MiRestore(u8 block)
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0xC2;
+	fifo[1]=block;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(!NFC_DataExStruct.nBytesReceived)
+		return FM175XX_REG_ERR;
+	else 
+	{
+		fifo[0]=0x00;
+		fifo[1]=0x00;
+		fifo[2]=0x00;
+		fifo[3]=0x00;		
+		NFC_DataExStruct.pExBuf =	fifo;
+		NFC_DataExStruct.nBytesToSend	  =	0x04;
+		NFC_DataExStruct.nBytesReceived = 0x00;
+		FM320_Command_Transceive(&NFC_DataExStruct);
+		return FM175XX_SUCCESS;
+	}
+}
+
+//***********************************************
+//函数名称：FM320_MiTransfer
+//函数功能：FM320_MiTransfer
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_MiTransfer(u8 block)
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0xB0;
+	fifo[1]=block;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(NFC_DataExStruct.pExBuf[0]!=0x0A)
+		return FM175XX_REG_ERR;
+	else 
+		return FM175XX_SUCCESS;
 }
 
 
 
 //***********************************************
-//函数名称：RateSel
+//函数名称：ReadeA_HALT
+//函数功能：发送HALT命令
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_ReaderA_HALT()
+{
+	u8 fifo[16],i;
+	NFC_DataExTypeDef NFC_DataExStruct;
+	fifo[0]=0x50;
+	fifo[1]=0x00;
+	NFC_DataExStruct.pExBuf =	fifo;
+	NFC_DataExStruct.nBytesToSend	  =	0x02;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	if(NFC_DataExStruct.nBytesReceived)
+		return FM175XX_REG_ERR;
+	else 
+		return FM175XX_SUCCESS;
+}
+
+
+
+//***********************************************
+//函数名称：FM320_RateSel
 //函数功能：修改发送和接受速率
 //入口参数：txrata 发送速率，rxrate 接受速率
 //					0:106K;1:212K;2:424K;3:848K;
 //出口参数：u8  0：成功   others:失败
 //***********************************************
-u8 RateSel(u8 txrate,u8 rxrate)
+u8 FM320_RateSel(u8 txrate,u8 rxrate)
 {
 	u8 ret,regdata;
 	u8 res;
@@ -304,8 +568,6 @@ u8 FM320_Enter_Idle()
 		return FM175XX_REG_ERR;
 	return FM175XX_SUCCESS;
 }
-
-
 
 //***********************************************
 //函数名称：FM175xx_Initial_ReaderA
@@ -522,12 +784,12 @@ u8 FM320_Initial_ReaderB(void)
 }
 
 //***********************************************
-//函数名称：ReaderA_Request
+//函数名称：FM320_ReaderA_Request
 //函数功能：ReqA
 //入口参数：Type：ReqA：0x26 WupA：0x52
 //出口参数：u8  0：成功   others:失败
 //***********************************************
-u8 ReaderA_Request(u8 type)
+u8 FM320_ReaderA_Request(u8 type)
 {
 	u8 regdata;
 	u8 res;
@@ -594,7 +856,7 @@ u8 ReaderA_Request(u8 type)
 		{
 			return FM175XX_REG_ERR;
 		}
-		mDelay(10);			//0.1ms
+		FM320_mDelay(10);			//0.1ms
 		dly++;
 	}	
 //	res = FM320_ModifyReg(COMMIEN,BIT5|BIT0|BIT1,CLR);//清零中断使能
@@ -639,11 +901,11 @@ u8 ReaderA_Request(u8 type)
 }
 
 //*************************************
-//函数  名：ReaderA_AntiCol
+//函数  名：FM320_ReaderA_AntiCol
 //入口参数：size:防冲突等级，包括0、1、2
 //出口参数：u8:0:OK  others：错误
 //*************************************
-u8 ReaderA_AntiCol(u8 size)
+u8 FM320_ReaderA_AntiCol(u8 size)
 {
 	u8 regdata;
 	u8 res;
@@ -676,7 +938,7 @@ u8 ReaderA_AntiCol(u8 size)
 	*(NFC_DataExStruct.pExBuf+1) = 0x20;
 	NFC_DataExStruct.nBytesToSend = 2;						//发送长度：2
 
-	res = Command_Transceive(&NFC_DataExStruct);  
+	res = FM320_Command_Transceive(&NFC_DataExStruct);  
 
 	res = FM320_SetReg(COLL,0x80);
 	if(res != true)
@@ -698,11 +960,11 @@ u8 ReaderA_AntiCol(u8 size)
 }
 
 //*************************************
-//函数  名：ReaderA_Select
+//函数  名：FM320_ReaderA_Select
 //入口参数：size:防冲突等级，包括0、1、2
 //出口参数：u8:0:OK  others：错误
 //*************************************
-u8 ReaderA_Select(u8 size)
+u8 FM320_ReaderA_Select(u8 size)
 {
 	u8 addr,mask,set/*,regdata*/;
 	u8 res;
@@ -742,7 +1004,7 @@ u8 ReaderA_Select(u8 size)
 	}
 
 
-	res = Command_Transceive(&NFC_DataExStruct);
+	res = FM320_Command_Transceive(&NFC_DataExStruct);
 	if(NFC_DataExStruct.nBytesReceived == 1)
 		CardA_Sel_Res.SAK = *(NFC_DataExStruct.pExBuf);
 	else
@@ -752,11 +1014,11 @@ u8 ReaderA_Select(u8 size)
 }
 
 //*************************************
-//函数  名：ReaderA_Rats
+//函数  名：FM320_ReaderA_Rats
 //入口参数：FSDI：Reader的帧长度最大值：2^x；CID:0~14,Card的逻辑地址；
 //出口参数：u8:0:OK  others：错误
 //*************************************
-u8 ReaderA_Rats(u8 FSDI,u8 CCID)
+u8 FM320_ReaderA_Rats(u8 FSDI,u8 CCID)
 {
 	u8 res;	
 	u8 i;
@@ -766,7 +1028,7 @@ u8 ReaderA_Rats(u8 FSDI,u8 CCID)
 	*(NFC_DataExStruct.pExBuf+1) = ((FSDI&0x0F)<<4) + (CCID&0x0F);   					//
 	NFC_DataExStruct.nBytesToSend = 2;
 
-	res = Command_Transceive(&NFC_DataExStruct);
+	res = FM320_Command_Transceive(&NFC_DataExStruct);
 
 	CardA_Sel_Res.ATSLEN=NFC_DataExStruct.nBytesReceived;
 
@@ -797,13 +1059,13 @@ u8 FM320_ResetAllReg(void)
 }
 
 //*******************************************************
-//函数名称：Write_FIFO
+//函数名称：FM320_Write_FIFO
 //函数功能：写FIFO
 //入口参数：fflen:写入长度；
 //         ffbuf:数据缓冲区；
 //出口参数：u8  true：写成功   false:写失败
 //********************************************************
-u8 Write_FIFO(u8 fflen,u8* ffbuf)
+bool FM320_Write_FIFO(u8 fflen,u8* ffbuf)
 {
 	u8  i;
 	u8 res;
@@ -819,15 +1081,14 @@ u8 Write_FIFO(u8 fflen,u8* ffbuf)
 }
 
 
-
 /******************************************************************************/
-//函数名：Command_Transceive
+//函数名：FM320_Command_Transceive
 //入口参数：
 //			u8* sendbuf:发送数据缓冲区	u8 sendlen:发送数据长度
 //			u8* recvbuf:接收数据缓冲区	u8* recvlen:接收到的数据长度
 //出口参数：u8 0:发送接收流程正常	0x50：寄存器读写错误 
 /******************************************************************************/
-u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct)
+u8 FM320_Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct)
 {
 	u8 regdata;
 	u8 i;
@@ -850,13 +1111,13 @@ u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct)
 
 	if(NFC_DataExStruct->nBytesToSend > 0x40) //FIFO maxlen=64Bytes
 	{
-		res = Write_FIFO(0x40,NFC_DataExStruct->pExBuf);
+		res = FM320_Write_FIFO(0x40,NFC_DataExStruct->pExBuf);
 		if(res != true)
 				return FM175XX_REG_ERR;
 	}
 	else
 	{
-		res = Write_FIFO(NFC_DataExStruct->nBytesToSend,NFC_DataExStruct->pExBuf);
+		res = FM320_Write_FIFO(NFC_DataExStruct->nBytesToSend,NFC_DataExStruct->pExBuf);
 		if(res != true)
 				return FM175XX_REG_ERR;
 	}
@@ -895,7 +1156,7 @@ u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct)
 		res = FM320_GetReg(COMMIRQ,&regdata);
 		if(res != true)
 			return FM175XX_REG_ERR;
-		mDelay(1);			//0.1ms
+		FM320_mDelay(1);			//0.1ms
 		dly++;
 	}
 	if(dly == 255)
@@ -936,7 +1197,7 @@ u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct)
 			return FM175XX_REG_ERR;
 		if(!(NFC_DataExStruct->AllCommIrq & NFC_DataExStruct->WaitForComm))
 		{
-			mDelay(1);			//0.1ms
+			FM320_mDelay(1);			//0.1ms
 			dly++;
 		}
 		else
@@ -945,7 +1206,7 @@ u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct)
 				dly++;
 			else
 			{
-				mDelay(1);
+				FM320_mDelay(1);
 				dly = 998;
 			}
 		}

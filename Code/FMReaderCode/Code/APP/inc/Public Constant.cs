@@ -38,7 +38,7 @@ namespace PcSc
         public const string MI_DecBlock     =   "FF18011205";	//CLA,INS,P1,P2,P3  后接一byte地址及4byte减少值
         public const string MI_Restore      =   "FF18011301";	//CLA,INS,P1,P2,P3  后接一byte地址
         public const string MI_Transfer     =   "FF18011401";	//CLA,INS,P1,P2,P3  后接一byte地址
-
+        
         public const string MI_PPS_CL =         "FFFF000001";	//CLB,INS,P1,P2,P3 后面加一个参数0x11 :106kbps .0x13：212kbps。0x94：424kbps。0x18：848kbps
         public const string MI_PPS_CT =         "FFFF000101";	//CLB,INS,P1,P2,P3  0x11\0x13\0x94\0x18\0x95\0x96
 

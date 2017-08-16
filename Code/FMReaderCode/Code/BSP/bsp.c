@@ -131,8 +131,6 @@ void  BSP_Init (void)
   // bCardSlotStatus = CARD_SLOT_ABSENT;
   CCIDCardSlotChange(); 
 	CLCardPowerOff();
-	
-	CLCardPowerOff();
 
 }
 /*

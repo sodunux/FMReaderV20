@@ -25,7 +25,6 @@ typedef struct
   uint8_t bBlockNum;  // Block number
   uint8_t bChain;     // Chain
 } TCLParam;
-extern TCLParam stuTCLParam;
 
 /* Function Result */
 #define CL_TCL_OK   0
@@ -38,12 +37,17 @@ extern TCLParam stuTCLParam;
 #define FALSE 0
 #define TRUE (!FALSE)
 
-uint8_t CLCardReset(uint8_t *APDUBuffer, uint16_t *APDURecvLen);
+#define BLOCK_TYPE_I     0x10
+#define BLOCK_TYPE_RACK  0x21
+#define BLOCK_TYPE_RNAK  0x22
+#define BLOCK_TYPE_SWTX  0x31
+#define BLOCK_TYPE_SDISELECT 0x32
+#define ERROR_COUNTER_MAX 0x03
+
+
 uint8_t CLCardPPS(uint8_t PPS1);
 uint8_t CLTCLAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
 uint8_t ContactlessCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
 void CLCardPowerOff(void);
-void CLCardInit(void);
-uint8_t CLCardRegInit(void);
 
 #endif

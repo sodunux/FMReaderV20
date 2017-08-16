@@ -501,49 +501,46 @@ extern const u8 RF_CMD_SELECT[3];
 
 #define  RF_DATA_BUF_LEN 255  
 extern u8 RF_Data_Buf[RF_DATA_BUF_LEN];
+extern u8 FM175xx_CurFunc;       	//当前FM320功能
+extern bool FM175xx_Card_Actived;
+
+extern u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 extern struct TypeACardResponse CardA_Sel_Res;
 
+extern u8 RF_Data_Buf[RF_DATA_BUF_LEN];
 
 
 /******************functions**************/
-void FM320_mDelay(u16 ms);	//ms level delay
-void FM320_uDelay(u16 us);	//us level delay
+void mDelay(u16 ms);	//ms level delay
+void uDelay(u16 us);	//us level delay
 
 //FM320 Reg Opertion Functions via SPI Port
 void FM320_SPIConfig(void);
-bool FM320_GetReg(u8 addr,u8* regdata);
-bool FM320_SetReg(u8 addr,u8 regdata);
-bool FM320_ModifyReg(u8 addr,u8 mask,u8 set);
-bool FM320_Write_FIFO(u8 fflen,u8* ffbuf);
+u8 FM320_GetReg(u8 addr,u8* regdata);
+u8 FM320_SetReg(u8 addr,u8 regdata);
+u8 FM320_ModifyReg(u8 addr,u8 mask,u8 set);
+u8 FM320_WriteFIFO(u8 fflen,u8* ffbuf);
 //end of FM320 Reg Opertion Functions via SPI Port
 
 //FM320_Reader Functions
 u8 FM320_Initial_ReaderA(void);
 u8 FM320_Initial_ReaderB(void);
-u8 FM320_ReaderA_Request(u8 type);
-u8 FM320_ReaderA_AntiCol(u8 size);
-u8 FM320_ReaderA_Select(u8 size);
-u8 FM320_ReaderA_Rats(u8 FSDI,u8 CCID);
-u8 FM320_RateSel(u8 txrate,u8 rxrate);
-u8 FM320_Enter_Idle(void);
-u8 FM320_ReaderA_HALT(void);
+u8 ReaderA_Request(u8 type);
+u8 ReaderA_AntiCol(u8 size);
+u8 ReaderA_Select(u8 size);
+u8 ReaderA_Rats(u8 FSDI,u8 CCID);
+u8 RateSel(u8 txrate,u8 rxrate);
+u8 FM320_Enter_Idle();
+u8 ReaderA_HALT();
 u8 FM320_Authent(MiAuthTpeDef miauth);
-
-u8 FM320_MiRead(u8 block,u8 *readbuf);
-u8 FM320_MiWrite(u8 block,u8 *writebuf);
-u8 FM320_MiIncrement(u8 block,u32 incdat);
-u8 FM320_MiDecrement(u8 block,u32 decdat);
-u8 FM320_MiRestore(u8 block);
-u8 FM320_MiTransfer(u8 block);
-u8 FM320_PPS(u8 PPS1);
-
-
+u8 FM320_Mi_Read()
 //end of FM320_Reader Functions
 
 //FM320_Basic Functions
 u8 FM320_ResetAllReg(void);
+u8 Write_FIFO(u8 fflen,u8* ffbuf);
 
-u8 FM320_Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct);
+u8 Command_Transceive(NFC_DataExTypeDef* NFC_DataExStruct);
 //end of FM320_Basic Functions
 
 

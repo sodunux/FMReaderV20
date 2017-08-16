@@ -35,6 +35,7 @@ void SetStatusWords(uint8_t *APDUBuffer, uint16_t SW)
 
 void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
+	MiAuthTpeDef mif;
 	uint8_t ret,i;
 	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
   uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
@@ -44,7 +45,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 	uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
 	SetStatusWords(APDUBuffer, 0x9000);	
 	*APDURecvLen = 2;	
-
+	
 	switch(iParam)
 	{
 		case 0x010001: //MI_FieldON
@@ -62,7 +63,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 				FM320_POWEROFF;
 			break;
 		case 0x010102: //ReqA
-			ret=ReaderA_Request(PICC_REQIDL);
+			ret=FM320_ReaderA_Request(PICC_REQIDL);
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -79,7 +80,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}
 			break;
 		case 0x010206://MI_ANTICOLL1
-			ret=ReaderA_AntiCol(0);
+			ret=FM320_ReaderA_AntiCol(0);
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -99,7 +100,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}
 			break;
 		case 0x012206://MI_ANTICOLL2
-			ret=ReaderA_AntiCol(1);
+			ret=FM320_ReaderA_AntiCol(1);
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -117,7 +118,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}			
 			break;
 		case 0x013206://MI_ANTICOLL3
-			ret=ReaderA_AntiCol(2);
+			ret=FM320_ReaderA_AntiCol(2);
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -134,7 +135,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}				
 			break;
 		case 0x010301://MI_SEL1
-			ret=ReaderA_Select(0);	
+			ret=FM320_ReaderA_Select(0);	
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -149,7 +150,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}
 			break;
 		case 0x012301://MI_SEL2
-			ret=ReaderA_Select(1);	
+			ret=FM320_ReaderA_Select(1);	
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -164,7 +165,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}
 			break;
 		case 0x013301://MI_SEL3
-			ret=ReaderA_Select(2);	
+			ret=FM320_ReaderA_Select(2);	
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -180,7 +181,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			break;
 			
 		case 0x010401://Rats
-			ret=ReaderA_Rats(8,1);
+			ret=FM320_ReaderA_Rats(8,1);
 			if(!ret)
 			{
 				if(!CardA_Sel_Res.ATSLEN)
@@ -208,7 +209,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			break;
 
 		case 0x010701://MI_HALT
-			ret=ReaderA_HALT();
+			ret=FM320_ReaderA_HALT();
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);	
@@ -219,7 +220,7 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 				//TODO
 			break;
 		case 0x010A02://MI_WUPA
-			ret=ReaderA_Request(PICC_REQALL);
+			ret=FM320_ReaderA_Request(PICC_REQALL);
 			if(ret)
 			{
 				SetStatusWords(APDUBuffer, 0x6700);
@@ -236,13 +237,41 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 			}
 			break;
 			
+		case 0x010901://MI_Authent
+			mif.keytype=KEYA;
+			mif.block=0;
+			mif.key[0]=0xA0;
+			mif.key[1]=0xA1;
+			mif.key[2]=0xA2;
+			mif.key[3]=0xA3;
+			mif.key[4]=0xA4;
+			mif.key[5]=0xA5;
+			mif.UID[0]=CardA_Sel_Res.UID[0];
+			mif.UID[1]=CardA_Sel_Res.UID[1];
+			mif.UID[2]=CardA_Sel_Res.UID[2];
+			mif.UID[3]=CardA_Sel_Res.UID[3];
+			FM320_Authent(mif);
+			break;	
 		case 0x010501://MI_RDBLOCK
+			FM320_MiRead(1,APDUBuffer);
+			APDUBuffer[16]=0x90;
+			APDUBuffer[17]=0x00;
+			*APDURecvLen = 18;			
 			//TODO
 			break;
 		case 0x010611://MI_WRITEBLOCK
+			
+			FM320_MiWrite(1,APDUBuffer+5);
+			APDUBuffer[0]=0x90;
+			APDUBuffer[1]=0x00;
+			*APDURecvLen = 2;				
 			//TODO
 			break;
 		case 0x011105://MI_IncBlock
+			FM320_MiIncrement(1,0x55AA);
+			APDUBuffer[0]=0x90;
+			APDUBuffer[1]=0x00;
+			*APDURecvLen = 2;					
 			//TODO
 			break;
 		case 0x011205: //MI_DecBlock 
