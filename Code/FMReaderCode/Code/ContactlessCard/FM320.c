@@ -135,7 +135,7 @@ bool FM320_SetReg(u8 addr,u8 regdata)
 {
 	
 	u16 i;
-	u8 temp = 0;
+	u8 idat = 0;
 	
 	FM320_NSS_CLR;
 	__nop();__nop();
@@ -149,7 +149,7 @@ bool FM320_SetReg(u8 addr,u8 regdata)
 		if(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) != RESET)
 		{
 			SPI_I2S_ClearFlag(SPI1,SPI_I2S_FLAG_RXNE);	
-			temp = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
+			idat = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
 			break;
 		}
 		FM320_uDelay(1);
@@ -166,7 +166,7 @@ bool FM320_SetReg(u8 addr,u8 regdata)
 		if(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) != RESET)
 		{
 			SPI_I2S_ClearFlag(SPI1,SPI_I2S_FLAG_RXNE);	
-			temp = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
+			idat = SPI_I2S_ReceiveData(SPI1);		 /* Read SPI1 received data */
 			break;
 		}
 		FM320_uDelay(1);
@@ -521,7 +521,7 @@ u8 FM320_ReaderA_HALT()
 //***********************************************
 u8 FM320_RateSel(u8 txrate,u8 rxrate)
 {
-	u8 ret,regdata;
+	u8 regdata;
 	u8 res;
 	if((txrate<4)&&(rxrate<4))
 	{
@@ -546,7 +546,6 @@ u8 FM320_RateSel(u8 txrate,u8 rxrate)
 	else 
 		return FM175XX_TRANS_ERR;
 	
-	return ret;
 }
 
 //***********************************************

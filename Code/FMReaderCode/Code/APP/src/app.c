@@ -23,11 +23,6 @@
 */
 
 #include "includes.h"
-#include "stm32f10x.h"
-#include "smartcard.h"
-#include "FM320.h"
-#include "stm32f10x_spi.h"
-#include "bsp.h"
 
 /*
 *********************************************************************************************************

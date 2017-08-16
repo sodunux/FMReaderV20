@@ -1,3 +1,5 @@
+#include "includes.h"
+
 #ifndef _CCID_H_
 #define _CCID_H_
 
@@ -107,11 +109,9 @@ extern uint8_t   abBuffer[CCID_BUFFER_SIZE];
 extern uint16_t  iBufferRecvLen, iBufferRecvCnt;
 extern uint16_t  iBufferSendLen, iBufferSendCnt;
 extern uint8_t   abAPDUBuffer[APDU_BUFFER_SIZE];
-extern uint16_t  iAPDUBufferSendLen, iAPDUBufferSendCnt;
-extern uint16_t  iAPDUBufferRecvLen, iAPDUBufferRecvCnt;
-extern uint8_t   abTPDUBuffer[TPDU_BUFFER_SIZE];
-extern uint16_t  volatile iTPDUBufferRecvLen, iTPDUBufferRecvCnt, iTPDUBufferRecvCntPrev, iTPDUBufferRecvPos;
-extern uint16_t  volatile iTPDUBufferSendLen, iTPDUBufferSendCnt;
+extern uint16_t  iAPDUBufferSendLen;
+extern uint16_t  iAPDUBufferRecvLen;
+
 
 extern uint8_t  bPowerSelect;       // Index = 7
 extern uint8_t  bmFindexDindex;     // Index = 10

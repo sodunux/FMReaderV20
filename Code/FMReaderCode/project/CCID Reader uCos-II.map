@@ -88,11 +88,10 @@ Section Cross References
     bsp.o(.text) refers to stm32f10x_rcc.o(.text) for RCC_USBCLKConfig
     bsp.o(.text) refers to misc.o(.text) for NVIC_PriorityGroupConfig
     bsp.o(.text) refers to stm32f10x_flash.o(.text) for FLASH_PrefetchBufferCmd
-    bsp.o(.text) refers to fm320.o(.text) for FM320_SPIConfig
+    bsp.o(.text) refers to contactlesscard.o(.text) for CLCardInit
     bsp.o(.text) refers to usb_init.o(.text) for USB_Init
     bsp.o(.text) refers to ccid.o(.text) for CCIDInit
     bsp.o(.text) refers to specialapdu.o(.text) for InRegsInit
-    bsp.o(.text) refers to contactlesscard.o(.text) for CLCardPowerOff
     bsp.o(.text) refers to bsp.o(.data) for HSEStartUpStatus
     bsp.o(.text) refers to app.o(.data) for bUsbStatus
     bsp.o(.text) refers to ccid.o(.data) for bCardSlotStatus
@@ -112,9 +111,10 @@ Section Cross References
     smartcard.o(.text) refers to smartcard.o(.data) for SCData
     smartcard.o(.text) refers to smartcard.o(.bss) for SC_A2R
     smartcard.o(.text) refers to stm32f10x_rcc.o(.text) for RCC_APB2PeriphClockCmd
-    contactlesscard.o(.text) refers to fm320.o(.text) for FM320_PPS
+    contactlesscard.o(.text) refers to fm320.o(.text) for FM320_SPIConfig
     contactlesscard.o(.text) refers to memcpya.o(.text) for __aeabi_memcpy
-    contactlesscard.o(.text) refers to ccid.o(.bss) for abTPDUBuffer
+    contactlesscard.o(.text) refers to contactlesscard.o(.data) for stuTCLParam
+    contactlesscard.o(.text) refers to fm320.o(.bss) for CardA_Sel_Res
     fm320.o(.text) refers to stm32f10x_rcc.o(.text) for RCC_APB2PeriphClockCmd
     fm320.o(.text) refers to stm32f10x_gpio.o(.text) for GPIO_Init
     fm320.o(.text) refers to stm32f10x_spi.o(.text) for SPI_Init
@@ -221,21 +221,21 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     ../clib/../cmprslib/zerorunl2.c          0x00000000   Number         0  __dczerorl2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  useno.o ABSOLUTE
     ..\Code\APP\src\CCID.c                   0x00000000   Number         0  ccid.o ABSOLUTE
     ..\Code\APP\src\SpecialAPDU.C            0x00000000   Number         0  specialapdu.o ABSOLUTE
@@ -345,76 +345,77 @@ Image Symbol Table
     .text                                    0x080047dc   Section        0  os_time.o(.text)
     .text                                    0x0800499c   Section        0  bsp.o(.text)
     NVIC_SetPriority                         0x0800499d   Thumb Code    32  bsp.o(.text)
-    .text                                    0x08004d5c   Section        0  contactcard.o(.text)
-    .text                                    0x0800586c   Section        0  smartcard.o(.text)
-    SC_SendData                              0x0800589b   Thumb Code   580  smartcard.o(.text)
-    SC_decode_Answer2reset                   0x08005adf   Thumb Code   306  smartcard.o(.text)
-    SC_AnswerReq                             0x08005c3f   Thumb Code   192  smartcard.o(.text)
-    .text                                    0x08006394   Section        0  contactlesscard.o(.text)
-    .text                                    0x0800666c   Section        0  fm320.o(.text)
-    .text                                    0x080077f4   Section        0  usb_core.o(.text)
-    DataStageOut                             0x08007c33   Thumb Code   166  usb_core.o(.text)
-    DataStageIn                              0x08007cd9   Thumb Code   166  usb_core.o(.text)
-    NoData_Setup0                            0x08007d7f   Thumb Code   302  usb_core.o(.text)
-    Data_Setup0                              0x08007ead   Thumb Code   678  usb_core.o(.text)
-    .text                                    0x08008350   Section        0  usb_endp.o(.text)
-    .text                                    0x0800840c   Section        0  usb_init.o(.text)
-    .text                                    0x08008448   Section        0  usb_int.o(.text)
-    .text                                    0x08008784   Section        0  usb_istr.o(.text)
-    .text                                    0x080087f8   Section        0  usb_mem.o(.text)
-    .text                                    0x08008854   Section        0  usb_prop.o(.text)
-    .text                                    0x08008a70   Section        0  usb_pwr.o(.text)
-    .text                                    0x08008bb8   Section        0  usb_regs.o(.text)
-    .text                                    0x080093c0   Section        0  usb_sil.o(.text)
-    .text                                    0x08009440   Section        0  memcpya.o(.text)
-    .text                                    0x08009464   Section       36  init.o(.text)
-    .text                                    0x08009488   Section        0  __dczerorl2.o(.text)
-    i.__scatterload_copy                     0x080094de   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x080094ec   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x080094ee   Section       14  handlers.o(i.__scatterload_zeroinit)
-    .constdata                               0x080094fc   Section       20  ccid.o(.constdata)
-    .constdata                               0x08009510   Section       94  os_dbg.o(.constdata)
-    .constdata                               0x0800956e   Section      256  os_core.o(.constdata)
-    .constdata                               0x0800966e   Section        6  fm320.o(.constdata)
-    .constdata                               0x08009674   Section      165  usb_desc.o(.constdata)
+    .text                                    0x08004d58   Section        0  contactcard.o(.text)
+    .text                                    0x08005868   Section        0  smartcard.o(.text)
+    SC_SendData                              0x08005897   Thumb Code   580  smartcard.o(.text)
+    SC_decode_Answer2reset                   0x08005adb   Thumb Code   306  smartcard.o(.text)
+    SC_AnswerReq                             0x08005c3b   Thumb Code   192  smartcard.o(.text)
+    .text                                    0x08006390   Section        0  contactlesscard.o(.text)
+    .text                                    0x080066b4   Section        0  fm320.o(.text)
+    .text                                    0x0800783c   Section        0  usb_core.o(.text)
+    DataStageOut                             0x08007c7b   Thumb Code   166  usb_core.o(.text)
+    DataStageIn                              0x08007d21   Thumb Code   166  usb_core.o(.text)
+    NoData_Setup0                            0x08007dc7   Thumb Code   302  usb_core.o(.text)
+    Data_Setup0                              0x08007ef5   Thumb Code   678  usb_core.o(.text)
+    .text                                    0x08008398   Section        0  usb_endp.o(.text)
+    .text                                    0x08008454   Section        0  usb_init.o(.text)
+    .text                                    0x08008490   Section        0  usb_int.o(.text)
+    .text                                    0x080087cc   Section        0  usb_istr.o(.text)
+    .text                                    0x08008840   Section        0  usb_mem.o(.text)
+    .text                                    0x0800889c   Section        0  usb_prop.o(.text)
+    .text                                    0x08008ab8   Section        0  usb_pwr.o(.text)
+    .text                                    0x08008c00   Section        0  usb_regs.o(.text)
+    .text                                    0x08009408   Section        0  usb_sil.o(.text)
+    .text                                    0x08009488   Section        0  memcpya.o(.text)
+    .text                                    0x080094ac   Section       36  init.o(.text)
+    .text                                    0x080094d0   Section        0  __dczerorl2.o(.text)
+    i.__scatterload_copy                     0x08009526   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x08009534   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x08009536   Section       14  handlers.o(i.__scatterload_zeroinit)
+    .constdata                               0x08009544   Section       20  ccid.o(.constdata)
+    .constdata                               0x08009558   Section       94  os_dbg.o(.constdata)
+    .constdata                               0x080095b6   Section      256  os_core.o(.constdata)
+    .constdata                               0x080096b6   Section        6  fm320.o(.constdata)
+    .constdata                               0x080096bc   Section      165  usb_desc.o(.constdata)
     .data                                    0x20000000   Section       12  app.o(.data)
-    .data                                    0x2000000c   Section       56  ccid.o(.data)
-    .data                                    0x20000044   Section        4  specialapdu.o(.data)
-    .data                                    0x20000048   Section       20  stm32f10x_rcc.o(.data)
-    APBAHBPrescTable                         0x20000048   Data          16  stm32f10x_rcc.o(.data)
-    ADCPrescTable                            0x20000058   Data           4  stm32f10x_rcc.o(.data)
-    .data                                    0x2000005c   Section       20  system_stm32f10x.o(.data)
-    .data                                    0x20000070   Section       64  os_core.o(.data)
-    .data                                    0x200000b0   Section        1  bsp.o(.data)
-    .data                                    0x200000b4   Section      123  contactcard.o(.data)
-    F_Table                                  0x200000b4   Data          64  contactcard.o(.data)
-    D_Table                                  0x200000f4   Data          32  contactcard.o(.data)
-    InitCmd00Doing                           0x2000012b   Data           1  contactcard.o(.data)
-    InitCmd55Doing                           0x2000012c   Data           1  contactcard.o(.data)
-    InitCmd54Doing                           0x2000012d   Data           1  contactcard.o(.data)
-    InitCmdC0Flag                            0x2000012e   Data           1  contactcard.o(.data)
-    .data                                    0x20000130   Section      101  smartcard.o(.data)
-    SCData                                   0x20000130   Data           1  smartcard.o(.data)
-    F_Table                                  0x20000134   Data          64  smartcard.o(.data)
-    D_Table                                  0x20000174   Data          32  smartcard.o(.data)
-    .data                                    0x20000196   Section        3  usb_core.o(.data)
-    .data                                    0x2000019c   Section       20  usb_init.o(.data)
-    .data                                    0x200001b0   Section        4  usb_int.o(.data)
-    .data                                    0x200001b4   Section       60  usb_istr.o(.data)
-    .data                                    0x200001f0   Section      128  usb_prop.o(.data)
-    .data                                    0x20000270   Section        7  usb_pwr.o(.data)
-    .bss                                     0x20000278   Section     2048  app.o(.bss)
-    App_TaskStartStk                         0x20000278   Data         512  app.o(.bss)
-    App_TaskCCIDStk                          0x20000478   Data        1024  app.o(.bss)
-    App_TaskLedCountStk                      0x20000878   Data         512  app.o(.bss)
-    .bss                                     0x20000a78   Section      812  ccid.o(.bss)
-    .bss                                     0x20000da4   Section     3636  os_core.o(.bss)
-    .bss                                     0x20001bd8   Section      280  contactcard.o(.bss)
-    C0_Buffer                                0x20001bd8   Data         280  contactcard.o(.bss)
-    .bss                                     0x20001cf0   Section      654  smartcard.o(.bss)
-    .bss                                     0x20001f7e   Section      303  fm320.o(.bss)
-    .bss                                     0x200020b0   Section       28  usb_init.o(.bss)
-    STACK                                    0x200020d0   Section     1024  startup_stm32f10x_md.o(STACK)
+    .data                                    0x2000000c   Section       40  ccid.o(.data)
+    .data                                    0x20000034   Section        4  specialapdu.o(.data)
+    .data                                    0x20000038   Section       20  stm32f10x_rcc.o(.data)
+    APBAHBPrescTable                         0x20000038   Data          16  stm32f10x_rcc.o(.data)
+    ADCPrescTable                            0x20000048   Data           4  stm32f10x_rcc.o(.data)
+    .data                                    0x2000004c   Section       20  system_stm32f10x.o(.data)
+    .data                                    0x20000060   Section       64  os_core.o(.data)
+    .data                                    0x200000a0   Section        1  bsp.o(.data)
+    .data                                    0x200000a4   Section      123  contactcard.o(.data)
+    F_Table                                  0x200000a4   Data          64  contactcard.o(.data)
+    D_Table                                  0x200000e4   Data          32  contactcard.o(.data)
+    InitCmd00Doing                           0x2000011b   Data           1  contactcard.o(.data)
+    InitCmd55Doing                           0x2000011c   Data           1  contactcard.o(.data)
+    InitCmd54Doing                           0x2000011d   Data           1  contactcard.o(.data)
+    InitCmdC0Flag                            0x2000011e   Data           1  contactcard.o(.data)
+    .data                                    0x20000120   Section      101  smartcard.o(.data)
+    SCData                                   0x20000120   Data           1  smartcard.o(.data)
+    F_Table                                  0x20000124   Data          64  smartcard.o(.data)
+    D_Table                                  0x20000164   Data          32  smartcard.o(.data)
+    .data                                    0x20000185   Section        5  contactlesscard.o(.data)
+    .data                                    0x2000018a   Section        3  usb_core.o(.data)
+    .data                                    0x20000190   Section       20  usb_init.o(.data)
+    .data                                    0x200001a4   Section        4  usb_int.o(.data)
+    .data                                    0x200001a8   Section       60  usb_istr.o(.data)
+    .data                                    0x200001e4   Section      128  usb_prop.o(.data)
+    .data                                    0x20000264   Section        7  usb_pwr.o(.data)
+    .bss                                     0x2000026c   Section     2048  app.o(.bss)
+    App_TaskStartStk                         0x2000026c   Data         512  app.o(.bss)
+    App_TaskCCIDStk                          0x2000046c   Data        1024  app.o(.bss)
+    App_TaskLedCountStk                      0x2000086c   Data         512  app.o(.bss)
+    .bss                                     0x20000a6c   Section      551  ccid.o(.bss)
+    .bss                                     0x20000c94   Section     3636  os_core.o(.bss)
+    .bss                                     0x20001ac8   Section      280  contactcard.o(.bss)
+    C0_Buffer                                0x20001ac8   Data         280  contactcard.o(.bss)
+    .bss                                     0x20001be0   Section      654  smartcard.o(.bss)
+    .bss                                     0x20001e6e   Section      303  fm320.o(.bss)
+    .bss                                     0x20001fa0   Section       28  usb_init.o(.bss)
+    STACK                                    0x20001fc0   Section     1024  startup_stm32f10x_md.o(STACK)
 
     Global Symbols
 
@@ -747,229 +748,230 @@ Image Symbol Table
     GPIO_Config                              0x08004b33   Thumb Code   102  bsp.o(.text)
     SysTick_Configuration                    0x08004b99   Thumb Code    74  bsp.o(.text)
     RCC_Config                               0x08004be3   Thumb Code   142  bsp.o(.text)
-    BSP_Init                                 0x08004c71   Thumb Code    88  bsp.o(.text)
-    USB_Cable_Config                         0x08004cc9   Thumb Code    30  bsp.o(.text)
-    Enter_LowPowerMode                       0x08004ce7   Thumb Code     8  bsp.o(.text)
-    Leave_LowPowerMode                       0x08004cef   Thumb Code    22  bsp.o(.text)
-    SendChar                                 0x08004d05   Thumb Code    26  bsp.o(.text)
-    GetKey                                   0x08004d1f   Thumb Code    26  bsp.o(.text)
-    ContactCardPPS                           0x08004d5d   Thumb Code    22  contactcard.o(.text)
-    ContactCardInitCmd                       0x08004d73   Thumb Code  2322  contactcard.o(.text)
-    ContactCardT0APDU                        0x08005685   Thumb Code   454  contactcard.o(.text)
-    ContactCardInterruptHandler              0x0800584b   Thumb Code     2  contactcard.o(.text)
-    USART_ByteReceive                        0x0800586d   Thumb Code    46  smartcard.o(.text)
-    SC_PowerCmd                              0x08005c11   Thumb Code    28  smartcard.o(.text)
-    SC_Reset                                 0x08005c2d   Thumb Code    18  smartcard.o(.text)
-    SC_Detect                                0x08005cff   Thumb Code     4  smartcard.o(.text)
-    SC_VoltageConfig                         0x08005d03   Thumb Code    68  smartcard.o(.text)
-    SC_Init                                  0x08005d47   Thumb Code   370  smartcard.o(.text)
-    SC_Handler                               0x08005eb9   Thumb Code   206  smartcard.o(.text)
-    SC_ParityErrorHandler                    0x08005f87   Thumb Code    28  smartcard.o(.text)
-    SC_PTSConfig                             0x08005fa3   Thumb Code   444  smartcard.o(.text)
-    SC_PPS                                   0x0800615f   Thumb Code   396  smartcard.o(.text)
-    SC_DirectSendData                        0x080062eb   Thumb Code   134  smartcard.o(.text)
-    SC_DeInit                                0x08006371   Thumb Code    20  smartcard.o(.text)
-    CLCardPPS                                0x08006395   Thumb Code    12  contactlesscard.o(.text)
-    ContactlessCardInitCmd                   0x080063a1   Thumb Code     6  contactlesscard.o(.text)
-    CLTCLAPDU                                0x080063a7   Thumb Code   688  contactlesscard.o(.text)
-    CLCardPowerOff                           0x08006657   Thumb Code    10  contactlesscard.o(.text)
-    FM320_mDelay                             0x0800666d   Thumb Code    28  fm320.o(.text)
-    FM320_uDelay                             0x08006689   Thumb Code    24  fm320.o(.text)
-    FM320_SPIConfig                          0x080066a1   Thumb Code   208  fm320.o(.text)
-    FM320_GetReg                             0x08006771   Thumb Code   180  fm320.o(.text)
-    FM320_SetReg                             0x08006825   Thumb Code   196  fm320.o(.text)
-    FM320_ModifyReg                          0x080068e9   Thumb Code    64  fm320.o(.text)
-    FM320_Write_FIFO                         0x08006929   Thumb Code    52  fm320.o(.text)
-    FM320_Command_Transceive                 0x0800695d   Thumb Code   502  fm320.o(.text)
-    FM320_PPS                                0x08006b53   Thumb Code   240  fm320.o(.text)
-    FM320_Authent                            0x08006c43   Thumb Code   206  fm320.o(.text)
-    FM320_MiRead                             0x08006d11   Thumb Code    74  fm320.o(.text)
-    FM320_MiWrite                            0x08006d5b   Thumb Code    88  fm320.o(.text)
-    FM320_MiIncrement                        0x08006db3   Thumb Code   102  fm320.o(.text)
-    FM320_MiDecrement                        0x08006e19   Thumb Code   102  fm320.o(.text)
-    FM320_MiRestore                          0x08006e7f   Thumb Code    94  fm320.o(.text)
-    FM320_MiTransfer                         0x08006edd   Thumb Code    56  fm320.o(.text)
-    FM320_ReaderA_HALT                       0x08006f15   Thumb Code    54  fm320.o(.text)
-    FM320_RateSel                            0x08006f4b   Thumb Code   134  fm320.o(.text)
-    FM320_Enter_Idle                         0x08006fd1   Thumb Code    54  fm320.o(.text)
-    FM320_Initial_ReaderA                    0x08007007   Thumb Code   598  fm320.o(.text)
-    FM320_Initial_ReaderB                    0x0800725d   Thumb Code   430  fm320.o(.text)
-    FM320_ReaderA_Request                    0x0800740b   Thumb Code   428  fm320.o(.text)
-    FM320_ReaderA_AntiCol                    0x080075b7   Thumb Code   212  fm320.o(.text)
-    FM320_ReaderA_Select                     0x0800768b   Thumb Code   230  fm320.o(.text)
-    FM320_ReaderA_Rats                       0x08007771   Thumb Code    90  fm320.o(.text)
-    FM320_ResetAllReg                        0x080077cb   Thumb Code    28  fm320.o(.text)
-    Standard_GetConfiguration                0x080077f5   Thumb Code    34  usb_core.o(.text)
-    Standard_SetConfiguration                0x08007817   Thumb Code    60  usb_core.o(.text)
-    Standard_GetInterface                    0x08007853   Thumb Code    34  usb_core.o(.text)
-    Standard_SetInterface                    0x08007875   Thumb Code    96  usb_core.o(.text)
-    Standard_GetStatus                       0x080078d5   Thumb Code   238  usb_core.o(.text)
-    Standard_ClearFeature                    0x080079c3   Thumb Code   342  usb_core.o(.text)
-    Standard_SetEndPointFeature              0x08007b19   Thumb Code   220  usb_core.o(.text)
-    Standard_SetDeviceFeature                0x08007bf5   Thumb Code    30  usb_core.o(.text)
-    Standard_GetDescriptorData               0x08007c13   Thumb Code    32  usb_core.o(.text)
-    Post0_Process                            0x08008153   Thumb Code    54  usb_core.o(.text)
-    Setup0_Process                           0x08008189   Thumb Code   170  usb_core.o(.text)
-    SetDeviceAddress                         0x08008233   Thumb Code    70  usb_core.o(.text)
-    In0_Process                              0x08008279   Thumb Code    98  usb_core.o(.text)
-    Out0_Process                             0x080082db   Thumb Code    70  usb_core.o(.text)
-    NOP_Process                              0x08008321   Thumb Code     2  usb_core.o(.text)
-    EP1_OUT_Callback                         0x08008351   Thumb Code    84  usb_endp.o(.text)
-    EP2_IN_Callback                          0x080083a5   Thumb Code    80  usb_endp.o(.text)
-    USB_Init                                 0x0800840d   Thumb Code    36  usb_init.o(.text)
-    CTR_LP                                   0x08008449   Thumb Code   616  usb_int.o(.text)
-    CTR_HP                                   0x080086b1   Thumb Code   178  usb_int.o(.text)
-    USB_Istr                                 0x08008785   Thumb Code    96  usb_istr.o(.text)
-    UserToPMABufferCopy                      0x080087f9   Thumb Code    52  usb_mem.o(.text)
-    PMAToUserBufferCopy                      0x0800882d   Thumb Code    34  usb_mem.o(.text)
-    CCID_READER_init                         0x08008855   Thumb Code    26  usb_prop.o(.text)
-    CCID_READER_Reset                        0x0800886f   Thumb Code   216  usb_prop.o(.text)
-    CCID_READER_SetConfiguration             0x08008947   Thumb Code    14  usb_prop.o(.text)
-    CCID_READER_SetDeviceAddress             0x08008955   Thumb Code     8  usb_prop.o(.text)
-    CCID_READER_Status_In                    0x0800895d   Thumb Code     2  usb_prop.o(.text)
-    CCID_READER_Status_Out                   0x0800895f   Thumb Code     2  usb_prop.o(.text)
-    CCID_READER_GetDataRates                 0x08008961   Thumb Code    30  usb_prop.o(.text)
-    CCID_READER_GetClockFrequencies          0x0800897f   Thumb Code    20  usb_prop.o(.text)
-    CCID_READER_Data_Setup                   0x08008993   Thumb Code    66  usb_prop.o(.text)
-    CCID_READER_NoData_Setup                 0x080089d5   Thumb Code    28  usb_prop.o(.text)
-    CCID_READER_GetDeviceDescriptor          0x080089f1   Thumb Code    14  usb_prop.o(.text)
-    CCID_READER_GetConfigDescriptor          0x080089ff   Thumb Code    14  usb_prop.o(.text)
-    CCID_READER_GetStringDescriptor          0x08008a0d   Thumb Code    32  usb_prop.o(.text)
-    CCID_READER_Get_Interface_Setting        0x08008a2d   Thumb Code    22  usb_prop.o(.text)
-    PowerOn                                  0x08008a71   Thumb Code    54  usb_pwr.o(.text)
-    PowerOff                                 0x08008aa7   Thumb Code    28  usb_pwr.o(.text)
-    Suspend                                  0x08008ac3   Thumb Code    34  usb_pwr.o(.text)
-    Resume_Init                              0x08008ae5   Thumb Code    30  usb_pwr.o(.text)
-    Resume                                   0x08008b03   Thumb Code   168  usb_pwr.o(.text)
-    SetCNTR                                  0x08008bb9   Thumb Code     6  usb_regs.o(.text)
-    GetCNTR                                  0x08008bbf   Thumb Code     8  usb_regs.o(.text)
-    SetISTR                                  0x08008bc7   Thumb Code     8  usb_regs.o(.text)
-    GetISTR                                  0x08008bcf   Thumb Code    10  usb_regs.o(.text)
-    GetFNR                                   0x08008bd9   Thumb Code    10  usb_regs.o(.text)
-    SetDADDR                                 0x08008be3   Thumb Code     8  usb_regs.o(.text)
-    GetDADDR                                 0x08008beb   Thumb Code    10  usb_regs.o(.text)
-    SetBTABLE                                0x08008bf5   Thumb Code    14  usb_regs.o(.text)
-    GetBTABLE                                0x08008c03   Thumb Code    10  usb_regs.o(.text)
-    SetENDPOINT                              0x08008c0d   Thumb Code    12  usb_regs.o(.text)
-    GetENDPOINT                              0x08008c19   Thumb Code    16  usb_regs.o(.text)
-    SetEPType                                0x08008c29   Thumb Code    32  usb_regs.o(.text)
-    GetEPType                                0x08008c49   Thumb Code    18  usb_regs.o(.text)
-    SetEPTxStatus                            0x08008c5b   Thumb Code    60  usb_regs.o(.text)
-    SetEPRxStatus                            0x08008c97   Thumb Code    60  usb_regs.o(.text)
-    SetDouBleBuffEPStall                     0x08008cd3   Thumb Code    54  usb_regs.o(.text)
-    GetEPTxStatus                            0x08008d09   Thumb Code    18  usb_regs.o(.text)
-    GetEPRxStatus                            0x08008d1b   Thumb Code    18  usb_regs.o(.text)
-    SetEPTxValid                             0x08008d2d   Thumb Code    48  usb_regs.o(.text)
-    SetEPRxValid                             0x08008d5d   Thumb Code    48  usb_regs.o(.text)
-    SetEP_KIND                               0x08008d8d   Thumb Code    38  usb_regs.o(.text)
-    ClearEP_KIND                             0x08008db3   Thumb Code    34  usb_regs.o(.text)
-    Clear_Status_Out                         0x08008dd5   Thumb Code    34  usb_regs.o(.text)
-    Set_Status_Out                           0x08008df7   Thumb Code    38  usb_regs.o(.text)
-    SetEPDoubleBuff                          0x08008e1d   Thumb Code    38  usb_regs.o(.text)
-    ClearEPDoubleBuff                        0x08008e43   Thumb Code    34  usb_regs.o(.text)
-    GetTxStallStatus                         0x08008e65   Thumb Code    28  usb_regs.o(.text)
-    GetRxStallStatus                         0x08008e81   Thumb Code    30  usb_regs.o(.text)
-    ClearEP_CTR_RX                           0x08008e9f   Thumb Code    32  usb_regs.o(.text)
-    ClearEP_CTR_TX                           0x08008ebf   Thumb Code    28  usb_regs.o(.text)
-    ToggleDTOG_RX                            0x08008edb   Thumb Code    34  usb_regs.o(.text)
-    ToggleDTOG_TX                            0x08008efd   Thumb Code    34  usb_regs.o(.text)
-    ClearDTOG_RX                             0x08008f1f   Thumb Code    48  usb_regs.o(.text)
-    ClearDTOG_TX                             0x08008f4f   Thumb Code    48  usb_regs.o(.text)
-    SetEPAddress                             0x08008f7f   Thumb Code    46  usb_regs.o(.text)
-    GetEPAddress                             0x08008fad   Thumb Code    18  usb_regs.o(.text)
-    SetEPTxAddr                              0x08008fbf   Thumb Code    24  usb_regs.o(.text)
-    SetEPRxAddr                              0x08008fd7   Thumb Code    26  usb_regs.o(.text)
-    GetEPTxAddr                              0x08008ff1   Thumb Code    22  usb_regs.o(.text)
-    GetEPRxAddr                              0x08009007   Thumb Code    24  usb_regs.o(.text)
-    SetEPTxCount                             0x0800901f   Thumb Code    20  usb_regs.o(.text)
-    SetEPCountRxReg                          0x08009033   Thumb Code    48  usb_regs.o(.text)
-    SetEPRxCount                             0x08009063   Thumb Code    68  usb_regs.o(.text)
-    GetEPTxCount                             0x080090a7   Thumb Code    26  usb_regs.o(.text)
-    GetEPRxCount                             0x080090c1   Thumb Code    26  usb_regs.o(.text)
-    SetEPDblBuffAddr                         0x080090db   Thumb Code    44  usb_regs.o(.text)
-    SetEPDblBuf0Addr                         0x08009107   Thumb Code    24  usb_regs.o(.text)
-    SetEPDblBuf1Addr                         0x0800911f   Thumb Code    26  usb_regs.o(.text)
-    GetEPDblBuf0Addr                         0x08009139   Thumb Code    22  usb_regs.o(.text)
-    GetEPDblBuf1Addr                         0x0800914f   Thumb Code    24  usb_regs.o(.text)
-    SetEPDblBuffCount                        0x08009167   Thumb Code   186  usb_regs.o(.text)
-    SetEPDblBuf0Count                        0x08009221   Thumb Code    96  usb_regs.o(.text)
-    SetEPDblBuf1Count                        0x08009281   Thumb Code    96  usb_regs.o(.text)
-    GetEPDblBuf0Count                        0x080092e1   Thumb Code    26  usb_regs.o(.text)
-    GetEPDblBuf1Count                        0x080092fb   Thumb Code    26  usb_regs.o(.text)
-    GetEPDblBufDir                           0x08009315   Thumb Code    62  usb_regs.o(.text)
-    FreeUserBuffer                           0x08009353   Thumb Code    90  usb_regs.o(.text)
-    ToWord                                   0x080093ad   Thumb Code     8  usb_regs.o(.text)
-    ByteSwap                                 0x080093b5   Thumb Code    12  usb_regs.o(.text)
-    USB_SIL_Init                             0x080093c1   Thumb Code    28  usb_sil.o(.text)
-    USB_SIL_Write                            0x080093dd   Thumb Code    46  usb_sil.o(.text)
-    USB_SIL_Read                             0x0800940b   Thumb Code    46  usb_sil.o(.text)
-    __aeabi_memcpy                           0x08009441   Thumb Code    36  memcpya.o(.text)
-    __aeabi_memcpy4                          0x08009441   Thumb Code     0  memcpya.o(.text)
-    __aeabi_memcpy8                          0x08009441   Thumb Code     0  memcpya.o(.text)
-    __scatterload                            0x08009465   Thumb Code    28  init.o(.text)
-    __scatterload_rt2                        0x08009465   Thumb Code     0  init.o(.text)
-    __decompress                             0x08009489   Thumb Code     0  __dczerorl2.o(.text)
-    __decompress1                            0x08009489   Thumb Code    86  __dczerorl2.o(.text)
-    __scatterload_copy                       0x080094df   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x080094ed   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x080094ef   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    CCID_READER_CLOCK_FREQUENCIES            0x080094fc   Data           4  ccid.o(.constdata)
-    CCID_READER_DATA_RATES                   0x08009500   Data          16  ccid.o(.constdata)
-    OSDebugEn                                0x08009510   Data           2  os_dbg.o(.constdata)
-    OSEndiannessTest                         0x08009514   Data           4  os_dbg.o(.constdata)
-    OSEventMax                               0x08009518   Data           2  os_dbg.o(.constdata)
-    OSEventNameSize                          0x0800951a   Data           2  os_dbg.o(.constdata)
-    OSEventEn                                0x0800951c   Data           2  os_dbg.o(.constdata)
-    OSEventSize                              0x0800951e   Data           2  os_dbg.o(.constdata)
-    OSEventTblSize                           0x08009520   Data           2  os_dbg.o(.constdata)
-    OSFlagEn                                 0x08009522   Data           2  os_dbg.o(.constdata)
-    OSFlagGrpSize                            0x08009524   Data           2  os_dbg.o(.constdata)
-    OSFlagNodeSize                           0x08009526   Data           2  os_dbg.o(.constdata)
-    OSFlagWidth                              0x08009528   Data           2  os_dbg.o(.constdata)
-    OSFlagMax                                0x0800952a   Data           2  os_dbg.o(.constdata)
-    OSFlagNameSize                           0x0800952c   Data           2  os_dbg.o(.constdata)
-    OSLowestPrio                             0x0800952e   Data           2  os_dbg.o(.constdata)
-    OSMboxEn                                 0x08009530   Data           2  os_dbg.o(.constdata)
-    OSMemEn                                  0x08009532   Data           2  os_dbg.o(.constdata)
-    OSMemMax                                 0x08009534   Data           2  os_dbg.o(.constdata)
-    OSMemNameSize                            0x08009536   Data           2  os_dbg.o(.constdata)
-    OSMemSize                                0x08009538   Data           2  os_dbg.o(.constdata)
-    OSMemTblSize                             0x0800953a   Data           2  os_dbg.o(.constdata)
-    OSMutexEn                                0x0800953c   Data           2  os_dbg.o(.constdata)
-    OSPtrSize                                0x0800953e   Data           2  os_dbg.o(.constdata)
-    OSQEn                                    0x08009540   Data           2  os_dbg.o(.constdata)
-    OSQMax                                   0x08009542   Data           2  os_dbg.o(.constdata)
-    OSQSize                                  0x08009544   Data           2  os_dbg.o(.constdata)
-    OSRdyTblSize                             0x08009546   Data           2  os_dbg.o(.constdata)
-    OSSemEn                                  0x08009548   Data           2  os_dbg.o(.constdata)
-    OSStkWidth                               0x0800954a   Data           2  os_dbg.o(.constdata)
-    OSTaskCreateEn                           0x0800954c   Data           2  os_dbg.o(.constdata)
-    OSTaskCreateExtEn                        0x0800954e   Data           2  os_dbg.o(.constdata)
-    OSTaskDelEn                              0x08009550   Data           2  os_dbg.o(.constdata)
-    OSTaskIdleStkSize                        0x08009552   Data           2  os_dbg.o(.constdata)
-    OSTaskProfileEn                          0x08009554   Data           2  os_dbg.o(.constdata)
-    OSTaskMax                                0x08009556   Data           2  os_dbg.o(.constdata)
-    OSTaskNameSize                           0x08009558   Data           2  os_dbg.o(.constdata)
-    OSTaskStatEn                             0x0800955a   Data           2  os_dbg.o(.constdata)
-    OSTaskStatStkSize                        0x0800955c   Data           2  os_dbg.o(.constdata)
-    OSTaskStatStkChkEn                       0x0800955e   Data           2  os_dbg.o(.constdata)
-    OSTaskSwHookEn                           0x08009560   Data           2  os_dbg.o(.constdata)
-    OSTCBPrioTblMax                          0x08009562   Data           2  os_dbg.o(.constdata)
-    OSTCBSize                                0x08009564   Data           2  os_dbg.o(.constdata)
-    OSTicksPerSec                            0x08009566   Data           2  os_dbg.o(.constdata)
-    OSTimeTickHookEn                         0x08009568   Data           2  os_dbg.o(.constdata)
-    OSVersionNbr                             0x0800956a   Data           2  os_dbg.o(.constdata)
-    OSDataSize                               0x0800956c   Data           2  os_dbg.o(.constdata)
-    OSUnMapTbl                               0x0800956e   Data         256  os_core.o(.constdata)
-    RF_CMD_ANTICOL                           0x0800966e   Data           3  fm320.o(.constdata)
-    RF_CMD_SELECT                            0x08009671   Data           3  fm320.o(.constdata)
-    CCID_READER_DeviceDescriptor             0x08009674   Data          18  usb_desc.o(.constdata)
-    CCID_READER_ConfigDescriptor             0x08009686   Data          93  usb_desc.o(.constdata)
-    CCID_READER_StringLangID                 0x080096e3   Data           4  usb_desc.o(.constdata)
-    CCID_READER_StringVendor                 0x080096e7   Data          10  usb_desc.o(.constdata)
-    CCID_READER_StringProduct                0x080096f1   Data          40  usb_desc.o(.constdata)
-    Region$$Table$$Base                      0x0800971c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800973c   Number         0  anon$$obj.o(Region$$Table)
+    BSP_Init                                 0x08004c71   Thumb Code    84  bsp.o(.text)
+    USB_Cable_Config                         0x08004cc5   Thumb Code    30  bsp.o(.text)
+    Enter_LowPowerMode                       0x08004ce3   Thumb Code     8  bsp.o(.text)
+    Leave_LowPowerMode                       0x08004ceb   Thumb Code    22  bsp.o(.text)
+    SendChar                                 0x08004d01   Thumb Code    26  bsp.o(.text)
+    GetKey                                   0x08004d1b   Thumb Code    26  bsp.o(.text)
+    ContactCardPPS                           0x08004d59   Thumb Code    22  contactcard.o(.text)
+    ContactCardInitCmd                       0x08004d6f   Thumb Code  2322  contactcard.o(.text)
+    ContactCardT0APDU                        0x08005681   Thumb Code   454  contactcard.o(.text)
+    ContactCardInterruptHandler              0x08005847   Thumb Code     2  contactcard.o(.text)
+    USART_ByteReceive                        0x08005869   Thumb Code    46  smartcard.o(.text)
+    SC_PowerCmd                              0x08005c0d   Thumb Code    28  smartcard.o(.text)
+    SC_Reset                                 0x08005c29   Thumb Code    18  smartcard.o(.text)
+    SC_Detect                                0x08005cfb   Thumb Code     4  smartcard.o(.text)
+    SC_VoltageConfig                         0x08005cff   Thumb Code    68  smartcard.o(.text)
+    SC_Init                                  0x08005d43   Thumb Code   370  smartcard.o(.text)
+    SC_Handler                               0x08005eb5   Thumb Code   206  smartcard.o(.text)
+    SC_ParityErrorHandler                    0x08005f83   Thumb Code    28  smartcard.o(.text)
+    SC_PTSConfig                             0x08005f9f   Thumb Code   444  smartcard.o(.text)
+    SC_PPS                                   0x0800615b   Thumb Code   396  smartcard.o(.text)
+    SC_DirectSendData                        0x080062e7   Thumb Code   134  smartcard.o(.text)
+    SC_DeInit                                0x0800636d   Thumb Code    20  smartcard.o(.text)
+    CLCardInit                               0x08006391   Thumb Code    98  contactlesscard.o(.text)
+    CLCardPPS                                0x080063f3   Thumb Code    12  contactlesscard.o(.text)
+    ContactlessCardInitCmd                   0x080063ff   Thumb Code     6  contactlesscard.o(.text)
+    CLTCLAPDU                                0x08006405   Thumb Code   666  contactlesscard.o(.text)
+    CLCardPowerOff                           0x0800669f   Thumb Code    10  contactlesscard.o(.text)
+    FM320_mDelay                             0x080066b5   Thumb Code    28  fm320.o(.text)
+    FM320_uDelay                             0x080066d1   Thumb Code    24  fm320.o(.text)
+    FM320_SPIConfig                          0x080066e9   Thumb Code   208  fm320.o(.text)
+    FM320_GetReg                             0x080067b9   Thumb Code   180  fm320.o(.text)
+    FM320_SetReg                             0x0800686d   Thumb Code   196  fm320.o(.text)
+    FM320_ModifyReg                          0x08006931   Thumb Code    64  fm320.o(.text)
+    FM320_Write_FIFO                         0x08006971   Thumb Code    52  fm320.o(.text)
+    FM320_Command_Transceive                 0x080069a5   Thumb Code   502  fm320.o(.text)
+    FM320_PPS                                0x08006b9b   Thumb Code   240  fm320.o(.text)
+    FM320_Authent                            0x08006c8b   Thumb Code   206  fm320.o(.text)
+    FM320_MiRead                             0x08006d59   Thumb Code    74  fm320.o(.text)
+    FM320_MiWrite                            0x08006da3   Thumb Code    88  fm320.o(.text)
+    FM320_MiIncrement                        0x08006dfb   Thumb Code   102  fm320.o(.text)
+    FM320_MiDecrement                        0x08006e61   Thumb Code   102  fm320.o(.text)
+    FM320_MiRestore                          0x08006ec7   Thumb Code    94  fm320.o(.text)
+    FM320_MiTransfer                         0x08006f25   Thumb Code    56  fm320.o(.text)
+    FM320_ReaderA_HALT                       0x08006f5d   Thumb Code    54  fm320.o(.text)
+    FM320_RateSel                            0x08006f93   Thumb Code   134  fm320.o(.text)
+    FM320_Enter_Idle                         0x08007019   Thumb Code    54  fm320.o(.text)
+    FM320_Initial_ReaderA                    0x0800704f   Thumb Code   598  fm320.o(.text)
+    FM320_Initial_ReaderB                    0x080072a5   Thumb Code   430  fm320.o(.text)
+    FM320_ReaderA_Request                    0x08007453   Thumb Code   428  fm320.o(.text)
+    FM320_ReaderA_AntiCol                    0x080075ff   Thumb Code   212  fm320.o(.text)
+    FM320_ReaderA_Select                     0x080076d3   Thumb Code   230  fm320.o(.text)
+    FM320_ReaderA_Rats                       0x080077b9   Thumb Code    90  fm320.o(.text)
+    FM320_ResetAllReg                        0x08007813   Thumb Code    28  fm320.o(.text)
+    Standard_GetConfiguration                0x0800783d   Thumb Code    34  usb_core.o(.text)
+    Standard_SetConfiguration                0x0800785f   Thumb Code    60  usb_core.o(.text)
+    Standard_GetInterface                    0x0800789b   Thumb Code    34  usb_core.o(.text)
+    Standard_SetInterface                    0x080078bd   Thumb Code    96  usb_core.o(.text)
+    Standard_GetStatus                       0x0800791d   Thumb Code   238  usb_core.o(.text)
+    Standard_ClearFeature                    0x08007a0b   Thumb Code   342  usb_core.o(.text)
+    Standard_SetEndPointFeature              0x08007b61   Thumb Code   220  usb_core.o(.text)
+    Standard_SetDeviceFeature                0x08007c3d   Thumb Code    30  usb_core.o(.text)
+    Standard_GetDescriptorData               0x08007c5b   Thumb Code    32  usb_core.o(.text)
+    Post0_Process                            0x0800819b   Thumb Code    54  usb_core.o(.text)
+    Setup0_Process                           0x080081d1   Thumb Code   170  usb_core.o(.text)
+    SetDeviceAddress                         0x0800827b   Thumb Code    70  usb_core.o(.text)
+    In0_Process                              0x080082c1   Thumb Code    98  usb_core.o(.text)
+    Out0_Process                             0x08008323   Thumb Code    70  usb_core.o(.text)
+    NOP_Process                              0x08008369   Thumb Code     2  usb_core.o(.text)
+    EP1_OUT_Callback                         0x08008399   Thumb Code    84  usb_endp.o(.text)
+    EP2_IN_Callback                          0x080083ed   Thumb Code    80  usb_endp.o(.text)
+    USB_Init                                 0x08008455   Thumb Code    36  usb_init.o(.text)
+    CTR_LP                                   0x08008491   Thumb Code   616  usb_int.o(.text)
+    CTR_HP                                   0x080086f9   Thumb Code   178  usb_int.o(.text)
+    USB_Istr                                 0x080087cd   Thumb Code    96  usb_istr.o(.text)
+    UserToPMABufferCopy                      0x08008841   Thumb Code    52  usb_mem.o(.text)
+    PMAToUserBufferCopy                      0x08008875   Thumb Code    34  usb_mem.o(.text)
+    CCID_READER_init                         0x0800889d   Thumb Code    26  usb_prop.o(.text)
+    CCID_READER_Reset                        0x080088b7   Thumb Code   216  usb_prop.o(.text)
+    CCID_READER_SetConfiguration             0x0800898f   Thumb Code    14  usb_prop.o(.text)
+    CCID_READER_SetDeviceAddress             0x0800899d   Thumb Code     8  usb_prop.o(.text)
+    CCID_READER_Status_In                    0x080089a5   Thumb Code     2  usb_prop.o(.text)
+    CCID_READER_Status_Out                   0x080089a7   Thumb Code     2  usb_prop.o(.text)
+    CCID_READER_GetDataRates                 0x080089a9   Thumb Code    30  usb_prop.o(.text)
+    CCID_READER_GetClockFrequencies          0x080089c7   Thumb Code    20  usb_prop.o(.text)
+    CCID_READER_Data_Setup                   0x080089db   Thumb Code    66  usb_prop.o(.text)
+    CCID_READER_NoData_Setup                 0x08008a1d   Thumb Code    28  usb_prop.o(.text)
+    CCID_READER_GetDeviceDescriptor          0x08008a39   Thumb Code    14  usb_prop.o(.text)
+    CCID_READER_GetConfigDescriptor          0x08008a47   Thumb Code    14  usb_prop.o(.text)
+    CCID_READER_GetStringDescriptor          0x08008a55   Thumb Code    32  usb_prop.o(.text)
+    CCID_READER_Get_Interface_Setting        0x08008a75   Thumb Code    22  usb_prop.o(.text)
+    PowerOn                                  0x08008ab9   Thumb Code    54  usb_pwr.o(.text)
+    PowerOff                                 0x08008aef   Thumb Code    28  usb_pwr.o(.text)
+    Suspend                                  0x08008b0b   Thumb Code    34  usb_pwr.o(.text)
+    Resume_Init                              0x08008b2d   Thumb Code    30  usb_pwr.o(.text)
+    Resume                                   0x08008b4b   Thumb Code   168  usb_pwr.o(.text)
+    SetCNTR                                  0x08008c01   Thumb Code     6  usb_regs.o(.text)
+    GetCNTR                                  0x08008c07   Thumb Code     8  usb_regs.o(.text)
+    SetISTR                                  0x08008c0f   Thumb Code     8  usb_regs.o(.text)
+    GetISTR                                  0x08008c17   Thumb Code    10  usb_regs.o(.text)
+    GetFNR                                   0x08008c21   Thumb Code    10  usb_regs.o(.text)
+    SetDADDR                                 0x08008c2b   Thumb Code     8  usb_regs.o(.text)
+    GetDADDR                                 0x08008c33   Thumb Code    10  usb_regs.o(.text)
+    SetBTABLE                                0x08008c3d   Thumb Code    14  usb_regs.o(.text)
+    GetBTABLE                                0x08008c4b   Thumb Code    10  usb_regs.o(.text)
+    SetENDPOINT                              0x08008c55   Thumb Code    12  usb_regs.o(.text)
+    GetENDPOINT                              0x08008c61   Thumb Code    16  usb_regs.o(.text)
+    SetEPType                                0x08008c71   Thumb Code    32  usb_regs.o(.text)
+    GetEPType                                0x08008c91   Thumb Code    18  usb_regs.o(.text)
+    SetEPTxStatus                            0x08008ca3   Thumb Code    60  usb_regs.o(.text)
+    SetEPRxStatus                            0x08008cdf   Thumb Code    60  usb_regs.o(.text)
+    SetDouBleBuffEPStall                     0x08008d1b   Thumb Code    54  usb_regs.o(.text)
+    GetEPTxStatus                            0x08008d51   Thumb Code    18  usb_regs.o(.text)
+    GetEPRxStatus                            0x08008d63   Thumb Code    18  usb_regs.o(.text)
+    SetEPTxValid                             0x08008d75   Thumb Code    48  usb_regs.o(.text)
+    SetEPRxValid                             0x08008da5   Thumb Code    48  usb_regs.o(.text)
+    SetEP_KIND                               0x08008dd5   Thumb Code    38  usb_regs.o(.text)
+    ClearEP_KIND                             0x08008dfb   Thumb Code    34  usb_regs.o(.text)
+    Clear_Status_Out                         0x08008e1d   Thumb Code    34  usb_regs.o(.text)
+    Set_Status_Out                           0x08008e3f   Thumb Code    38  usb_regs.o(.text)
+    SetEPDoubleBuff                          0x08008e65   Thumb Code    38  usb_regs.o(.text)
+    ClearEPDoubleBuff                        0x08008e8b   Thumb Code    34  usb_regs.o(.text)
+    GetTxStallStatus                         0x08008ead   Thumb Code    28  usb_regs.o(.text)
+    GetRxStallStatus                         0x08008ec9   Thumb Code    30  usb_regs.o(.text)
+    ClearEP_CTR_RX                           0x08008ee7   Thumb Code    32  usb_regs.o(.text)
+    ClearEP_CTR_TX                           0x08008f07   Thumb Code    28  usb_regs.o(.text)
+    ToggleDTOG_RX                            0x08008f23   Thumb Code    34  usb_regs.o(.text)
+    ToggleDTOG_TX                            0x08008f45   Thumb Code    34  usb_regs.o(.text)
+    ClearDTOG_RX                             0x08008f67   Thumb Code    48  usb_regs.o(.text)
+    ClearDTOG_TX                             0x08008f97   Thumb Code    48  usb_regs.o(.text)
+    SetEPAddress                             0x08008fc7   Thumb Code    46  usb_regs.o(.text)
+    GetEPAddress                             0x08008ff5   Thumb Code    18  usb_regs.o(.text)
+    SetEPTxAddr                              0x08009007   Thumb Code    24  usb_regs.o(.text)
+    SetEPRxAddr                              0x0800901f   Thumb Code    26  usb_regs.o(.text)
+    GetEPTxAddr                              0x08009039   Thumb Code    22  usb_regs.o(.text)
+    GetEPRxAddr                              0x0800904f   Thumb Code    24  usb_regs.o(.text)
+    SetEPTxCount                             0x08009067   Thumb Code    20  usb_regs.o(.text)
+    SetEPCountRxReg                          0x0800907b   Thumb Code    48  usb_regs.o(.text)
+    SetEPRxCount                             0x080090ab   Thumb Code    68  usb_regs.o(.text)
+    GetEPTxCount                             0x080090ef   Thumb Code    26  usb_regs.o(.text)
+    GetEPRxCount                             0x08009109   Thumb Code    26  usb_regs.o(.text)
+    SetEPDblBuffAddr                         0x08009123   Thumb Code    44  usb_regs.o(.text)
+    SetEPDblBuf0Addr                         0x0800914f   Thumb Code    24  usb_regs.o(.text)
+    SetEPDblBuf1Addr                         0x08009167   Thumb Code    26  usb_regs.o(.text)
+    GetEPDblBuf0Addr                         0x08009181   Thumb Code    22  usb_regs.o(.text)
+    GetEPDblBuf1Addr                         0x08009197   Thumb Code    24  usb_regs.o(.text)
+    SetEPDblBuffCount                        0x080091af   Thumb Code   186  usb_regs.o(.text)
+    SetEPDblBuf0Count                        0x08009269   Thumb Code    96  usb_regs.o(.text)
+    SetEPDblBuf1Count                        0x080092c9   Thumb Code    96  usb_regs.o(.text)
+    GetEPDblBuf0Count                        0x08009329   Thumb Code    26  usb_regs.o(.text)
+    GetEPDblBuf1Count                        0x08009343   Thumb Code    26  usb_regs.o(.text)
+    GetEPDblBufDir                           0x0800935d   Thumb Code    62  usb_regs.o(.text)
+    FreeUserBuffer                           0x0800939b   Thumb Code    90  usb_regs.o(.text)
+    ToWord                                   0x080093f5   Thumb Code     8  usb_regs.o(.text)
+    ByteSwap                                 0x080093fd   Thumb Code    12  usb_regs.o(.text)
+    USB_SIL_Init                             0x08009409   Thumb Code    28  usb_sil.o(.text)
+    USB_SIL_Write                            0x08009425   Thumb Code    46  usb_sil.o(.text)
+    USB_SIL_Read                             0x08009453   Thumb Code    46  usb_sil.o(.text)
+    __aeabi_memcpy                           0x08009489   Thumb Code    36  memcpya.o(.text)
+    __aeabi_memcpy4                          0x08009489   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memcpy8                          0x08009489   Thumb Code     0  memcpya.o(.text)
+    __scatterload                            0x080094ad   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x080094ad   Thumb Code     0  init.o(.text)
+    __decompress                             0x080094d1   Thumb Code     0  __dczerorl2.o(.text)
+    __decompress1                            0x080094d1   Thumb Code    86  __dczerorl2.o(.text)
+    __scatterload_copy                       0x08009527   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x08009535   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x08009537   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    CCID_READER_CLOCK_FREQUENCIES            0x08009544   Data           4  ccid.o(.constdata)
+    CCID_READER_DATA_RATES                   0x08009548   Data          16  ccid.o(.constdata)
+    OSDebugEn                                0x08009558   Data           2  os_dbg.o(.constdata)
+    OSEndiannessTest                         0x0800955c   Data           4  os_dbg.o(.constdata)
+    OSEventMax                               0x08009560   Data           2  os_dbg.o(.constdata)
+    OSEventNameSize                          0x08009562   Data           2  os_dbg.o(.constdata)
+    OSEventEn                                0x08009564   Data           2  os_dbg.o(.constdata)
+    OSEventSize                              0x08009566   Data           2  os_dbg.o(.constdata)
+    OSEventTblSize                           0x08009568   Data           2  os_dbg.o(.constdata)
+    OSFlagEn                                 0x0800956a   Data           2  os_dbg.o(.constdata)
+    OSFlagGrpSize                            0x0800956c   Data           2  os_dbg.o(.constdata)
+    OSFlagNodeSize                           0x0800956e   Data           2  os_dbg.o(.constdata)
+    OSFlagWidth                              0x08009570   Data           2  os_dbg.o(.constdata)
+    OSFlagMax                                0x08009572   Data           2  os_dbg.o(.constdata)
+    OSFlagNameSize                           0x08009574   Data           2  os_dbg.o(.constdata)
+    OSLowestPrio                             0x08009576   Data           2  os_dbg.o(.constdata)
+    OSMboxEn                                 0x08009578   Data           2  os_dbg.o(.constdata)
+    OSMemEn                                  0x0800957a   Data           2  os_dbg.o(.constdata)
+    OSMemMax                                 0x0800957c   Data           2  os_dbg.o(.constdata)
+    OSMemNameSize                            0x0800957e   Data           2  os_dbg.o(.constdata)
+    OSMemSize                                0x08009580   Data           2  os_dbg.o(.constdata)
+    OSMemTblSize                             0x08009582   Data           2  os_dbg.o(.constdata)
+    OSMutexEn                                0x08009584   Data           2  os_dbg.o(.constdata)
+    OSPtrSize                                0x08009586   Data           2  os_dbg.o(.constdata)
+    OSQEn                                    0x08009588   Data           2  os_dbg.o(.constdata)
+    OSQMax                                   0x0800958a   Data           2  os_dbg.o(.constdata)
+    OSQSize                                  0x0800958c   Data           2  os_dbg.o(.constdata)
+    OSRdyTblSize                             0x0800958e   Data           2  os_dbg.o(.constdata)
+    OSSemEn                                  0x08009590   Data           2  os_dbg.o(.constdata)
+    OSStkWidth                               0x08009592   Data           2  os_dbg.o(.constdata)
+    OSTaskCreateEn                           0x08009594   Data           2  os_dbg.o(.constdata)
+    OSTaskCreateExtEn                        0x08009596   Data           2  os_dbg.o(.constdata)
+    OSTaskDelEn                              0x08009598   Data           2  os_dbg.o(.constdata)
+    OSTaskIdleStkSize                        0x0800959a   Data           2  os_dbg.o(.constdata)
+    OSTaskProfileEn                          0x0800959c   Data           2  os_dbg.o(.constdata)
+    OSTaskMax                                0x0800959e   Data           2  os_dbg.o(.constdata)
+    OSTaskNameSize                           0x080095a0   Data           2  os_dbg.o(.constdata)
+    OSTaskStatEn                             0x080095a2   Data           2  os_dbg.o(.constdata)
+    OSTaskStatStkSize                        0x080095a4   Data           2  os_dbg.o(.constdata)
+    OSTaskStatStkChkEn                       0x080095a6   Data           2  os_dbg.o(.constdata)
+    OSTaskSwHookEn                           0x080095a8   Data           2  os_dbg.o(.constdata)
+    OSTCBPrioTblMax                          0x080095aa   Data           2  os_dbg.o(.constdata)
+    OSTCBSize                                0x080095ac   Data           2  os_dbg.o(.constdata)
+    OSTicksPerSec                            0x080095ae   Data           2  os_dbg.o(.constdata)
+    OSTimeTickHookEn                         0x080095b0   Data           2  os_dbg.o(.constdata)
+    OSVersionNbr                             0x080095b2   Data           2  os_dbg.o(.constdata)
+    OSDataSize                               0x080095b4   Data           2  os_dbg.o(.constdata)
+    OSUnMapTbl                               0x080095b6   Data         256  os_core.o(.constdata)
+    RF_CMD_ANTICOL                           0x080096b6   Data           3  fm320.o(.constdata)
+    RF_CMD_SELECT                            0x080096b9   Data           3  fm320.o(.constdata)
+    CCID_READER_DeviceDescriptor             0x080096bc   Data          18  usb_desc.o(.constdata)
+    CCID_READER_ConfigDescriptor             0x080096ce   Data          93  usb_desc.o(.constdata)
+    CCID_READER_StringLangID                 0x0800972b   Data           4  usb_desc.o(.constdata)
+    CCID_READER_StringVendor                 0x0800972f   Data          10  usb_desc.o(.constdata)
+    CCID_READER_StringProduct                0x08009739   Data          40  usb_desc.o(.constdata)
+    Region$$Table$$Base                      0x08009764   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08009784   Number         0  anon$$obj.o(Region$$Table)
     err                                      0x20000000   Data           1  app.o(.data)
     LedCount                                 0x20000001   Data           1  app.o(.data)
     bUsbStatus                               0x20000002   Data           1  app.o(.data)
@@ -983,124 +985,116 @@ Image Symbol Table
     iBufferSendLen                           0x20000012   Data           2  ccid.o(.data)
     iBufferSendCnt                           0x20000014   Data           2  ccid.o(.data)
     iAPDUBufferSendLen                       0x20000016   Data           2  ccid.o(.data)
-    iAPDUBufferSendCnt                       0x20000018   Data           2  ccid.o(.data)
-    iAPDUBufferRecvLen                       0x2000001a   Data           2  ccid.o(.data)
-    iAPDUBufferRecvCnt                       0x2000001c   Data           2  ccid.o(.data)
-    iTPDUBufferRecvLen                       0x2000001e   Data           2  ccid.o(.data)
-    iTPDUBufferRecvCnt                       0x20000020   Data           2  ccid.o(.data)
-    iTPDUBufferRecvCntPrev                   0x20000022   Data           2  ccid.o(.data)
-    iTPDUBufferRecvPos                       0x20000024   Data           2  ccid.o(.data)
-    iTPDUBufferSendLen                       0x20000026   Data           2  ccid.o(.data)
-    iTPDUBufferSendCnt                       0x20000028   Data           2  ccid.o(.data)
-    bMessageType                             0x2000002a   Data           1  ccid.o(.data)
-    dwLength                                 0x2000002c   Data           4  ccid.o(.data)
-    bSlot                                    0x20000030   Data           1  ccid.o(.data)
-    bSeq                                     0x20000031   Data           1  ccid.o(.data)
-    bPrevSeq                                 0x20000032   Data           1  ccid.o(.data)
-    bPowerSelect                             0x20000033   Data           1  ccid.o(.data)
-    bProtocolNum                             0x20000034   Data           1  ccid.o(.data)
-    bmFindexDindex                           0x20000035   Data           1  ccid.o(.data)
-    bmTCCKST0                                0x20000036   Data           1  ccid.o(.data)
-    bGuardTimeT0                             0x20000037   Data           1  ccid.o(.data)
-    bWaitingIntegerT0                        0x20000038   Data           1  ccid.o(.data)
-    bClockStop                               0x20000039   Data           1  ccid.o(.data)
-    bmTCCKST1                                0x2000003a   Data           1  ccid.o(.data)
-    bGuardTimeT1                             0x2000003b   Data           1  ccid.o(.data)
-    bWaitingIntegerT1                        0x2000003c   Data           1  ccid.o(.data)
-    bIFSC                                    0x2000003d   Data           1  ccid.o(.data)
-    bNadValue                                0x2000003e   Data           1  ccid.o(.data)
-    bBWI                                     0x2000003f   Data           1  ccid.o(.data)
-    wLevelParameter                          0x20000040   Data           2  ccid.o(.data)
-    bStatus                                  0x20000042   Data           1  ccid.o(.data)
-    bError                                   0x20000043   Data           1  ccid.o(.data)
-    stuInRegs                                0x20000044   Data           1  specialapdu.o(.data)
-    InitCmd04Flag                            0x20000045   Data           1  specialapdu.o(.data)
-    InitCmd00Flag                            0x20000046   Data           1  specialapdu.o(.data)
-    InitCmdFlag                              0x20000047   Data           1  specialapdu.o(.data)
-    SystemCoreClock                          0x2000005c   Data           4  system_stm32f10x.o(.data)
-    AHBPrescTable                            0x20000060   Data          16  system_stm32f10x.o(.data)
-    OSCtxSwCtr                               0x20000070   Data           4  os_core.o(.data)
-    OSEventFreeList                          0x20000074   Data           4  os_core.o(.data)
-    OSFlagFreeList                           0x20000078   Data           4  os_core.o(.data)
-    OSCPUUsage                               0x2000007c   Data           1  os_core.o(.data)
-    OSIdleCtrMax                             0x20000080   Data           4  os_core.o(.data)
-    OSIdleCtrRun                             0x20000084   Data           4  os_core.o(.data)
-    OSStatRdy                                0x20000088   Data           1  os_core.o(.data)
-    OSIntNesting                             0x20000089   Data           1  os_core.o(.data)
-    OSLockNesting                            0x2000008a   Data           1  os_core.o(.data)
-    OSPrioCur                                0x2000008b   Data           1  os_core.o(.data)
-    OSPrioHighRdy                            0x2000008c   Data           1  os_core.o(.data)
-    OSRdyGrp                                 0x2000008d   Data           1  os_core.o(.data)
-    OSRdyTbl                                 0x2000008e   Data           4  os_core.o(.data)
-    OSRunning                                0x20000092   Data           1  os_core.o(.data)
-    OSTaskCtr                                0x20000093   Data           1  os_core.o(.data)
-    OSIdleCtr                                0x20000094   Data           4  os_core.o(.data)
-    OSTCBCur                                 0x20000098   Data           4  os_core.o(.data)
-    OSTCBFreeList                            0x2000009c   Data           4  os_core.o(.data)
-    OSTCBHighRdy                             0x200000a0   Data           4  os_core.o(.data)
-    OSTCBList                                0x200000a4   Data           4  os_core.o(.data)
-    OSTickStepState                          0x200000a8   Data           1  os_core.o(.data)
-    OSTime                                   0x200000ac   Data           4  os_core.o(.data)
-    HSEStartUpStatus                         0x200000b0   Data           1  bsp.o(.data)
-    bATRSource                               0x20000114   Data           1  contactcard.o(.data)
-    bT0Status                                0x20000115   Data           1  contactcard.o(.data)
-    bTA1                                     0x20000116   Data           1  contactcard.o(.data)
-    bTC1                                     0x20000117   Data           1  contactcard.o(.data)
-    bTC2                                     0x20000118   Data           1  contactcard.o(.data)
-    bProtocolT                               0x20000119   Data           1  contactcard.o(.data)
-    lWwtInEtu                                0x2000011c   Data           4  contactcard.o(.data)
-    bIsTimeout                               0x20000120   Data           1  contactcard.o(.data)
-    bIsParityErr                             0x20000121   Data           1  contactcard.o(.data)
-    bRecvResult                              0x20000122   Data           1  contactcard.o(.data)
-    bTAPos                                   0x20000123   Data           1  contactcard.o(.data)
-    bTBPos                                   0x20000124   Data           1  contactcard.o(.data)
-    bTCPos                                   0x20000125   Data           1  contactcard.o(.data)
-    bTDPos                                   0x20000126   Data           1  contactcard.o(.data)
-    bATRCyc                                  0x20000127   Data           1  contactcard.o(.data)
-    bAPDUCase                                0x20000128   Data           1  contactcard.o(.data)
-    bINS                                     0x20000129   Data           1  contactcard.o(.data)
-    bP3                                      0x2000012a   Data           1  contactcard.o(.data)
-    state                                    0x20000194   Data           1  smartcard.o(.data)
-    StatusInfo                               0x20000196   Data           2  usb_core.o(.data)
-    Data_Mul_MaxPacketSize                   0x20000198   Data           1  usb_core.o(.data)
-    EPindex                                  0x2000019c   Data           1  usb_init.o(.data)
-    pInformation                             0x200001a0   Data           4  usb_init.o(.data)
-    pProperty                                0x200001a4   Data           4  usb_init.o(.data)
-    SaveState                                0x200001a8   Data           2  usb_init.o(.data)
-    wInterrupt_Mask                          0x200001aa   Data           2  usb_init.o(.data)
-    pUser_Standard_Requests                  0x200001ac   Data           4  usb_init.o(.data)
-    SaveRState                               0x200001b0   Data           2  usb_int.o(.data)
-    SaveTState                               0x200001b2   Data           2  usb_int.o(.data)
-    wIstr                                    0x200001b4   Data           2  usb_istr.o(.data)
-    bIntPackSOF                              0x200001b6   Data           1  usb_istr.o(.data)
-    pEpInt_IN                                0x200001b8   Data          28  usb_istr.o(.data)
-    pEpInt_OUT                               0x200001d4   Data          28  usb_istr.o(.data)
-    Device_Table                             0x200001f0   Data           2  usb_prop.o(.data)
-    Device_Property                          0x200001f4   Data          48  usb_prop.o(.data)
-    User_Standard_Requests                   0x20000224   Data          36  usb_prop.o(.data)
-    Device_Descriptor                        0x20000248   Data           8  usb_prop.o(.data)
-    Config_Descriptor                        0x20000250   Data           8  usb_prop.o(.data)
-    String_Descriptor                        0x20000258   Data          24  usb_prop.o(.data)
-    bDeviceState                             0x20000270   Data           4  usb_pwr.o(.data)
-    fSuspendEnabled                          0x20000274   Data           1  usb_pwr.o(.data)
-    ResumeS                                  0x20000275   Data           2  usb_pwr.o(.data)
-    abBuffer                                 0x20000a78   Data         271  ccid.o(.bss)
-    abAPDUBuffer                             0x20000b87   Data         280  ccid.o(.bss)
-    abTPDUBuffer                             0x20000c9f   Data         261  ccid.o(.bss)
-    OSEventTbl                               0x20000da4   Data         320  os_core.o(.bss)
-    OSFlagTbl                                0x20000ee4   Data         140  os_core.o(.bss)
-    OSTaskStatStk                            0x20000f70   Data         512  os_core.o(.bss)
-    OSTaskIdleStk                            0x20001170   Data         512  os_core.o(.bss)
-    OSTCBPrioTbl                             0x20001370   Data         128  os_core.o(.bss)
-    OSTCBTbl                                 0x200013f0   Data        2024  os_core.o(.bss)
-    SC_A2R                                   0x20001cf0   Data          44  smartcard.o(.bss)
-    SC_ATR_Table                             0x20001d1c   Data          40  smartcard.o(.bss)
-    apdu_commands                            0x20001d44   Data         288  smartcard.o(.bss)
-    apdu_responce                            0x20001e64   Data         282  smartcard.o(.bss)
-    CardA_Sel_Res                            0x20001f7e   Data          48  fm320.o(.bss)
-    RF_Data_Buf                              0x20001fae   Data         255  fm320.o(.bss)
-    Device_Info                              0x200020b0   Data          28  usb_init.o(.bss)
-    __initial_sp                             0x200024d0   Data           0  startup_stm32f10x_md.o(STACK)
+    iAPDUBufferRecvLen                       0x20000018   Data           2  ccid.o(.data)
+    bMessageType                             0x2000001a   Data           1  ccid.o(.data)
+    dwLength                                 0x2000001c   Data           4  ccid.o(.data)
+    bSlot                                    0x20000020   Data           1  ccid.o(.data)
+    bSeq                                     0x20000021   Data           1  ccid.o(.data)
+    bPrevSeq                                 0x20000022   Data           1  ccid.o(.data)
+    bPowerSelect                             0x20000023   Data           1  ccid.o(.data)
+    bProtocolNum                             0x20000024   Data           1  ccid.o(.data)
+    bmFindexDindex                           0x20000025   Data           1  ccid.o(.data)
+    bmTCCKST0                                0x20000026   Data           1  ccid.o(.data)
+    bGuardTimeT0                             0x20000027   Data           1  ccid.o(.data)
+    bWaitingIntegerT0                        0x20000028   Data           1  ccid.o(.data)
+    bClockStop                               0x20000029   Data           1  ccid.o(.data)
+    bmTCCKST1                                0x2000002a   Data           1  ccid.o(.data)
+    bGuardTimeT1                             0x2000002b   Data           1  ccid.o(.data)
+    bWaitingIntegerT1                        0x2000002c   Data           1  ccid.o(.data)
+    bIFSC                                    0x2000002d   Data           1  ccid.o(.data)
+    bNadValue                                0x2000002e   Data           1  ccid.o(.data)
+    bBWI                                     0x2000002f   Data           1  ccid.o(.data)
+    wLevelParameter                          0x20000030   Data           2  ccid.o(.data)
+    bStatus                                  0x20000032   Data           1  ccid.o(.data)
+    bError                                   0x20000033   Data           1  ccid.o(.data)
+    stuInRegs                                0x20000034   Data           1  specialapdu.o(.data)
+    InitCmd04Flag                            0x20000035   Data           1  specialapdu.o(.data)
+    InitCmd00Flag                            0x20000036   Data           1  specialapdu.o(.data)
+    InitCmdFlag                              0x20000037   Data           1  specialapdu.o(.data)
+    SystemCoreClock                          0x2000004c   Data           4  system_stm32f10x.o(.data)
+    AHBPrescTable                            0x20000050   Data          16  system_stm32f10x.o(.data)
+    OSCtxSwCtr                               0x20000060   Data           4  os_core.o(.data)
+    OSEventFreeList                          0x20000064   Data           4  os_core.o(.data)
+    OSFlagFreeList                           0x20000068   Data           4  os_core.o(.data)
+    OSCPUUsage                               0x2000006c   Data           1  os_core.o(.data)
+    OSIdleCtrMax                             0x20000070   Data           4  os_core.o(.data)
+    OSIdleCtrRun                             0x20000074   Data           4  os_core.o(.data)
+    OSStatRdy                                0x20000078   Data           1  os_core.o(.data)
+    OSIntNesting                             0x20000079   Data           1  os_core.o(.data)
+    OSLockNesting                            0x2000007a   Data           1  os_core.o(.data)
+    OSPrioCur                                0x2000007b   Data           1  os_core.o(.data)
+    OSPrioHighRdy                            0x2000007c   Data           1  os_core.o(.data)
+    OSRdyGrp                                 0x2000007d   Data           1  os_core.o(.data)
+    OSRdyTbl                                 0x2000007e   Data           4  os_core.o(.data)
+    OSRunning                                0x20000082   Data           1  os_core.o(.data)
+    OSTaskCtr                                0x20000083   Data           1  os_core.o(.data)
+    OSIdleCtr                                0x20000084   Data           4  os_core.o(.data)
+    OSTCBCur                                 0x20000088   Data           4  os_core.o(.data)
+    OSTCBFreeList                            0x2000008c   Data           4  os_core.o(.data)
+    OSTCBHighRdy                             0x20000090   Data           4  os_core.o(.data)
+    OSTCBList                                0x20000094   Data           4  os_core.o(.data)
+    OSTickStepState                          0x20000098   Data           1  os_core.o(.data)
+    OSTime                                   0x2000009c   Data           4  os_core.o(.data)
+    HSEStartUpStatus                         0x200000a0   Data           1  bsp.o(.data)
+    bATRSource                               0x20000104   Data           1  contactcard.o(.data)
+    bT0Status                                0x20000105   Data           1  contactcard.o(.data)
+    bTA1                                     0x20000106   Data           1  contactcard.o(.data)
+    bTC1                                     0x20000107   Data           1  contactcard.o(.data)
+    bTC2                                     0x20000108   Data           1  contactcard.o(.data)
+    bProtocolT                               0x20000109   Data           1  contactcard.o(.data)
+    lWwtInEtu                                0x2000010c   Data           4  contactcard.o(.data)
+    bIsTimeout                               0x20000110   Data           1  contactcard.o(.data)
+    bIsParityErr                             0x20000111   Data           1  contactcard.o(.data)
+    bRecvResult                              0x20000112   Data           1  contactcard.o(.data)
+    bTAPos                                   0x20000113   Data           1  contactcard.o(.data)
+    bTBPos                                   0x20000114   Data           1  contactcard.o(.data)
+    bTCPos                                   0x20000115   Data           1  contactcard.o(.data)
+    bTDPos                                   0x20000116   Data           1  contactcard.o(.data)
+    bATRCyc                                  0x20000117   Data           1  contactcard.o(.data)
+    bAPDUCase                                0x20000118   Data           1  contactcard.o(.data)
+    bINS                                     0x20000119   Data           1  contactcard.o(.data)
+    bP3                                      0x2000011a   Data           1  contactcard.o(.data)
+    state                                    0x20000184   Data           1  smartcard.o(.data)
+    stuTCLParam                              0x20000185   Data           5  contactlesscard.o(.data)
+    StatusInfo                               0x2000018a   Data           2  usb_core.o(.data)
+    Data_Mul_MaxPacketSize                   0x2000018c   Data           1  usb_core.o(.data)
+    EPindex                                  0x20000190   Data           1  usb_init.o(.data)
+    pInformation                             0x20000194   Data           4  usb_init.o(.data)
+    pProperty                                0x20000198   Data           4  usb_init.o(.data)
+    SaveState                                0x2000019c   Data           2  usb_init.o(.data)
+    wInterrupt_Mask                          0x2000019e   Data           2  usb_init.o(.data)
+    pUser_Standard_Requests                  0x200001a0   Data           4  usb_init.o(.data)
+    SaveRState                               0x200001a4   Data           2  usb_int.o(.data)
+    SaveTState                               0x200001a6   Data           2  usb_int.o(.data)
+    wIstr                                    0x200001a8   Data           2  usb_istr.o(.data)
+    bIntPackSOF                              0x200001aa   Data           1  usb_istr.o(.data)
+    pEpInt_IN                                0x200001ac   Data          28  usb_istr.o(.data)
+    pEpInt_OUT                               0x200001c8   Data          28  usb_istr.o(.data)
+    Device_Table                             0x200001e4   Data           2  usb_prop.o(.data)
+    Device_Property                          0x200001e8   Data          48  usb_prop.o(.data)
+    User_Standard_Requests                   0x20000218   Data          36  usb_prop.o(.data)
+    Device_Descriptor                        0x2000023c   Data           8  usb_prop.o(.data)
+    Config_Descriptor                        0x20000244   Data           8  usb_prop.o(.data)
+    String_Descriptor                        0x2000024c   Data          24  usb_prop.o(.data)
+    bDeviceState                             0x20000264   Data           4  usb_pwr.o(.data)
+    fSuspendEnabled                          0x20000268   Data           1  usb_pwr.o(.data)
+    ResumeS                                  0x20000269   Data           2  usb_pwr.o(.data)
+    abBuffer                                 0x20000a6c   Data         271  ccid.o(.bss)
+    abAPDUBuffer                             0x20000b7b   Data         280  ccid.o(.bss)
+    OSEventTbl                               0x20000c94   Data         320  os_core.o(.bss)
+    OSFlagTbl                                0x20000dd4   Data         140  os_core.o(.bss)
+    OSTaskStatStk                            0x20000e60   Data         512  os_core.o(.bss)
+    OSTaskIdleStk                            0x20001060   Data         512  os_core.o(.bss)
+    OSTCBPrioTbl                             0x20001260   Data         128  os_core.o(.bss)
+    OSTCBTbl                                 0x200012e0   Data        2024  os_core.o(.bss)
+    SC_A2R                                   0x20001be0   Data          44  smartcard.o(.bss)
+    SC_ATR_Table                             0x20001c0c   Data          40  smartcard.o(.bss)
+    apdu_commands                            0x20001c34   Data         288  smartcard.o(.bss)
+    apdu_responce                            0x20001d54   Data         282  smartcard.o(.bss)
+    CardA_Sel_Res                            0x20001e6e   Data          48  fm320.o(.bss)
+    RF_Data_Buf                              0x20001e9e   Data         255  fm320.o(.bss)
+    Device_Info                              0x20001fa0   Data          28  usb_init.o(.bss)
+    __initial_sp                             0x200023c0   Data           0  startup_stm32f10x_md.o(STACK)
 
 
 
@@ -1110,108 +1104,109 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000099b4, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x000097e4])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000099f0, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x0000982c])
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000973c, Max: 0x00020000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00009784, Max: 0x00020000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x000000ec   Data   RO          548    RESET               startup_stm32f10x_md.o
-    0x080000ec   0x00000000   Code   RO         1013  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080000ec   0x00000004   Code   RO         1020    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080000f0   0x00000004   Code   RO         1023    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080000f4   0x00000000   Code   RO         1025    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080000f4   0x00000000   Code   RO         1027    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080000f4   0x00000008   Code   RO         1028    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080000fc   0x00000000   Code   RO         1030    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x080000fc   0x00000000   Code   RO         1032    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x080000fc   0x00000004   Code   RO         1021    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000000   0x000000ec   Data   RO          549    RESET               startup_stm32f10x_md.o
+    0x080000ec   0x00000000   Code   RO         1022  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080000ec   0x00000004   Code   RO         1029    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080000f0   0x00000004   Code   RO         1032    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080000f4   0x00000000   Code   RO         1034    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080000f4   0x00000000   Code   RO         1036    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080000f4   0x00000008   Code   RO         1037    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080000fc   0x00000000   Code   RO         1039    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x080000fc   0x00000000   Code   RO         1041    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x080000fc   0x00000004   Code   RO         1030    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000100   0x000002a8   Code   RO            1    .text               app.o
-    0x080003a8   0x00000368   Code   RO          214    .text               ccid.o
-    0x08000710   0x00000694   Code   RO          237    .text               specialapdu.o
-    0x08000da4   0x00000064   Code   RO          261    .text               stm32f10x_it.o
-    0x08000e08   0x000000dc   Code   RO          280    .text               misc.o
-    0x08000ee4   0x000005d4   Code   RO          388    .text               stm32f10x_flash.o
-    0x080014b8   0x0000035c   Code   RO          412    .text               stm32f10x_gpio.o
-    0x08001814   0x000003a4   Code   RO          460    .text               stm32f10x_rcc.o
-    0x08001bb8   0x0000030c   Code   RO          498    .text               stm32f10x_spi.o
-    0x08001ec4   0x00000416   Code   RO          522    .text               stm32f10x_usart.o
+    0x080003a8   0x00000368   Code   RO          215    .text               ccid.o
+    0x08000710   0x00000694   Code   RO          246    .text               specialapdu.o
+    0x08000da4   0x00000064   Code   RO          266    .text               stm32f10x_it.o
+    0x08000e08   0x000000dc   Code   RO          281    .text               misc.o
+    0x08000ee4   0x000005d4   Code   RO          389    .text               stm32f10x_flash.o
+    0x080014b8   0x0000035c   Code   RO          413    .text               stm32f10x_gpio.o
+    0x08001814   0x000003a4   Code   RO          461    .text               stm32f10x_rcc.o
+    0x08001bb8   0x0000030c   Code   RO          499    .text               stm32f10x_spi.o
+    0x08001ec4   0x00000416   Code   RO          523    .text               stm32f10x_usart.o
     0x080022da   0x00000002   PAD
-    0x080022dc   0x00000024   Code   RO          549    .text               startup_stm32f10x_md.o
-    0x08002300   0x000001d4   Code   RO          554    .text               system_stm32f10x.o
-    0x080024d4   0x000000a4   Code   RO          572    .text               os_cpu_a.o
-    0x08002578   0x000000e2   Code   RO          575    .text               os_cpu_c.o
+    0x080022dc   0x00000024   Code   RO          550    .text               startup_stm32f10x_md.o
+    0x08002300   0x000001d4   Code   RO          555    .text               system_stm32f10x.o
+    0x080024d4   0x000000a4   Code   RO          573    .text               os_cpu_a.o
+    0x08002578   0x000000e2   Code   RO          576    .text               os_cpu_c.o
     0x0800265a   0x00000002   PAD
-    0x0800265c   0x00000114   Code   RO          594    .text               os_dbg.o
-    0x08002770   0x00000ca8   Code   RO          609    .text               os_core.o
-    0x08003418   0x00000838   Code   RO          629    .text               os_flag.o
-    0x08003c50   0x000003c0   Code   RO          671    .text               os_sem.o
-    0x08004010   0x000007cc   Code   RO          683    .text               os_task.o
-    0x080047dc   0x000001c0   Code   RO          695    .text               os_time.o
-    0x0800499c   0x000003c0   Code   RO          713    .text               bsp.o
-    0x08004d5c   0x00000b10   Code   RO          758    .text               contactcard.o
-    0x0800586c   0x00000b28   Code   RO          777    .text               smartcard.o
-    0x08006394   0x000002d8   Code   RO          796    .text               contactlesscard.o
-    0x0800666c   0x00001188   Code   RO          811    .text               fm320.o
-    0x080077f4   0x00000b5c   Code   RO          830    .text               usb_core.o
-    0x08008350   0x000000bc   Code   RO          857    .text               usb_endp.o
-    0x0800840c   0x0000003c   Code   RO          870    .text               usb_init.o
-    0x08008448   0x0000033c   Code   RO          893    .text               usb_int.o
-    0x08008784   0x00000074   Code   RO          917    .text               usb_istr.o
-    0x080087f8   0x0000005c   Code   RO          935    .text               usb_mem.o
-    0x08008854   0x0000021c   Code   RO          947    .text               usb_prop.o
-    0x08008a70   0x00000148   Code   RO          971    .text               usb_pwr.o
-    0x08008bb8   0x00000808   Code   RO          989    .text               usb_regs.o
-    0x080093c0   0x00000080   Code   RO         1001    .text               usb_sil.o
-    0x08009440   0x00000024   Code   RO         1016    .text               mc_w.l(memcpya.o)
-    0x08009464   0x00000024   Code   RO         1034    .text               mc_w.l(init.o)
-    0x08009488   0x00000056   Code   RO         1044    .text               mc_w.l(__dczerorl2.o)
-    0x080094de   0x0000000e   Code   RO         1038    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080094ec   0x00000002   Code   RO         1039    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080094ee   0x0000000e   Code   RO         1040    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x080094fc   0x00000014   Data   RO          216    .constdata          ccid.o
-    0x08009510   0x0000005e   Data   RO          595    .constdata          os_dbg.o
-    0x0800956e   0x00000100   Data   RO          611    .constdata          os_core.o
-    0x0800966e   0x00000006   Data   RO          813    .constdata          fm320.o
-    0x08009674   0x000000a5   Data   RO          845    .constdata          usb_desc.o
-    0x08009719   0x00000003   PAD
-    0x0800971c   0x00000020   Data   RO         1036    Region$$Table       anon$$obj.o
+    0x0800265c   0x00000114   Code   RO          595    .text               os_dbg.o
+    0x08002770   0x00000ca8   Code   RO          610    .text               os_core.o
+    0x08003418   0x00000838   Code   RO          630    .text               os_flag.o
+    0x08003c50   0x000003c0   Code   RO          672    .text               os_sem.o
+    0x08004010   0x000007cc   Code   RO          684    .text               os_task.o
+    0x080047dc   0x000001c0   Code   RO          696    .text               os_time.o
+    0x0800499c   0x000003bc   Code   RO          714    .text               bsp.o
+    0x08004d58   0x00000b10   Code   RO          759    .text               contactcard.o
+    0x08005868   0x00000b28   Code   RO          782    .text               smartcard.o
+    0x08006390   0x00000324   Code   RO          801    .text               contactlesscard.o
+    0x080066b4   0x00001188   Code   RO          820    .text               fm320.o
+    0x0800783c   0x00000b5c   Code   RO          839    .text               usb_core.o
+    0x08008398   0x000000bc   Code   RO          866    .text               usb_endp.o
+    0x08008454   0x0000003c   Code   RO          879    .text               usb_init.o
+    0x08008490   0x0000033c   Code   RO          902    .text               usb_int.o
+    0x080087cc   0x00000074   Code   RO          926    .text               usb_istr.o
+    0x08008840   0x0000005c   Code   RO          944    .text               usb_mem.o
+    0x0800889c   0x0000021c   Code   RO          956    .text               usb_prop.o
+    0x08008ab8   0x00000148   Code   RO          980    .text               usb_pwr.o
+    0x08008c00   0x00000808   Code   RO          998    .text               usb_regs.o
+    0x08009408   0x00000080   Code   RO         1010    .text               usb_sil.o
+    0x08009488   0x00000024   Code   RO         1025    .text               mc_w.l(memcpya.o)
+    0x080094ac   0x00000024   Code   RO         1043    .text               mc_w.l(init.o)
+    0x080094d0   0x00000056   Code   RO         1053    .text               mc_w.l(__dczerorl2.o)
+    0x08009526   0x0000000e   Code   RO         1047    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08009534   0x00000002   Code   RO         1048    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08009536   0x0000000e   Code   RO         1049    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08009544   0x00000014   Data   RO          217    .constdata          ccid.o
+    0x08009558   0x0000005e   Data   RO          596    .constdata          os_dbg.o
+    0x080095b6   0x00000100   Data   RO          612    .constdata          os_core.o
+    0x080096b6   0x00000006   Data   RO          822    .constdata          fm320.o
+    0x080096bc   0x000000a5   Data   RO          854    .constdata          usb_desc.o
+    0x08009761   0x00000003   PAD
+    0x08009764   0x00000020   Data   RO         1045    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x000024d0, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a8])
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x000023c0, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000a8])
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   0x0000000c   Data   RW            3    .data               app.o
-    0x2000000c   0x00000038   Data   RW          217    .data               ccid.o
-    0x20000044   0x00000004   Data   RW          238    .data               specialapdu.o
-    0x20000048   0x00000014   Data   RW          461    .data               stm32f10x_rcc.o
-    0x2000005c   0x00000014   Data   RW          555    .data               system_stm32f10x.o
-    0x20000070   0x00000040   Data   RW          612    .data               os_core.o
-    0x200000b0   0x00000001   Data   RW          714    .data               bsp.o
-    0x200000b1   0x00000003   PAD
-    0x200000b4   0x0000007b   Data   RW          760    .data               contactcard.o
-    0x2000012f   0x00000001   PAD
-    0x20000130   0x00000065   Data   RW          779    .data               smartcard.o
-    0x20000195   0x00000001   PAD
-    0x20000196   0x00000003   Data   RW          831    .data               usb_core.o
-    0x20000199   0x00000003   PAD
-    0x2000019c   0x00000014   Data   RW          872    .data               usb_init.o
-    0x200001b0   0x00000004   Data   RW          894    .data               usb_int.o
-    0x200001b4   0x0000003c   Data   RW          918    .data               usb_istr.o
-    0x200001f0   0x00000080   Data   RW          948    .data               usb_prop.o
-    0x20000270   0x00000007   Data   RW          972    .data               usb_pwr.o
-    0x20000277   0x00000001   PAD
-    0x20000278   0x00000800   Zero   RW            2    .bss                app.o
-    0x20000a78   0x0000032c   Zero   RW          215    .bss                ccid.o
-    0x20000da4   0x00000e34   Zero   RW          610    .bss                os_core.o
-    0x20001bd8   0x00000118   Zero   RW          759    .bss                contactcard.o
-    0x20001cf0   0x0000028e   Zero   RW          778    .bss                smartcard.o
-    0x20001f7e   0x0000012f   Zero   RW          812    .bss                fm320.o
-    0x200020ad   0x00000003   PAD
-    0x200020b0   0x0000001c   Zero   RW          871    .bss                usb_init.o
-    0x200020cc   0x00000004   PAD
-    0x200020d0   0x00000400   Zero   RW          546    STACK               startup_stm32f10x_md.o
+    0x2000000c   0x00000028   Data   RW          218    .data               ccid.o
+    0x20000034   0x00000004   Data   RW          247    .data               specialapdu.o
+    0x20000038   0x00000014   Data   RW          462    .data               stm32f10x_rcc.o
+    0x2000004c   0x00000014   Data   RW          556    .data               system_stm32f10x.o
+    0x20000060   0x00000040   Data   RW          613    .data               os_core.o
+    0x200000a0   0x00000001   Data   RW          715    .data               bsp.o
+    0x200000a1   0x00000003   PAD
+    0x200000a4   0x0000007b   Data   RW          761    .data               contactcard.o
+    0x2000011f   0x00000001   PAD
+    0x20000120   0x00000065   Data   RW          784    .data               smartcard.o
+    0x20000185   0x00000005   Data   RW          803    .data               contactlesscard.o
+    0x2000018a   0x00000003   Data   RW          840    .data               usb_core.o
+    0x2000018d   0x00000003   PAD
+    0x20000190   0x00000014   Data   RW          881    .data               usb_init.o
+    0x200001a4   0x00000004   Data   RW          903    .data               usb_int.o
+    0x200001a8   0x0000003c   Data   RW          927    .data               usb_istr.o
+    0x200001e4   0x00000080   Data   RW          957    .data               usb_prop.o
+    0x20000264   0x00000007   Data   RW          981    .data               usb_pwr.o
+    0x2000026b   0x00000001   PAD
+    0x2000026c   0x00000800   Zero   RW            2    .bss                app.o
+    0x20000a6c   0x00000227   Zero   RW          216    .bss                ccid.o
+    0x20000c93   0x00000001   PAD
+    0x20000c94   0x00000e34   Zero   RW          611    .bss                os_core.o
+    0x20001ac8   0x00000118   Zero   RW          760    .bss                contactcard.o
+    0x20001be0   0x0000028e   Zero   RW          783    .bss                smartcard.o
+    0x20001e6e   0x0000012f   Zero   RW          821    .bss                fm320.o
+    0x20001f9d   0x00000003   PAD
+    0x20001fa0   0x0000001c   Zero   RW          880    .bss                usb_init.o
+    0x20001fbc   0x00000004   PAD
+    0x20001fc0   0x00000400   Zero   RW          547    STACK               startup_stm32f10x_md.o
 
 
 ==============================================================================
@@ -1221,12 +1216,12 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       680         90          0         12       2048     277478   app.o
-       960         36          0          1          0      18958   bsp.o
-       872        126         20         56        812       4768   ccid.o
+       680         90          0         12       2048     276262   app.o
+       956         36          0          1          0      18954   bsp.o
+       872        126         20         40        551       4259   ccid.o
       2832        100          0        123        280       5676   contactcard.o
-       728         12          0          0          0       2720   contactlesscard.o
-      4488         26          6          0        303      20557   fm320.o
+       804         12          0          5          0       3979   contactlesscard.o
+      4488         26          6          0        303      20545   fm320.o
        220         22          0          0          0       1889   misc.o
       3240        260        256         64       3636      19022   os_core.o
        164         32          0          0          0        344   os_cpu_a.o
@@ -1259,9 +1254,9 @@ Image component sizes
        128          8          0          0          0       1482   usb_sil.o
 
     ----------------------------------------------------------------------
-     37696       1660        812        632       8792     485158   Object Totals
+     37768       1660        812        620       8532     484676   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         4          0          3          9          7          0   (incl. Padding)
+         4          0          3          8          8          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1300,15 +1295,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     37904       1676        812        632       8792     481990   Grand Totals
-     37904       1676        812        168       8792     481990   ELF Image Totals (compressed)
-     37904       1676        812        168          0          0   ROM Totals
+     37976       1676        812        620       8532     481508   Grand Totals
+     37976       1676        812        168       8532     481508   ELF Image Totals (compressed)
+     37976       1676        812        168          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                38716 (  37.81kB)
-    Total RW  Size (RW Data + ZI Data)              9424 (   9.20kB)
-    Total ROM Size (Code + RO Data + RW Data)      38884 (  37.97kB)
+    Total RO  Size (Code + RO Data)                38788 (  37.88kB)
+    Total RW  Size (RW Data + ZI Data)              9152 (   8.94kB)
+    Total ROM Size (Code + RO Data + RW Data)      38956 (  38.04kB)
 
 ==============================================================================
 

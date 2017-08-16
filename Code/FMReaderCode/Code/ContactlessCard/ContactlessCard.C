@@ -1,7 +1,45 @@
 #include "includes.h"
 
 uint16_t const FrameSize[9] = {16, 24, 32, 40, 48, 64, 96, 128, 256};
+TCLParam stuTCLParam;
 
+
+/*******************************************************************************
+* Function Name  : CLCardInit.
+* Description    : Variables of contactless card initialization.
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void CLCardInit(void)
+{
+  uint8_t b;
+
+  stuTCLParam.bNADEn = 0;
+  stuTCLParam.bCIDEn = 1;
+
+  stuTCLParam.bINFLen = 254;
+  stuTCLParam.bBlockNum = 0;
+
+	for(b=0;b<2;b++)
+	{
+		CardA_Sel_Res.ATQA[b]=0;
+	}
+	for(b=0;b<12;b++)
+	{
+		CardA_Sel_Res.UID[b]=0;
+	}
+	for(b=0;b<32;b++)
+	{
+		CardA_Sel_Res.ATS[b]=0;
+	}
+	CardA_Sel_Res.ATSLEN=0;
+	CardA_Sel_Res.SAK=0;
+
+	FM320_SPIConfig();
+	FM320_ResetAllReg();
+	
+}
 
 
 /*******************************************************************************
@@ -46,7 +84,7 @@ uint8_t ContactlessCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16
 *******************************************************************************/
 uint8_t CLTCLAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
-  int8_t  	bStatus;
+  int8_t  	bRet;
   uint16_t  iSendOffset = 0;
   uint16_t  iSendLen;
   uint8_t   bINFSize;
@@ -57,8 +95,8 @@ uint8_t CLTCLAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvL
   uint8_t   b;
   uint16_t  iTemp;
   uint8_t   bErrCnt = 0;
+	uint8_t   abTPDUBuffer[TPDU_BUFFER_SIZE];
   NFC_DataExTypeDef NFC_DataExStruct;//FM320
-	TCLParam stuTCLParam;
 	
   /* Orgnize first I-Block */
   bSendBlockType = BLOCK_TYPE_I;
@@ -66,11 +104,11 @@ uint8_t CLTCLAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvL
 	stuTCLParam.bINFLen=254;
 	stuTCLParam.bCIDEn=0x01;
 	stuTCLParam.bNADEn=0;
-//	stuTCLParam.bBlockNum=0;
+
 	
 ORGNIZE_BLOCK:
   /* Information field */
-                                                                                iSendLen = 1;
+  iSendLen = 1;
   if(stuTCLParam.bCIDEn)
     iSendLen++;
   if(bSendBlockType == BLOCK_TYPE_I)
@@ -138,20 +176,14 @@ ORGNIZE_BLOCK:
   iSendLen += (uint16_t)bINFSize;
   //iSendLen += 2;  // Two CRC bytes.
 
-//  stuTCLParam.lFWT = (1<<14);
-//	abTPDUBuffer,abBuffer
-
 
 	NFC_DataExStruct.pExBuf=abTPDUBuffer;
 	NFC_DataExStruct.nBytesToSend=iSendLen;
-	bStatus=FM320_Command_Transceive(&NFC_DataExStruct);	
-  for(b=0;b<NFC_DataExStruct.nBytesReceived;b++)
-	{
-		abBuffer[b]=NFC_DataExStruct.pExBuf[b];		
-	}
+	bRet=FM320_Command_Transceive(&NFC_DataExStruct);	
+
 	iRecvLen=NFC_DataExStruct.nBytesReceived;
 	
-	if(bStatus != CL_TCL_OK)
+	if(bRet != CL_TCL_OK)
   {
     bErrCnt++;
     if(bErrCnt >= ERROR_COUNTER_MAX) 
@@ -163,13 +195,13 @@ ORGNIZE_BLOCK:
   
   /* Parser received block  */
   bErrCnt = 0;
-  b = abBuffer[0];
+  b = abTPDUBuffer[0];
   if((b&0xF0) == 0xF0)  // S-Block WTX
   {
     if(b&0x08)
-      bWTXValue = abBuffer[2];
+      bWTXValue = abTPDUBuffer[2];
     else
-      bWTXValue = abBuffer[1];  
+      bWTXValue = abTPDUBuffer[1];  
     bSendBlockType = BLOCK_TYPE_SWTX;
     goto ORGNIZE_BLOCK;
   }
@@ -178,7 +210,7 @@ ORGNIZE_BLOCK:
     if((b&0x01) != stuTCLParam.bBlockNum)
       return CL_TCL_APDU_ERROR;
     /* information field */ 
-//    iRecvLen -= 2;  // CRC bytes are excluded.
+		
     if(iRecvLen == 0)
       return CL_TCL_APDU_ERROR;      
     iTemp = 1;      // PCB is always
@@ -187,7 +219,7 @@ ORGNIZE_BLOCK:
     if(b&0x04)      
       iTemp++;
 		//copy received data to ApduBuffer
-    memcpy(APDUBuffer+iRecvOffset, abBuffer+iTemp, iRecvLen-iTemp);
+    memcpy(APDUBuffer+iRecvOffset, abTPDUBuffer+iTemp, iRecvLen-iTemp);
     iRecvOffset += (iRecvLen-iTemp);
     /* Change block number */
     stuTCLParam.bBlockNum++;

@@ -9,11 +9,9 @@ uint8_t   abBuffer[CCID_BUFFER_SIZE];
 uint16_t  iBufferRecvLen, iBufferRecvCnt;
 uint16_t  iBufferSendLen, iBufferSendCnt;
 uint8_t   abAPDUBuffer[APDU_BUFFER_SIZE];
-uint16_t  iAPDUBufferSendLen, iAPDUBufferSendCnt;
-uint16_t  iAPDUBufferRecvLen, iAPDUBufferRecvCnt;
-uint8_t   abTPDUBuffer[TPDU_BUFFER_SIZE];
-uint16_t  volatile iTPDUBufferRecvLen, iTPDUBufferRecvCnt, iTPDUBufferRecvCntPrev, iTPDUBufferRecvPos;
-uint16_t  volatile iTPDUBufferSendLen, iTPDUBufferSendCnt;
+uint16_t  iAPDUBufferSendLen;
+uint16_t  iAPDUBufferRecvLen;
+
 
 /* Clock frequency is 3.58M */
 uint8_t const CCID_READER_CLOCK_FREQUENCIES[4]={0xFC, 0x0D, 0x00, 0x00};		//Clock Frequency

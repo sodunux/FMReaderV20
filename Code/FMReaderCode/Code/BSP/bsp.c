@@ -112,8 +112,7 @@ void  BSP_Init (void)
 	SysTick_Configuration();
 	GPIO_Config();
 	NVIC_Config();
-	FM320_SPIConfig();
-	FM320_ResetAllReg();
+	CLCardInit();
   Set_USBClock();
   USB_Init();
 
@@ -121,14 +120,13 @@ void  BSP_Init (void)
 
   CCIDInit();
   InRegsInit();
-
+	
 	for(i=1; i<5; i++)
 	{
 		LEDShow(i,Bit_SET);	
 	}
 
 	bCardSlotStatus = CCID_CARD_SLOT_PRESENT;
-  // bCardSlotStatus = CARD_SLOT_ABSENT;
   CCIDCardSlotChange(); 
 	CLCardPowerOff();
 
