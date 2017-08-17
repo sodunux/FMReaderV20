@@ -46,6 +46,31 @@ static u8 SC_decode_Answer2reset(u8 *card);  /* Decode ATR */
 
 /* Private functions ---------------------------------------------------------*/
 
+void SC_uDelay(u32 us) //1us
+{
+	//72M 
+	u32 i,j;
+	for(j=0;j<us;j++)
+	{
+		for(i=0;i<81;i++)
+			__nop();
+	}
+}
+
+
+void SC_mDelay(u32 ms) //1ms
+{
+	//72M
+	u32 i,j;
+	for(j=0;j<ms;j++)
+	{
+		for(i=0;i<8100;i++)
+			__nop();
+	}
+}
+
+
+
 /*******************************************************************************
 * Function Name  : SC_Handler
 * Description    : Handles all Smartcard states and serves to send and receive all
@@ -176,21 +201,7 @@ void SC_Reset(BitAction ResetState)
   GPIO_WriteBit(SC_RESET_PORT, SC_RESET, ResetState);
 }
 
-/*******************************************************************************
-* Function Name  : SC_ParityErrorHandler
-* Description    : Resends the byte that failed to be received (by the Smartcard)
-*                  correctly.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void SC_ParityErrorHandler(void)
-{
-  USART_SendData(USART3, SCData);
-  while(USART_GetFlagStatus(USART3, USART_FLAG_TC) == RESET)
-  {
-  } 
-}
+
 
 /*******************************************************************************
 * Function Name  : SC_PTSConfig

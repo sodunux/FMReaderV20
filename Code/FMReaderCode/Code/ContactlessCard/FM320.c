@@ -510,6 +510,67 @@ u8 FM320_ReaderA_HALT()
 		return FM175XX_SUCCESS;
 }
 
+//***********************************************
+//函数名称：FM320_DirectSend()
+//函数功能：直接发送指令
+//入口参数：send_crc_en：1 使能CRC; 0, 失能CRC
+//					recev_crc_en 1 使能CRC; 0, 失能CRC
+//					databuf 数据缓存区
+//     			sendLen  发送长度
+//					recevLen 接受长度
+//出口参数：u8  0：成功   others:失败
+//***********************************************
+u8 FM320_DirectSend(u8 *databuf,u8 sendLen,u8 *recevLen,u8 send_crc_en,u8 recev_crc_en)
+{
+	
+	u8 res;
+	NFC_DataExTypeDef NFC_DataExStruct;
+
+	
+	if(send_crc_en)
+	{
+		res=FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,SET);
+		if(res != true)
+			return FM175XX_REG_ERR;	
+	}
+	else
+	{
+		res=FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,CLR);
+		if(res != true)
+			return FM175XX_REG_ERR;			
+	} 
+
+	if(recev_crc_en)
+	{
+		res=FM320_ModifyReg(RXMODE,PHCS_BFL_JBIT_RXCRCEN,SET);
+		if(res != true)
+			return FM175XX_REG_ERR;		
+	}
+	else
+	{
+		FM320_ModifyReg(RXMODE,PHCS_BFL_JBIT_RXCRCEN,CLR);
+		if(res != true)
+			return FM175XX_REG_ERR;	
+	}
+
+	
+	NFC_DataExStruct.pExBuf =	databuf;
+	NFC_DataExStruct.nBytesToSend	  =	sendLen;
+	NFC_DataExStruct.nBytesReceived = 0x00;
+	FM320_Command_Transceive(&NFC_DataExStruct);
+	*recevLen=NFC_DataExStruct.nBytesReceived;
+	
+	res=FM320_ModifyReg(RXMODE,PHCS_BFL_JBIT_RXCRCEN,SET); //恢复CRC使能
+	if(res != true)
+		return FM175XX_REG_ERR;	
+	res=FM320_ModifyReg(TXMODE,PHCS_BFL_JBIT_TXCRCEN,SET); //恢复CRC使能
+	if(res != true)
+		return FM175XX_REG_ERR;		
+	
+	
+	return FM175XX_SUCCESS;
+}
+
 
 
 //***********************************************

@@ -536,7 +536,7 @@ u8 FM320_MiDecrement(u8 block,u32 decdat);
 u8 FM320_MiRestore(u8 block);
 u8 FM320_MiTransfer(u8 block);
 u8 FM320_PPS(u8 PPS1);
-
+u8 FM320_DirectSend(u8 *databuf,u8 sendLen,u8 *recevLen,u8 send_crc_en,u8 recev_crc_en);
 
 //end of FM320_Reader Functions
 

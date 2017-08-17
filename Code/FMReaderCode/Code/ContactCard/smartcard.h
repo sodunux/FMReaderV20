@@ -163,7 +163,8 @@ typedef struct
 void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Response);
 void SC_PowerCmd(FunctionalState NewState);
 void SC_Reset(BitAction ResetState);
-void SC_ParityErrorHandler(void);
+void SC_mDelay(u32 ms);
+void SC_uDelay(u32 us);
 void SC_PTSConfig(void);
 u8 SC_PPS(u8 PPS1);
 void SC_Init(void);

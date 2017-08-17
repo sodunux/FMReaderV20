@@ -146,12 +146,6 @@ void SysTick_Configuration(void)
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);
 	SysTick_Config(cnts);
 
-/*	SystemCoreClock=(u32)RCC_Clocks.HCLK_Frequency;
-    SysTick_SetReload(cnts);
-    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);
-    SysTick_CounterCmd(SysTick_Counter_Enable);
-    SysTick_ITConfig(ENABLE);
-*/
 }
 
 /*******************************************************************************
@@ -272,6 +266,8 @@ void GPIO_Config(void)
 	GPIOPinxConfig(LED_PORT, LED_PIN_2, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
 	GPIOPinxConfig(LED_PORT, LED_PIN_3, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
 	GPIOPinxConfig(LED_PORT, LED_PIN_4, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
+	
+	
 }
 
 /*******************************************************************************
