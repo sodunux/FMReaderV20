@@ -648,11 +648,6 @@
           <GroupName>ContactCard</GroupName>
           <Files>
             <File>
-              <FileName>ContactCard.C</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Code\ContactCard\ContactCard.C</FilePath>
-            </File>
-            <File>
               <FileName>smartcard.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Code\ContactCard\smartcard.c</FilePath>

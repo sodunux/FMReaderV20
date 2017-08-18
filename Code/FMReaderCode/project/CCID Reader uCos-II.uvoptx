@@ -166,9 +166,25 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>602</LineNumber>
+          <LineNumber>604</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134221800</Address>
+          <Address>134244630</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Code\ContactCard\smartcard.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CCID_Reader_uCos_II\../Code/ContactCard/smartcard.c\604</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>524</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221396</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -177,14 +193,30 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\Code\APP\src\SpecialAPDU.C</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/SpecialAPDU.C\602</Expression>
+          <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/SpecialAPDU.C\524</Expression>
         </Bp>
         <Bp>
-          <Number>1</Number>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>438</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221108</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Code\APP\src\SpecialAPDU.C</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/SpecialAPDU.C\438</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
           <Type>0</Type>
           <LineNumber>192</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219028</Address>
+          <Address>134219016</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -194,6 +226,22 @@
           <Filename>..\Code\APP\src\CCID.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/CCID.c\192</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>286</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Code\ContactCard\smartcard.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -211,6 +259,36 @@
           <count>2</count>
           <WinNumber>1</WinNumber>
           <ItemText>writebuf</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>sc_tim</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>USART_InitStructure</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>APDUBuffer[0]</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>APDUBuffer[1]</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>APDUBuffer[2]</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>APDUBuffer[3]</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -389,7 +467,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>0</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
@@ -415,6 +493,12 @@
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
       <bLintAuto>0</bLintAuto>
+      <SystemViewers>
+        <Entry>
+          <Name>System Viewer\GPIOD</Name>
+          <WinId>35905</WinId>
+        </Entry>
+      </SystemViewers>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableLog>0</EnableLog>
@@ -1029,19 +1113,6 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Code\ContactCard\ContactCard.C</PathWithFileName>
-      <FilenameWithoutPath>ContactCard.C</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>5</GroupNumber>
-      <FileNumber>45</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>0</Focus>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\Code\ContactCard\smartcard.c</PathWithFileName>
       <FilenameWithoutPath>smartcard.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1057,7 +1128,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>46</FileNumber>
+      <FileNumber>45</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1070,9 +1141,9 @@
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
-      <FileNumber>47</FileNumber>
+      <FileNumber>46</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
@@ -1091,7 +1162,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>48</FileNumber>
+      <FileNumber>47</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1104,7 +1175,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>49</FileNumber>
+      <FileNumber>48</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1117,7 +1188,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>50</FileNumber>
+      <FileNumber>49</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1130,7 +1201,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>51</FileNumber>
+      <FileNumber>50</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1143,7 +1214,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>52</FileNumber>
+      <FileNumber>51</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1156,7 +1227,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>53</FileNumber>
+      <FileNumber>52</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1169,7 +1240,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>54</FileNumber>
+      <FileNumber>53</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1182,7 +1253,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>55</FileNumber>
+      <FileNumber>54</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1195,7 +1266,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>56</FileNumber>
+      <FileNumber>55</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1208,7 +1279,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>57</FileNumber>
+      <FileNumber>56</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -1221,7 +1292,7 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>58</FileNumber>
+      <FileNumber>57</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
