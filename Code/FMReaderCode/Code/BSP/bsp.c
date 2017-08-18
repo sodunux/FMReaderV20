@@ -267,7 +267,6 @@ void GPIO_Config(void)
 	GPIOPinxConfig(LED_PORT, LED_PIN_3, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
 	GPIOPinxConfig(LED_PORT, LED_PIN_4, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
 	
-	GPIOPinxConfig(GPIOB, GPIO_Pin_7, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);	
 	
 }
 
@@ -366,6 +365,7 @@ void NVIC_Config(void)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
+
 
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);

@@ -50,15 +50,13 @@
 #include "app_cfg.h" 
 #include "bsp.h"
 
-
+#include "ContactCard.h"
 #include "ContactlessCard.h"
 #include "CCID.h"
 #include "SpecialAPDU.h" 
 #include "core_cm3.h"
 #include "misc.h"
+#include "smartcard.h"
 #include "FM320.h"
 #include "PICCCmdConst.h"
-//#include "SCard.h"
-#include "smartcard.h"
-//#include "ContactCard.h"
 #endif

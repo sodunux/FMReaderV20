@@ -2,6 +2,7 @@
 #include "CCID.h"
 #include "SpecialAPDU.h"
 #include "ContactCard.h"
+#include "smartcard.h"
 
 /* ATR source Constants */
 #define ATR_SOURCE_CARD   0x01
@@ -77,7 +78,6 @@ uint8_t ContactCardPPS(uint8_t PPS1)
 
 uint8_t ContactCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
-
 	static uint8_t InitCmd00Doing=0;
 	static uint8_t InitCmd55Doing=0;
 	static uint8_t InitCmd54Doing=0;
@@ -521,8 +521,7 @@ uint8_t ContactCardInitCmd(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *
 			*APDURecvLen=2;
 			InitCmdC0Flag=0xff;
 			break;	
-	}
-	
+	}	
 	return CT_T0_OK;	
 }
 

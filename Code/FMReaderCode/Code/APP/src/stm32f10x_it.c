@@ -281,8 +281,7 @@ void TIM1_CC_IRQHandler(void)
 *******************************************************************************/
 void TIM3_IRQHandler(void)
 {
-	SC_InterruptHandler();
-	//TIM3InterruptHandler();
+//  TIM3InterruptHandler();
 }
 
 /*******************************************************************************

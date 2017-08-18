@@ -432,16 +432,94 @@ void SpecApduCT(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 	switch(iParam)
 	{
 		case 0x010001: //InitCT
-				SC_Init();
-				SC_ColdReset(abBuffer,0x20);
-				SC_WarmReset(abBuffer,0x20);
+			*APDURecvLen = 0;
+			SC_PowerCmd(DISABLE);
+			state=SC_POWER_ON;
+			apdu_commands.Header.CLA = 0x00;
+			apdu_commands.Header.INS = SC_GET_A2R;
+			apdu_commands.Header.P1 = 0x00;
+			apdu_commands.Header.P2 = 0x00;
+			apdu_commands.Body.LC = 0x00;
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_RESET_LOW
+			SC_PowerCmd(DISABLE);
+			SetStatusWords(APDUBuffer, 0x9000);				
+			*APDURecvLen = 2;		
 			break;
 		case 0x010101: //ColdReset
-				//SC_ColdReset(APDUBuffer,0x20);
-				
+			*APDURecvLen = 0;
+			SC_PowerCmd(DISABLE);
+			state=SC_POWER_ON;
+			apdu_commands.Header.CLA = 0x00;
+			apdu_commands.Header.INS = SC_GET_A2R;
+			apdu_commands.Header.P1 = 0x00;
+			apdu_commands.Header.P2 = 0x00;
+			apdu_commands.Body.LC = 0x00;
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_RESET_LOW
+			//config the voltage 
+			if(pData[0] == CARD_VCC_5V)
+				SC_VoltageConfig(SC_Voltage_5V);
+			else if(pData[0] == CARD_VCC_18V)
+				SC_VoltageConfig(SC_Voltage_18V);
+			else 
+				SC_VoltageConfig(SC_Voltage_3V);
+			
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_ACTIVE,ATR
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_ACTIVE_ON_T0 or SC_POWER_OFF													
+
+			if(state==SC_ACTIVE_ON_T0)
+			{
+				for(b=0;b<SC_A2R.Tlength+SC_A2R.Hlength+2;b++)
+				{
+					APDUBuffer[b]=SC_ATR_Table[b];
+				}
+				SetStatusWords(APDUBuffer+b, 0x9000);							
+				*APDURecvLen = b+2;
+				bIsCTon = (bool)TRUE;
+				InitCmdFlag=0;	//初始化指令标志位
+				InitCmd00Flag=0;
+				InitCmd04Flag=0;
+			}
+			else 
+			{
+				SetStatusWords(APDUBuffer, 0x6D00);							
+				*APDURecvLen = 2;							
+			}	
 			break;
 		case 0x010201: //WarmReset
-				//SC_WarmReset(APDUBuffer,0x20);
+			*APDURecvLen = 0;
+			SC_PowerCmd(DISABLE);
+			state=SC_POWER_ON;
+			apdu_commands.Header.CLA = 0x00;
+			apdu_commands.Header.INS = SC_GET_A2R;
+			apdu_commands.Header.P1 = 0x00;
+			apdu_commands.Header.P2 = 0x00;
+			apdu_commands.Body.LC = 0x00;
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_RESET_LOW
+			//config the voltage 
+			if(pData[0] == CARD_VCC_5V)
+				SC_VoltageConfig(SC_Voltage_5V);
+			else if(pData[0] == CARD_VCC_18V)
+				SC_VoltageConfig(SC_Voltage_18V);
+			else 
+				SC_VoltageConfig(SC_Voltage_3V);
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_ACTIVE,ATR
+			SC_Handler(&state,&apdu_commands,&apdu_responce);//state=SC_ACTIVE_ON_T0 or SC_POWER_OFF													
+			if(state==SC_ACTIVE_ON_T0)
+			{
+				for(b=0;b<SC_A2R.Tlength+SC_A2R.Hlength+2;b++)
+				{
+					APDUBuffer[b]=SC_ATR_Table[b];
+				}
+				SetStatusWords(APDUBuffer+b, 0x9000);							
+				*APDURecvLen = b+2;
+				bIsCTon = (bool)TRUE;	
+				InitCmdFlag=0;
+			}
+			else 
+			{
+				SetStatusWords(APDUBuffer, 0x6D00);							
+				*APDURecvLen = 2;							
+			}		
 			break;
 		default:
 			*APDURecvLen = 0;
@@ -612,8 +690,7 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 			}
 			else if(iParam==0x000101)//CT PPS
 			{
-				//if(ContactCardPPS(pData[0])==CT_T0_OK)
-				if(1)
+				if(ContactCardPPS(pData[0])==CT_T0_OK) 
 				{	
 					SetStatusWords(APDUBuffer, 0x9000);	
 					*APDURecvLen = 2;	
