@@ -536,13 +536,21 @@ void DataTransmit(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvL
 				*APDURecvLen = 2;
 			}
 			else
-			{
+			{			
 				ret=SC_DataTrancive(pData,bP3,&recevLen);
 				if(ret==SC_SUCCESS)
 				{
 					for(i=0;i<recevLen;i++)
 						APDUBuffer[i]=pData[i];
 					*APDURecvLen = recevLen;
+					
+					//Add For FM349 Init CMD(01)
+					if((bP3==5)&&(pData[0]==0x00)&&(pData[1]==0x01)&&(pData[4]==0x00))
+					{
+						sc_tim.D=(pData[2]&0x0F);
+						sc_tim.F=(pData[2]>>4);
+						SC_ETUConfig();
+					}
 
 				}
 				else

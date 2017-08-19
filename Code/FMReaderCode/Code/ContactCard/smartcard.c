@@ -280,6 +280,17 @@ void SC_Init(void)
 u8 SC_ColdReset(u8 *atr,u8 *len)
 {	
 	u8 ret,i;
+	
+  USART_InitTypeDef USART_InitStructure;
+	sc_tim.F=Fi[0];
+  sc_tim.D=Di[0];
+  sc_tim.FreqDiv=SC_CLK_3P6M;
+  sc_tim.GuardTime=0x02; //2etu
+  sc_tim.AtrTimeout=400; //400ETU
+  sc_tim.WaitTimeout=9600; //9600ETU
+  sc_tim.clk_cnt=0;
+	SC_ETUConfig();
+
 	SC_PowerOFF;
 	SC_ResetOFF;
 	SC_mDelay(10);	
@@ -313,6 +324,17 @@ u8 SC_ColdReset(u8 *atr,u8 *len)
 u8 SC_WarmReset(u8 *atr,u8 *len)
 {
 	u8 ret,i;
+	
+  USART_InitTypeDef USART_InitStructure;
+	sc_tim.F=Fi[0];
+  sc_tim.D=Di[0];
+  sc_tim.FreqDiv=SC_CLK_3P6M;
+  sc_tim.GuardTime=0x02; //2etu
+  sc_tim.AtrTimeout=400; //400ETU
+  sc_tim.WaitTimeout=9600; //9600ETU
+  sc_tim.clk_cnt=0;
+	SC_ETUConfig();
+	
 	SC_ResetOFF;
 	SC_mDelay(5);
 	SC_ResetON;	

@@ -27,7 +27,30 @@ Project File Date:  08/19/2017
 <h2>Output:</h2>
 *** Using Compiler 'V5.05 update 2 (build 169)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'CCID Reader uCos-II'
-".\output\CCID Reader uCos-II.axf" - 0 Error(s), 0 Warning(s).
+compiling SpecialAPDU.C...
+..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
+  void SC_ETUConfig();
+..\Code\APP\src\SpecialAPDU.C(41): warning:  #177-D: variable "bINS" was declared but never referenced
+        uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+..\Code\APP\src\SpecialAPDU.C(439): warning:  #223-D: function "SC_ColdReset" declared implicitly
+                                ret=SC_ColdReset(APDUBuffer,&recevLen);
+..\Code\APP\src\SpecialAPDU.C(454): warning:  #223-D: function "SC_WarmReset" declared implicitly
+                                ret=SC_WarmReset(APDUBuffer,&recevLen);
+..\Code\APP\src\SpecialAPDU.C(422): warning:  #177-D: variable "b" was declared but never referenced
+        uint8_t b,ret;
+..\Code\APP\src\SpecialAPDU.C(424): warning:  #177-D: variable "bINS" was declared but never referenced
+        uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+..\Code\APP\src\SpecialAPDU.C(428): warning:  #177-D: variable "pData" was declared but never referenced
+    uint8_t   *pData = (APDUBuffer+INDEX_DATA);
+..\Code\APP\src\SpecialAPDU.C(477): warning:  #177-D: variable "bINS" was declared but never referenced
+        uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+..\Code\APP\src\SpecialAPDU.C(482): warning:  #177-D: variable "iParam" was declared but never referenced
+        uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
+..\Code\APP\src\SpecialAPDU.C: 9 warnings, 0 errors
+linking...
+Program Size: Code=39500 RO-data=812 RW-data=476 ZI-data=8268  
+FromELF: creating hex file...
+".\output\CCID Reader uCos-II.axf" - 0 Error(s), 9 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\S\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE

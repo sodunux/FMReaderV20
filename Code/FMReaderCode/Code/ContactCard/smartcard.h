@@ -201,7 +201,7 @@ extern SC_ADPU_Commands apdu_commands;
 extern SC_ADPU_Responce apdu_responce;
 extern SC_TimTypeDef sc_tim;
 u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen);
-
+void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceStatus);
 
 #endif /* __SMARTCARD_H */
 
