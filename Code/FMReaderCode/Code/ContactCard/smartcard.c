@@ -277,7 +277,7 @@ void SC_Init(void)
 
 
 
-u8 SC_ColdReset(u8 *atr,u8 len)
+u8 SC_ColdReset(u8 *atr,u8 *len)
 {	
 	u8 ret,i;
 	SC_PowerOFF;
@@ -291,14 +291,26 @@ u8 SC_ColdReset(u8 *atr,u8 len)
 		return SC_ERROR;
 	else
 	{
-		for(i=1;i<len;i++)
+		for(i=1;i<*len;i++)
 			SC_RecvByte(atr+i,20);
-		return SC_SUCCESS;
+
+		SC_decode_Answer2reset(atr);
+		if((SC_A2R.TS==0x3B)||(SC_A2R.TS==0x3F))
+		{
+			*len=SC_A2R.Hlength+SC_A2R.Tlength+2;
+			return SC_SUCCESS;
+		}
+		else
+		{
+			return SC_ERROR;
+		}
+
+
 	}
 }
 
 
-u8 SC_WarmReset(u8 *atr,u8 len)
+u8 SC_WarmReset(u8 *atr,u8 *len)
 {
 	u8 ret,i;
 	SC_ResetOFF;
@@ -309,12 +321,20 @@ u8 SC_WarmReset(u8 *atr,u8 len)
 		return SC_ERROR;
 	else
 	{
-		for(i=1;i<len;i++)
-			SC_RecvByte(atr+i,10);
-		return SC_SUCCESS;
+		for(i=1;i<*len;i++)
+			SC_RecvByte(atr+i,20);
+		SC_decode_Answer2reset(atr);
+		if((SC_A2R.TS==0x3B)||(SC_A2R.TS==0x3F))
+		{
+			*len=SC_A2R.Hlength+SC_A2R.Tlength+2;
+			return SC_SUCCESS;
+		}
+		else
+		{
+			return SC_ERROR;
+		}
 	}
 }
-
 
 
 /*******************************************************************************
@@ -462,6 +482,9 @@ u8 SC_decode_Answer2reset(u8 *card)
 {
   u32 i = 0, flag = 0, buf = 0, protocol = 0;
 
+	SC_A2R.Hlength=0;
+	SC_A2R.Tlength=0;
+	
   SC_A2R.TS = card[0];  /* Initial character */
   SC_A2R.T0 = card[1];  /* Format character */
 
@@ -641,6 +664,46 @@ void SC_VoltageConfig(u32 SC_Voltage)
 		
 	}
 }
+
+
+/*******************************************************************************
+* Function Name  : SC_DataTrancive
+* Description    : Send Data and Receive Data
+* Input 		 : DataBuffer; sendlen,recevlen;
+* Return         : SC_SUCCESS, SC_ERROR
+*******************************************************************************/
+u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen)
+{
+	u8 i;
+	u8 ret,locData;
+	for(i=0;i<sendlen;i++)
+		SC_SendByte(buffer[i]);
+	ret=SC_RecvByte(&locData, sc_tim.WaitTimeout);
+	if(ret==SC_ERROR)
+		return SC_ERROR;
+	else
+	{
+		buffer[0]=locData;
+		*recelen=1;
+	}
+		
+	for(i=1;recelen;i++)
+	{
+		ret=SC_RecvByte(&locData, sc_tim.WaitTimeout);
+		if(ret==SC_ERROR)
+		{
+			return SC_ERROR;
+		}	
+		else
+		{
+			buffer[i]=locData;
+			*recelen=*recelen+1;
+		}
+	}
+}
+
+
+
 
 
 

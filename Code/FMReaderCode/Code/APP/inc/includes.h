@@ -60,5 +60,5 @@
 #include "PICCCmdConst.h"
 //#include "SCard.h"
 #include "smartcard.h"
-//#include "ContactCard.h"
+#include "ContactCard.h"
 #endif

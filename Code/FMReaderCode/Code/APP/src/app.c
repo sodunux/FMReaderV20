@@ -284,8 +284,7 @@ void CCID_handler(void)
 						{ 
 							LEDShow(3, Bit_SET);
 							if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_CT)
-								bTemp=CL_TCL_OK;
-								//bTemp = ContactCardT0APDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
+								bTemp = ContactCardT0APDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
 							else 
 								bTemp = CLTCLAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);					
 							if(bTemp!=CL_TCL_OK)

@@ -200,7 +200,7 @@ extern u8 SC_ATR_Table[40];
 extern SC_ADPU_Commands apdu_commands;
 extern SC_ADPU_Responce apdu_responce;
 extern SC_TimTypeDef sc_tim;
-
+u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen);
 
 
 #endif /* __SMARTCARD_H */
