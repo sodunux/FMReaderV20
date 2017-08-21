@@ -28,7 +28,6 @@
 #define SETUP_LENGTH       20
 #define HIST_LENGTH        20
 #define LCmax              280
-#define SC_Receive_Timeout 0x4000  /* Direction to reader */
 
 /* SC Tree Structure -----------------------------------------------------------
                               MasterFile
@@ -102,16 +101,29 @@
 #define SC_Voltage_3V      1
 #define SC_Voltage_18V		 2 
 
-/* Exported types ------------------------------------------------------------*/
-typedef enum
-{
-  SC_POWER_ON = 0x00,
-  SC_RESET_LOW = 0x01,
-  SC_RESET_HIGH = 0x02,
-  SC_ACTIVE = 0x03,
-  SC_ACTIVE_ON_T0 = 0x04,
-  SC_POWER_OFF = 0x05
-} SC_State;
+
+#define SC_CLK_18M  0x01
+#define SC_CLK_9M   0x02
+#define SC_CLK_6M   0x03
+#define SC_CLK_4P5M 0x04
+#define SC_CLK_3P6M 0x05
+#define SC_CLK_3M   0x06
+#define APB1_FREQ  36000000
+
+#define SC_CLK_STOP_H 0x01
+#define SC_CLK_STOP_L 0x00
+#define SC_CLK_ENABLE 0x01
+#define SC_CLK_DISABLE 0x00
+
+#define SC_SUCCESS  0
+#define SC_ERROR    1
+
+
+#define SC_PowerON   GPIO_ResetBits(SC_CMDVCC_PORT, SC_CMDVCC)
+#define SC_PowerOFF  GPIO_SetBits(SC_CMDVCC_PORT, SC_CMDVCC)
+
+#define SC_ResetON 	 GPIO_SetBits(SC_RESET_PORT, SC_RESET)
+#define SC_ResetOFF  GPIO_ResetBits(SC_RESET_PORT, SC_RESET)
 
 /* ATR structure - Answer To Reset -------------------------------------------*/
 typedef struct
@@ -156,27 +168,41 @@ typedef struct
   u8 SW2;          /* Command Processing qualification */
 } SC_ADPU_Responce;
 
+typedef struct
+{
+  u32 F; //ETU=F/D
+  u8 D; 
+  u8 FreqDiv; //CT CLK Frequecy (PCK1 Freq)/(PrescalerValue*2)
+  u8 GuardTime; //number of ETU
+  u32 AtrTimeout; //number of ETU timeout
+  u32 WaitTimeout; //number of ETU timeout 
+  u32 clk_cnt; //Restore CLK number,add by timer
+}SC_TimTypeDef;
+
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 /* APPLICATION LAYER ---------------------------------------------------------*/
 
-void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Response);
-void SC_PowerCmd(FunctionalState NewState);
-void SC_Reset(BitAction ResetState);
 void SC_mDelay(u32 ms);
 void SC_uDelay(u32 us);
-void SC_PTSConfig(void);
 u8 SC_PPS(u8 PPS1);
 void SC_Init(void);
 void SC_DeInit(void);
 void SC_VoltageConfig(u32 SC_Voltage);
-u8 SC_Detect(void);
-ErrorStatus USART_ByteReceive(u8 *Data, u32 TimeOut);
+void SC_ETUConfig();
+void SC_ClkCmd(u8 stat);
+void SC_SendByte(u8 dat);
+u8 SC_RecvByte(u8 *dat,u32 TimeOut);
+u8 SC_decode_Answer2reset(u8 *card);
 extern SC_ATR SC_A2R;
 extern u8 SC_ATR_Table[40];
-extern SC_State state;
 extern SC_ADPU_Commands apdu_commands;
 extern SC_ADPU_Responce apdu_responce;
+extern SC_TimTypeDef sc_tim;
+
+
+
 #endif /* __SMARTCARD_H */
 
 /******************* (C) COPYRIGHT 2007 STMicroelectronics *****END OF FILE****/
