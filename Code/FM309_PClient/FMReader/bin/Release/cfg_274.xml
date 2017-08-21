@@ -1,0 +1,198 @@
+<root>  
+  <config CWD="CW0" contex="工作模式"  bit="0~2"> 
+    <item cfgitem="制造商">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="中测编程">
+		<data>06</data>
+	</item>
+	<item cfgitem="中测用户">
+		<data>07</data> 
+	</item>	
+	<item cfgitem="编程">
+		<data>02</data> 
+	</item>
+	<item cfgitem="用户">
+		<data>03</data> 
+	</item>	
+  </config>    
+  
+  <config CWD="CW0" contex="应用模式" bit="3~4">  
+    <item cfgitem="接触">
+		<data>08</data> 
+	</item>	  
+	<item cfgitem="非接触">
+		<data>10</data> 
+	</item>
+	<item cfgitem="双界面">
+		<data>18</data> 
+	</item>	
+  </config>  
+
+   <config CWD="CW0" contex="程序存储器" bit="5~5">  
+    <item cfgitem="ROM">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="EEPROM">
+		<data>20</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW0" contex="程序扩展类型" bit="6~7">  
+    <item cfgitem="不扩展">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="扩展1">
+		<data>40</data> 
+	</item>
+	<item cfgitem="扩展2">
+		<data>80</data> 
+	</item>	
+	<item cfgitem="RFU(不扩展)">
+		<data>C0</data> 
+	</item>		
+  </config>  
+  
+  <config CWD="CW1" contex="卡类型" bit="0~0">  
+    <item cfgitem="CPU卡">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="CPU+逻辑加密卡">
+		<data>01</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW1" contex="逻辑加密卡类型" bit="1~1">  
+    <item cfgitem="S50">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="兼容S70">
+		<data>02</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW1" contex="逻辑加密算法类型" bit="2~2">  
+    <item cfgitem="MIFARE">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="SH">
+		<data>04</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW1" contex="逻辑加密区大小" bit="3~3">  
+    <item cfgitem="1K">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="4K">
+		<data>08</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW1" contex="非接触界面类型" bit="4~4">  
+    <item cfgitem="typeA">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="typeB">
+		<data>10</data> 
+	</item>
+  </config>  
+ 
+  <config CWD="CW1" contex="数据存储器大小" bit="5~6">  
+    <item cfgitem="4k">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="8k">
+		<data>20</data> 
+	</item>
+    <item cfgitem="16k">
+		<data>40</data> 
+	</item>	  
+	<item cfgitem="32k">
+		<data>60</data> 
+	</item>	
+  </config>  
+ 
+  <config CWD="CW1" contex="程序区大小" bit="7~7">  
+    <item cfgitem="16k">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="32k">
+		<data>80</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW2" contex="DES" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>01</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW2" contex="SSF33" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>02</data> 
+	</item>
+  </config>
+ 
+  <config CWD="CW2" contex="RSA" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>04</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW2" contex="SHA1" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>08</data> 
+	</item>
+  </config>
+
+  <config CWD="CW3" contex="pll" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>01</data> 
+	</item>
+  </config>     
+  
+  <config CWD="CW3" contex="程序存储器加密" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>02</data> 
+	</item>		
+  </config> 
+  
+  <config CWD="CW3" contex="数据存储器加密" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>04</data> 
+	</item>		
+  </config> 
+ 
+
+  <config CWD="CW3" contex="频率检测" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>08</data> 
+	</item>	 
+  </config>
+  
+</root>  

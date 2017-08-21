@@ -1,0 +1,1793 @@
+﻿<root>  
+  <config CWD="CW0" contex="Vdet_trim" bit="0~2"> 
+    <item cfgitem="0.525V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="0.550V">
+		<data>00000001</data> 
+	</item>
+	<item cfgitem="0.575V">
+		<data>00000002</data> 
+	</item>
+	<item cfgitem="0.600V">
+		<data>00000003</data> 
+	</item>
+    <item cfgitem="0.625V">
+		<data>00000004</data> 
+	</item>	  
+	<item cfgitem="0.650V">
+		<data>00000005</data> 
+	</item>
+	<item cfgitem="0.675V">
+		<data>00000006</data> 
+	</item>
+	<item cfgitem="0.700V">
+		<data>00000007</data> 
+	</item>	
+  </config>   
+ <config CWD="CW0" contex="vdd12_ana_trim" bit="3~5"> 
+    <item cfgitem="1.086V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.115V">
+		<data>00000008</data> 
+	</item>
+	<item cfgitem="1.143V">
+		<data>00000010</data> 
+	</item>
+	<item cfgitem="1.172V">
+		<data>00000018</data> 
+	</item>
+    <item cfgitem="1.200V">
+		<data>00000020</data> 
+	</item>	  
+	<item cfgitem="1.229V">
+		<data>00000028</data> 
+	</item>
+	<item cfgitem="1.257V">
+		<data>00000030</data> 
+	</item>
+	<item cfgitem="1.286V">
+		<data>00000038</data> 
+	</item>	
+  </config>   
+  <config CWD="CW0" contex="4bit-8M环振TRIM"  bit="6~9"> 
+    <item cfgitem="6.39MHz(0000)">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="6.68MHz(0001)">
+		<data>00000040</data> 
+	</item>	 	
+    <item cfgitem="6.99MHz(0010)">
+		<data>00000080</data> 
+	</item>	 	
+    <item cfgitem="7.32MHz(0011)">
+		<data>000000C0</data> 
+	</item>	 	
+    <item cfgitem="7.69MHz(0100)">
+		<data>00000100</data> 
+	</item>	 	
+    <item cfgitem="8.10MHz(0101)">
+		<data>00000140</data> 
+	</item>	 	
+    <item cfgitem="8.31MHz(0110)">
+		<data>00000180</data> 
+	</item>	 	
+    <item cfgitem="8.55MHz(0111)">
+		<data>000001C0</data> 
+	</item>	 	
+    <item cfgitem="8.79MHz(1000)">
+		<data>00000200</data> 
+	</item>	 	
+    <item cfgitem="9.05MHz(1001)">
+		<data>00000240</data> 
+	</item>	 	
+    <item cfgitem="9.32MHz(1010)">
+		<data>00000280</data> 
+	</item>	 	
+    <item cfgitem="9.61MHz(1011)">
+		<data>000002C0</data> 
+	</item>	 	
+    <item cfgitem="9.93MHz(1100)">
+		<data>00000300</data> 
+	</item>	 	
+    <item cfgitem="10.26MHz(1101)">
+		<data>00000340</data> 
+	</item>	 	
+    <item cfgitem="10.61MHz(1110)">
+		<data>00000380</data> 
+	</item>	 	
+    <item cfgitem="10.99MHz(1111)">
+		<data>000003C0</data> 
+	</item>	
+  </config>  
+  <config CWD="CW0" contex="（手写）芯片bandgap参考电压trim(影响温度系数)"  bit="A~E"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 		
+  </config>  		
+   <config CWD="CW0" contex="vref_flash电压trim(无关温度系数)"  bit="F~11"> 
+    <item cfgitem="1.15V">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1.1625V">
+		<data>00008000</data> 
+	</item>	 
+	<item cfgitem="1.175V">
+		<data>00010000</data> 
+	</item>	 
+	<item cfgitem="1.1875V">
+		<data>00018000</data> 
+	</item>	 
+	<item cfgitem="1.2V">
+		<data>00020000</data> 
+	</item>	 	
+	<item cfgitem="1.2125V">
+		<data>00028000</data> 
+	</item>	 
+	<item cfgitem="1.225V">
+		<data>00030000</data> 
+	</item>	 
+	<item cfgitem="1.2375V">
+		<data>00038000</data> 
+	</item>	 
+  </config>  	
+  <config CWD="CW0" contex="LDO16_ct_trim(低耗模式)" bit="12~13">  
+    <item cfgitem="1.5V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.6V">
+		<data>00040000</data> 
+	</item>
+	<item cfgitem="1.7V">
+		<data>00080000</data> 
+	</item>
+	<item cfgitem="1.8V">
+		<data>000C0000</data> 
+	</item>
+  </config>  	
+  <config CWD="CW0" contex="LDO16_ct_trim(标准模式)" bit="14~16">  
+    <item cfgitem="1.45V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.50V">
+		<data>00100000</data> 
+	</item>
+	<item cfgitem="1.55V">
+		<data>00200000</data> 
+	</item>
+	<item cfgitem="1.60V">
+		<data>00300000</data> 
+	</item>
+    <item cfgitem="1.65V">
+		<data>00400000</data> 
+	</item>	  
+	<item cfgitem="1.70V">
+		<data>00500000</data> 
+	</item>
+	<item cfgitem="1.75V">
+		<data>00600000</data> 
+	</item>
+	<item cfgitem="1.80V">
+		<data>00700000</data> 
+	</item>	
+  </config>    
+  <config CWD="CW0" contex="LDO16_cl_trim(高到低位bit1,2,0)" bit="17~19">  
+    <item cfgitem="1.45V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.50V">
+		<data>00800000</data> 
+	</item>
+	<item cfgitem="1.65V">
+		<data>01000000</data> 
+	</item>
+	<item cfgitem="1.70V">
+		<data>01800000</data> 
+	</item>
+    <item cfgitem="1.55V">
+		<data>02000000</data> 
+	</item>	  
+	<item cfgitem="1.6V">
+		<data>02800000</data> 
+	</item>
+	<item cfgitem="1.75V">
+		<data>03000000</data> 
+	</item>
+	<item cfgitem="1.80V">
+		<data>03800000</data> 
+	</item>	
+  </config>   
+  <config CWD="CW0" contex="LDO12_ct_trim(标准模式)" bit="1A~1C">  
+    <item cfgitem="1.05V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.10V">
+		<data>04000000</data> 
+	</item>
+	<item cfgitem="1.15V">
+		<data>08000000</data> 
+	</item>
+	<item cfgitem="1.20V">
+		<data>0C000000</data> 
+	</item>
+    <item cfgitem="1.25V">
+		<data>10000000</data> 
+	</item>	  
+	<item cfgitem="1.30V">
+		<data>14000000</data> 
+	</item>
+	<item cfgitem="1.35V">
+		<data>18000000</data> 
+	</item>
+	<item cfgitem="1.40V">
+		<data>1C000000</data> 
+	</item>	
+  </config>     
+  <config CWD="CW0" contex="LDO12_cl_trim(标准模式)" bit="1D~1F">  
+    <item cfgitem="1.00V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.05V">
+		<data>20000000</data> 
+	</item>
+	<item cfgitem="1.10V">
+		<data>40000000</data> 
+	</item>
+	<item cfgitem="1.15V">
+		<data>60000000</data> 
+	</item>
+    <item cfgitem="1.20V">
+		<data>80000000</data> 
+	</item>	  
+	<item cfgitem="1.25V">
+		<data>A0000000</data> 
+	</item>
+	<item cfgitem="1.30V">
+		<data>C0000000</data> 
+	</item>
+	<item cfgitem="1.35V">
+		<data>E0000000</data> 
+	</item>	
+  </config>     
+ 
+   <config CWD="CW1" contex="glitch检测使能" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000001</data> 
+	</item>
+  </config>  
+   <config CWD="CW1" contex="sys和osc8M检测使能" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000002</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="CT_clk检测使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000004</data> 
+	</item>
+  </config>    
+   <config CWD="CW1" contex="light检测使能" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000008</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="shield检测使能" bit="4~4">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000010</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="temp检测使能" bit="5~5">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000020</data> 
+	</item>
+  </config>  
+   <config CWD="CW1" contex="Vcc_hvolt检测使能" bit="6~6">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000040</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="Vdd_hvolt检测使能" bit="7~7">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000080</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="RAM_encry使能" bit="8~8">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000100</data> 
+	</item>
+  </config>    
+   <config CWD="CW1" contex="CPU内部门控时钟随机化使能" bit="9~9">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000200</data> 
+	</item>
+  </config>      
+   <config CWD="CW1" contex="NVM_encry使能" bit="A~A">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000400</data> 
+	</item>
+  </config>    
+   <config CWD="CW1" contex="ROM_encry使能" bit="B~B">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000800</data> 
+	</item>
+  </config>    
+   <config CWD="CW1" contex="RAM_parity使能" bit="C~C">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00001000</data> 
+	</item>
+  </config>    
+   <config CWD="CW1" contex="NVM_data_parity使能" bit="D~D">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00002000</data> 
+	</item>
+  </config>    
+   <config CWD="CW1" contex="NVM_prog_parity使能(通用/boot/firm)" bit="E~E">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00004000</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="ROM_parity使能" bit="F~F">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00008000</data> 
+	</item>
+  </config>   
+   <config CWD="CW1" contex="接触初始化接口使能(含CW6-17)" bit="10~10">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启(同时ct_init_cmd_en_n=0)">
+		<data>00010000</data> 
+	</item>
+  </config>  
+   <config CWD="CW1" contex="CPU随机插入指令使能" bit="11~11">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00020000</data> 
+	</item>
+  </config>  
+  <config CWD="CW1" contex="光检测灵敏度" bit="12~13">  
+    <item cfgitem="第2档位">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="第3档位">
+		<data>00040000</data> 
+	</item>
+	<item cfgitem="第4档位">
+		<data>00080000</data> 
+	</item>
+	<item cfgitem="第1档位">
+		<data>000C0000</data> 
+	</item>
+  </config>  
+  <config CWD="CW1" contex="DFS高频检测阈值" bit="14~17">  
+    <item cfgitem="0MHz">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="4MHz">
+		<data>00100000</data> 
+	</item>
+	<item cfgitem="8MHz">
+		<data>00200000</data> 
+	</item>
+	<item cfgitem="12MHz">
+		<data>00300000</data> 
+	</item>
+    <item cfgitem="16MHz">
+		<data>00400000</data> 
+	</item>	  
+	<item cfgitem="20MHz">
+		<data>00500000</data> 
+	</item>
+	<item cfgitem="24MHz">
+		<data>00600000</data> 
+	</item>
+	<item cfgitem="28MHz">
+		<data>00700000</data> 
+	</item>	
+    <item cfgitem="32MHz">
+		<data>00800000</data> 
+	</item>	  
+	<item cfgitem="36MHz">
+		<data>00900000</data> 
+	</item>
+	<item cfgitem="40MHz">
+		<data>00A00000</data> 
+	</item>
+	<item cfgitem="44MHz">
+		<data>00B00000</data> 
+	</item>
+    <item cfgitem="48MHz">
+		<data>00C00000</data> 
+	</item>	  
+	<item cfgitem="52MHz">
+		<data>00D00000</data> 
+	</item>
+	<item cfgitem="56MHz">
+		<data>00E00000</data> 
+	</item>
+	<item cfgitem="60MHz">
+		<data>00F00000</data> 
+	</item>			
+  </config>  
+  <config CWD="CW1" contex="低温检测阈值" bit="18~1B">  
+    <item cfgitem="vbe 7℃/vptat 14℃">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="vbe 0℃/vptat 6℃">
+		<data>01000000</data> 
+	</item>
+	<item cfgitem="vbe -7℃/vptat -3℃">
+		<data>02000000</data> 
+	</item>
+	<item cfgitem="vbe -14℃/vptat -10℃">
+		<data>03000000</data> 
+	</item>
+    <item cfgitem="vbe -21℃/vptat -19℃">
+		<data>04000000</data> 
+	</item>	  
+	<item cfgitem="vbe -28℃/vptat -27℃">
+		<data>05000000</data> 
+	</item>
+	<item cfgitem="vbe -35℃/vptat -35℃">
+		<data>06000000</data> 
+	</item>
+	<item cfgitem="vbe -41℃/vptat -43℃">
+		<data>07000000</data> 
+	</item>	
+    <item cfgitem="vbe -48℃/vptat -52℃">
+		<data>08000000</data> 
+	</item>	  
+	<item cfgitem="vbe -54℃/vptat -60℃">
+		<data>09000000</data> 
+	</item>
+	<item cfgitem="vbe -63℃/vptat -68℃">
+		<data>0A000000</data> 
+	</item>
+	<item cfgitem="vbe -70℃/vptat -77℃">
+		<data>0B000000</data> 
+	</item>
+    <item cfgitem="vbe -77℃/vptat -85℃">
+		<data>0C000000</data> 
+	</item>	  
+	<item cfgitem="vbe -84℃/vptat -94℃">
+		<data>0D000000</data> 
+	</item>
+	<item cfgitem="vbe -91℃/vptat -101℃">
+		<data>0E000000</data> 
+	</item>
+	<item cfgitem="vbe -98℃/vptat -108℃">
+		<data>0F000000</data> 
+	</item>			
+  </config> 
+  <config CWD="CW1" contex="高温检测阈值" bit="1C~1F">  
+    <item cfgitem="vbe 55℃/vptat 47℃">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="vbe 62℃/vptat 55℃">
+		<data>10000000</data> 
+	</item>
+	<item cfgitem="vbe 69℃/vptat 63℃">
+		<data>20000000</data> 
+	</item>
+	<item cfgitem="vbe 75℃/vptat 72℃">
+		<data>30000000</data> 
+	</item>
+    <item cfgitem="vbe 82℃/vptat 80℃">
+		<data>40000000</data> 
+	</item>	  
+	<item cfgitem="vbe 89℃/vptat 88℃">
+		<data>50000000</data> 
+	</item>
+	<item cfgitem="vbe 96℃/vptat 96℃">
+		<data>60000000</data> 
+	</item>
+	<item cfgitem="vbe 103℃/vptat 105℃">
+		<data>70000000</data> 
+	</item>	
+    <item cfgitem="vbe 110℃/vptat 112℃">
+		<data>80000000</data> 
+	</item>	  
+	<item cfgitem="vbe 117℃/vptat 121℃">
+		<data>90000000</data> 
+	</item>
+	<item cfgitem="vbe 123℃/vptat 129℃">
+		<data>A0000000</data> 
+	</item>
+	<item cfgitem="vbe 130℃/vptat 137℃">
+		<data>B0000000</data> 
+	</item>
+    <item cfgitem="vbe 137℃/vptat 146℃">
+		<data>C0000000</data> 
+	</item>	  
+	<item cfgitem="vbe 144℃/vptat 154℃">
+		<data>D0000000</data> 
+	</item>
+	<item cfgitem="vbe 151℃/vptat 162℃">
+		<data>E0000000</data> 
+	</item>
+	<item cfgitem="vbe 157℃/vptat 170℃">
+		<data>F0000000</data> 
+	</item>			
+  </config> 
+
+  <config CWD="CW2" contex="CPU校验复位使能" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000001</data> 
+	</item>
+  </config>  
+  <config CWD="CW2" contex="BCA/CRC/PAE/JCA/MMU/MODE校验复位使能" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000002</data> 
+	</item>
+  </config> 
+  <config CWD="CW2" contex="随机数校验复位使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000004</data> 
+	</item>
+  </config> 
+  <config CWD="CW2" contex="模拟自检复位使能" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000008</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="数字自检复位使能" bit="4~4">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000010</data> 
+	</item>
+  </config>     
+  <config CWD="CW2" contex="寄存器校验复位使能" bit="5~5">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000020</data> 
+	</item>
+  </config>     
+  <config CWD="CW2" contex="存储器权限错误复位使能" bit="6~6">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000040</data> 
+	</item>
+  </config>      
+  <config CWD="CW2" contex="存储器parity校验复位使能" bit="7~7">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000080</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="freq检测复位使能" bit="8~8">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000100</data> 
+	</item>
+  </config>     
+  <config CWD="CW2" contex="light检测复位使能" bit="9~9">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000200</data> 
+	</item>
+  </config>       
+  <config CWD="CW2" contex="shield检测复位使能" bit="A~A">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000400</data> 
+	</item>
+  </config>    
+  <config CWD="CW2" contex="temp检测复位使能" bit="B~B">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00000800</data> 
+	</item>
+  </config>     
+  <config CWD="CW2" contex="hvolt检测复位使能" bit="C~C">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00001000</data> 
+	</item>
+  </config>     
+  <config CWD="CW2" contex="glitch检测复位使能" bit="D~D">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00002000</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="CPU内部寄存器极性随机化使能" bit="E~E">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00004000</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="路径检查复位使能" bit="F~F">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>00008000</data> 
+	</item>
+  </config>     
+  <config CWD="CW2" contex="CPU启动配置" bit="10~11">  
+    <item cfgitem="从ROM boot启动">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="从NVM boot启动">
+		<data>00010000</data> 
+	</item>
+	<item cfgitem="从用户通用程序启动">
+		<data>00020000</data> 
+	</item>
+	<item cfgitem="CPU不启动">
+		<data>00030000</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="8M低频检测阈值" bit="12~13">  
+    <item cfgitem="2.62MHz">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="3.38MHz">
+		<data>00040000</data> 
+	</item>
+	<item cfgitem="4.17MHz">
+		<data>00080000</data> 
+	</item>
+	<item cfgitem="5.01MHz">
+		<data>000C0000</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="8M高频检测阈值" bit="14~15">  
+    <item cfgitem="11.74MHz">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="13.42MHz">
+		<data>00100000</data> 
+	</item>
+	<item cfgitem="15.21MHz">
+		<data>00200000</data> 
+	</item>
+	<item cfgitem="17.04MHz">
+		<data>00300000</data> 
+	</item>
+  </config>   
+  <config CWD="CW2" contex="light检测时钟频率配置(000->111依次降低)" bit="16~18">  
+    <item cfgitem="1MHz">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="333KHz">
+		<data>00400000</data> 
+	</item>
+	<item cfgitem="200KHz">
+		<data>00800000</data> 
+	</item>
+	<item cfgitem="142KHz">
+		<data>00C00000</data> 
+	</item>
+    <item cfgitem="111KHz">
+		<data>01000000</data> 
+	</item>	  
+	<item cfgitem="90KHz">
+		<data>01400000</data> 
+	</item>
+	<item cfgitem="76KHz">
+		<data>01800000</data> 
+	</item>
+	<item cfgitem="66KHz">
+		<data>01C00000</data> 
+	</item>	
+  </config> 
+  <config CWD="CW2" contex="firm安全取指使能" bit="19~19">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>02000000</data> 
+	</item>
+  </config>  
+  <config CWD="CW2" contex="shield模式" bit="1A~1A">  
+    <item cfgitem="静态">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="动态">
+		<data>04000000</data> 
+	</item>
+  </config>  
+  <config CWD="CW2" contex="glitch灵敏度" bit="1B~1B">  
+    <item cfgitem="低灵敏度">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="高灵敏度">
+		<data>08000000</data> 
+	</item>
+  </config>  
+  <config CWD="CW2" contex="NVM的boot和firm擦写使能" bit="1C~1C">  
+    <item cfgitem="开启">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="关闭">
+		<data>10000000</data> 
+	</item>
+  </config> 
+  <config CWD="CW2" contex="数据存储器加解密轮数" bit="1D~1D">  
+    <item cfgitem="1轮">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="2轮">
+		<data>20000000</data> 
+	</item>
+  </config> 
+  <config CWD="CW2" contex="接触初始化接口认证使能" bit="1E~1E">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启(rst管脚需有序列完成驱动才激活)">
+		<data>40000000</data> 
+	</item>
+  </config> 
+  <config CWD="CW2" contex="非接初始化接口使能(含CW6-1B)" bit="1F~1F">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启(同时cl_init_cmd_en_n=0)">
+		<data>80000000</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW3" contex="（手写）4bit-ROM中boot大小(2KB为单位)"  bit="0~3"> 
+    <item cfgitem="C">
+		<data>0000000C</data> 
+	</item>	 	
+  </config>  
+  <config CWD="CW3" contex="（手写）4bit-NVM中boot大小(2KB为单位)"  bit="4~7"> 
+    <item cfgitem="C">
+		<data>000000C0</data> 
+	</item>	 	
+  </config>
+  <config CWD="CW3" contex="（手写）7bit-NVM中firm大小(4KB为单位)"  bit="8~E"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config>
+  <config CWD="CW3" contex="（手写）6bit-程序NVM区大小(8KB为单位)"  bit="F~14"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config>
+  <config CWD="CW3" contex="（手写）7bit-敏感数据区大小(4KB为单位)"  bit="15~1B"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config>
+  <config CWD="CW3" contex="（手写）4bit-firmware区专用RAM大小(1KB为单位)"  bit="1C~1F"> 
+    <item cfgitem="0">
+		<data>00000000</data> 
+	</item>	 	
+  </config>
+
+  <config CWD="CW4" contex="非接电路恒流源配置(压差/档位判断阈值)" bit="0~3">  
+    <item cfgitem="Vdd=3.3V;阈值=3.68V/3.50V;压差=0.38V">
+		<data>00000000</data>
+	</item>	  
+	<item cfgitem="Vdd=3.3V;阈值=3.81V/3.62V;压差=0.51V">
+		<data>00000004</data>
+	</item>
+	<item cfgitem="Vdd=3.3V;阈值=3.95V/3.75V;压差=0.65V">
+		<data>00000008</data>
+	</item>
+	<item cfgitem="Vdd=3.3V;阈值=4.09V/3.89V;压差=0.79V">
+		<data>0000000C</data>
+	</item>
+	<item cfgitem="Vdd=3.0V;阈值=3.40V/3.23V;压差=0.40V">
+		<data>00000001</data>
+	</item>	  
+	<item cfgitem="Vdd=3.0V;阈值=3.51V/3.33V;压差=0.51V">
+		<data>00000005</data>
+	</item>
+	<item cfgitem="Vdd=3.0V;阈值=3.68V/3.50V;压差=0.68V">
+		<data>00000009</data>
+	</item>
+	<item cfgitem="Vdd=3.0V;阈值=3.81V/3.62V;压差=0.81V">
+		<data>0000000D</data>
+	</item>
+	<item cfgitem="Vdd=2.8V;阈值=3.16V/3.00V;压差=0.36V">
+		<data>00000002</data>
+	</item>
+	<item cfgitem="Vdd=2.8V;阈值=3.25V/3.09V;压差=0.45V">
+		<data>00000006</data>
+	</item>
+	<item cfgitem="Vdd=2.8V;阈值=3.35V/3.18V;压差=0.55V">
+		<data>0000000A</data>
+	</item>
+	<item cfgitem="Vdd=2.8V;阈值=3.46V/3.28V;压差=0.66V">
+		<data>0000000E</data>
+	</item>
+	<item cfgitem="Vdd=2.5V;阈值=2.91V/2.77V;压差=0.41V">
+		<data>00000003</data>
+	</item>
+	<item cfgitem="Vdd=2.5V;阈值=2.99V/2.84V;压差=0.49V">
+		<data>00000007</data>
+	</item>
+	<item cfgitem="Vdd=2.5V;阈值=3.07V/2.92V;压差=0.57V">
+		<data>0000000B</data>
+	</item>
+	<item cfgitem="Vdd=2.5V;阈值=3.16V/3.00V;压差=0.66V">
+		<data>0000000F</data> 
+	</item>
+  </config> 
+  <config CWD="CW4" contex="系统环振电容配置" bit="4~5">  
+    <item cfgitem="0.47pF">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="0.94pF">
+		<data>00000010</data> 
+	</item>
+	<item cfgitem="1.41pF">
+		<data>00000020</data> 
+	</item>
+	<item cfgitem="1.88pF">
+		<data>00000030</data> 
+	</item>
+  </config>   
+  <config CWD="CW4" contex="非接触接口电路选择"  bit="6~6"> 
+    <item cfgitem="逆向">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="正向">
+		<data>00000040</data> 
+	</item>	 
+  </config>  
+  <config CWD="CW4" contex="typeA信息字选择"  bit="7~7"> 
+    <item cfgitem="默认厂商数据 ">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="用户数据">
+		<data>00000080</data> 
+	</item>	 
+  </config>   
+  <config CWD="CW4" contex="Clamp电路运放基准电压选择"  bit="8~8"> 
+    <item cfgitem="0: 2.0V">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1: 1.2V">
+		<data>00000100</data> 
+	</item>	 
+  </config>
+  <config CWD="CW4" contex="Clamp电路启动电压配置"  bit="9~C"> 
+    <item cfgitem="0001: 4.4V">
+		<data>00000200</data> 
+	</item>
+	<item cfgitem="0010: 5.0V">
+		<data>00000400</data> 
+	</item>
+	<item cfgitem="0100: 5.3V">
+		<data>00000800</data> 
+	</item>
+	<item cfgitem="1000: 5.9V">
+		<data>00001000</data> 
+	</item> 	
+  </config> 
+  <config CWD="CW4" contex="恒流源基准电流trim"  bit="D~E"> 
+    <item cfgitem="0mA">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1mA">
+		<data>00002000</data> 
+	</item>	 
+	<item cfgitem="1mA">
+		<data>00004000</data> 
+	</item>	 
+	<item cfgitem="2mA">
+		<data>00006000</data> 
+	</item>	  
+  </config> 
+  <config CWD="CW4" contex="LDO12_ct_lptrim[1]"  bit="F~F"> 
+    <item cfgitem="0">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1">
+		<data>00008000</data> 
+	</item>	 
+  </config>   
+  <config CWD="CW4" contex="场检测判断trim"  bit="10~12"> 
+    <item cfgitem="0.38mA / 3.3mA / 7.0mA">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="0.54mA / 3.4mA / 7.2mA">
+		<data>00010000</data> 
+	</item>	 
+	<item cfgitem="0.70mA / 3.6mA / 7.3mA">
+		<data>00020000</data> 
+	</item>	 
+	<item cfgitem="0.86mA / 3.8mA / 7.5mA">
+		<data>00030000</data> 
+	</item>	 
+	<item cfgitem="0.99mA / 3.9mA / 7.7mA">
+		<data>00040000</data> 
+	</item>	 	
+	<item cfgitem="1.2mA  / 4.1mA / 7.9mA">
+		<data>00050000</data> 
+	</item>	 
+	<item cfgitem="1.3mA  / 4.3mA / 8.2mA">
+		<data>00060000</data> 
+	</item>	 
+	<item cfgitem="1.5mA  / 4.4mA / 8.2mA">
+		<data>00070000</data> 
+	</item>		
+  </config> 
+  <config CWD="CW4" contex="LDO12_ct_lptrim[0]"  bit="13~13"> 
+    <item cfgitem="0">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1">
+		<data>00080000</data> 
+	</item>	 
+  </config>      
+  <config CWD="CW4" contex="NVM的pump模式切换中断信号阈值配置"  bit="14~15"> 
+    <item cfgitem="系统频率≤7.3MHz时产生中断">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="系统频率≤8.7MHz时产生中断">
+		<data>00100000</data> 
+	</item>	 
+	<item cfgitem="系统频率≤10.0MHz时产生中断">
+		<data>00200000</data> 
+	</item>	 
+	<item cfgitem="系统频率≤11.3MHz时产生中断">
+		<data>00300000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW4" contex="pump模式"  bit="16~16"> 
+    <item cfgitem="正常">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="低功耗,pump能力降低一半">
+		<data>00400000</data> 
+	</item>	 
+  </config>   
+  <config CWD="CW4" contex="NVM的片选信号模式"  bit="17~17"> 
+    <item cfgitem="正常">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="一直有效(除standby或DPD)">
+		<data>00800000</data> 
+	</item>	 
+  </config>   
+  <config CWD="CW4" contex="解调电路偏置电流配置" bit="18~19">  
+    <item cfgitem="00: 200nA(fastest)">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="01: 160nA">
+		<data>01000000</data> 
+	</item>
+	<item cfgitem="10: 160nA">
+		<data>02000000</data> 
+	</item>
+	<item cfgitem="11: 133nA(slowest)">
+		<data>03000000</data> 
+	</item>
+  </config>
+  <config CWD="CW4" contex="Vcc低压报警阈值" bit="1A~1B">  
+    <item cfgitem="1.60V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.65V">
+		<data>04000000</data> 
+	</item>
+	<item cfgitem="1.70V">
+		<data>08000000</data> 
+	</item>
+	<item cfgitem="2.45V">
+		<data>0C000000</data> 
+	</item>
+  </config>  
+  <config CWD="CW4" contex="LDO16额外200uA负载使能"  bit="1C~1C"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>10000000</data> 
+	</item>	 
+  </config>
+  <config CWD="CW4" contex="VDD16低压报警阈值(会中断flash擦写)" bit="1D~1E">  
+    <item cfgitem="1.45V">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.50V">
+		<data>20000000</data> 
+	</item>
+	<item cfgitem="1.55V">
+		<data>40000000</data> 
+	</item>
+	<item cfgitem="1.60V">
+		<data>60000000</data> 
+	</item>	
+  </config>    
+  <config CWD="CW4" contex="切换电源源头时芯片复位使能" bit="1F~1F">  
+    <item cfgitem="关闭">
+		<data>80000000</data> 
+	</item>	  	
+    <item cfgitem="开启">
+		<data>00000000</data> 
+	</item>	  	
+</config>
+
+ <config CWD="CW5" contex="频率电压自适应升降频判断电压阈值"  bit="0~2"> 
+    <item cfgitem="Rise=2.08V/1.92V, Reduce=2.39V/2.20V">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="Rise=2.21V/2.03V, Reduce=2.50V/2.30V">
+		<data>00000001</data> 
+	</item>	 
+	<item cfgitem="Rise=2.30V/2.11V, Reduce=2.62V/2.41V">
+		<data>00000002</data> 
+	</item>	 
+	<item cfgitem="Rise=2.39V/2.20V, Reduce=2.68V/2.46V">
+		<data>00000003</data> 
+	</item>	 
+	<item cfgitem="Rise=2.50V/2.30V, Reduce=2.81V/2.59V">
+		<data>00000004</data> 
+	</item>	 	
+	<item cfgitem="Rise=2.62V/2.41V, Reduce=2.89V/2.65V">
+		<data>00000005</data> 
+	</item>	 
+	<item cfgitem="Rise=2.68V/2.46V, Reduce=3.04V/2.80V">
+		<data>00000006</data> 
+	</item>	 
+	<item cfgitem="Rise=2.81V/2.59V, Reduce=3.13V/2.87V">
+		<data>00000007</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW5" contex="LDO16_cl_lptrim[0]"  bit="3~3"> 
+    <item cfgitem="0">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1">
+		<data>00000008</data> 
+	</item>	 
+  </config>
+  <config CWD="CW5" contex="频率电压自适应升降频判断电流阈值" bit="4~7">  
+    <item cfgitem="Rise=0.5mA,Reduce=0.3mA,Windows=0.2mA">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="Rise=0.8mA,Reduce=0.3mA,Windows=0.5mA">
+		<data>00000040</data> 
+	</item>
+	<item cfgitem="Rise=1.0mA,Reduce=0.3mA,Windows=0.7mA">
+		<data>00000080</data> 
+	</item>
+	<item cfgitem="Rise=1.2mA,Reduce=0.3mA,Windows=0.9mA">
+		<data>000000C0</data> 
+	</item>
+    <item cfgitem="Rise=0.8mA,Reduce=0.5mA,Windows=0.3mA">
+		<data>00000010</data> 
+	</item>	  
+	<item cfgitem="Rise=1.0mA,Reduce=0.5mA,Windows=0.5mA">
+		<data>00000050</data> 
+	</item>
+	<item cfgitem="Rise=1.2mA,Reduce=0.5mA,Windows=0.7mA">
+		<data>00000090</data> 
+	</item>
+	<item cfgitem="Rise=1.4mA,Reduce=0.5mA,Windows=0.9mA">
+		<data>000000D0</data> 
+	</item>
+    <item cfgitem="Rise=1.0mA,Reduce=0.7mA,Windows=0.3mA">
+		<data>00000020</data> 
+	</item>	  
+	<item cfgitem="Rise=1.2mA,Reduce=0.7mA,Windows=0.5mA">
+		<data>00000060</data> 
+	</item>
+	<item cfgitem="Rise=1.4mA,Reduce=0.7mA,Windows=0.7mA">
+		<data>000000A0</data> 
+	</item>
+	<item cfgitem="Rise=1.6mA,Reduce=0.7mA,Windows=0.9mA">
+		<data>000000E0</data> 
+	</item>
+    <item cfgitem="Rise=1.2mA,Reduce=1.0mA,Windows=0.2mA">
+		<data>00000030</data> 
+	</item>	  
+	<item cfgitem="Rise=1.4mA,Reduce=1.0mA,Windows=0.4mA">
+		<data>00000070</data> 
+	</item>
+	<item cfgitem="Rise=1.6mA, Reduce=1.0mA,Windows=0.6mA">
+		<data>000000B0</data> 
+	</item>
+	<item cfgitem="Rise=1.8mA, Reduce=1.0mA,Windows=0.8mA">
+		<data>000000F0</data> 
+	</item>
+  </config>
+  <config CWD="CW5" contex="（手写）6bit-nvm stretch加1频率阈值(2KB/Sector)"  bit="8~D"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config> 
+  <config CWD="CW5" contex="（手写）6bit-nvm stretch加1频率阈值(256B/Sector)"  bit="E~13"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config> 
+  <config CWD="CW5" contex="（手写）6bit-系统环振的低频区trim"  bit="14~19"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config> 
+  <config CWD="CW5" contex="（手写）6bit-系统环振的高频区trim"  bit="1A~1F"> 
+    <item cfgitem="00">
+		<data>00000000</data> 
+	</item>	 	
+  </config> 	
+	
+  <config CWD="CW6" contex="CL接口使能"  bit="0~0"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000001</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="CT接口使能"  bit="1~1"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000002</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="UART接口使能"  bit="2~2"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000004</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="I2C接口使能"  bit="3~3"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000008</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="SPI接口使能"  bit="4~4"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000010</data> 
+	</item>	 
+  </config> 
+ <config CWD="CW6" contex="接触界面下LDO工作模式" bit="5~6"> 
+    <item cfgitem="1.6V正常电压">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="1.6V正常电压">
+		<data>00000020</data> 
+	</item>
+	<item cfgitem="1.75V高电压">
+		<data>00000040</data> 
+	</item>
+	<item cfgitem="1.45V低电压">
+		<data>00000060</data> 
+	</item>
+  </config>   
+  <config CWD="CW6" contex="随机数源的数量配置(new)"  bit="7~7"> 
+    <item cfgitem="1个">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="8个">
+		<data>00000080</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="PAE算法协处理器使能"  bit="8~8"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000100</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="DES算法协处理器使能"  bit="9~9"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000200</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="SSF33算法协处理器使能"  bit="A~A"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000400</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="SM1算法协处理器使能"  bit="B~B"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00000800</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="SM4算法协处理器使能"  bit="C~C"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00001000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="AES算法协处理器使能"  bit="D~D"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00002000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="HASH算法协处理器使能"  bit="E~E"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00004000</data> 
+	</item>	 
+  </config>  
+  <config CWD="CW6" contex="随机数源的数量配置(Fibonacci)"  bit="F~F"> 
+    <item cfgitem="1个">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="8个">
+		<data>00008000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="随机数源的数量配置(Galois)" bit="10~11">  
+    <item cfgitem="1个">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="2个">
+		<data>00010000</data> 
+	</item>
+	<item cfgitem="3个">
+		<data>00020000</data> 
+	</item>
+	<item cfgitem="4个">
+		<data>00030000</data> 
+	</item>
+  </config>   
+  <config CWD="CW6" contex="随机数采样时钟频率" bit="12~13">  
+    <item cfgitem="1MHz">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="2MHz">
+		<data>00040000</data> 
+	</item>
+	<item cfgitem="4MHz">
+		<data>00080000</data> 
+	</item>
+	<item cfgitem="8MHz">
+		<data>000C0000</data> 
+	</item>
+  </config> 
+  <config CWD="CW6" contex="纯CL接口下VDD低压报警的处理"  bit="14~14"> 
+    <item cfgitem="产生报警信号">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="屏蔽系统时钟">
+		<data>00100000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="NVM区的数据空间的校验模式"  bit="15~15"> 
+    <item cfgitem="纠错模式">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="检错模式">
+		<data>00200000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="PUF功能使能"  bit="16~16"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>00400000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="接触初始化接口使能(含CW1-10)"  bit="17~17"> 
+    <item cfgitem="开启(同时ct_init_cmd_en=1)">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="关闭">
+		<data>00800000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="总线极性校验使能" bit="18~18">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>01000000</data> 
+	</item>
+  </config>  
+  <config CWD="CW6" contex="GPIO接口功能使能" bit="19~19">  
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	  
+	<item cfgitem="开启">
+		<data>02000000</data> 
+	</item>
+  </config>    
+  <config CWD="CW6" contex="mifare电路的存储器映射模式"  bit="1A~1A"> 
+    <item cfgitem="1block映射到1个sector">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1block映射到1个block">
+		<data>04000000</data> 
+	</item>	 
+  </config>  
+  <config CWD="CW6" contex="非接初始化接口使能(含CW2-1F)"  bit="1B~1B"> 
+    <item cfgitem="开启(同时cl_init_cmd_en=1)">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="关闭">
+		<data>08000000</data> 
+	</item>	 
+  </config>  
+  <config CWD="CW6" contex="配置字自动写反码使能"  bit="1C~1C"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="打开">
+		<data>10000000</data> 
+	</item>	 
+  </config>  
+  <config CWD="CW6" contex="温度报警采样时钟频率"  bit="1D~1D"> 
+    <item cfgitem="256k">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1k">
+		<data>20000000</data> 
+	</item>	 
+  </config>    
+  <config CWD="CW6" contex="NVM擦写操作寄存器权限模式配置"  bit="1E~1E"> 
+    <item cfgitem="开放给所有用户">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="只开放给firmware程序">
+		<data>40000000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW6" contex="温度检测电路的选择"  bit="1F~1F"> 
+    <item cfgitem="vptat">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="vbe">
+		<data>80000000</data> 
+	</item>	 
+  </config>   	
+	
+  <config CWD="CW7" contex="（手写）11bit-M1卡基地址配置（以sector为单位对齐）"  bit="8~12"> 
+    <item cfgitem="000">
+		<data>00000000</data> 
+	</item>	 	
+  </config>  
+  <config CWD="CW7" contex="LDO16_cl_lptrim[1]"  bit="13~13"> 
+    <item cfgitem="0">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="1">
+		<data>00080000</data> 
+	</item>	 
+  </config>    
+  <config CWD="CW7" contex="M1卡使能"  bit="14~14"> 
+    <item cfgitem="纯CPU卡">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="CPU卡 + 逻辑加密卡">
+		<data>00100000</data> 
+	</item>	 
+  </config>  
+  <config CWD="CW7" contex="M1卡容量"  bit="15~15"> 
+    <item cfgitem="1K">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="4K">
+		<data>00200000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW7" contex="M1卡认证方式"  bit="16~16"> 
+    <item cfgitem="mifare算法">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="SH算法">
+		<data>00400000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW7" contex="M1卡类型"  bit="17~17"> 
+    <item cfgitem="兼容S50">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="兼容S70">
+		<data>00800000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW7" contex="逆向CL接口电路的UID重数"  bit="18~19"> 
+    <item cfgitem="一重UID">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="二重UID">
+		<data>01000000</data> 
+	</item>	 
+    <item cfgitem="三重UID">
+		<data>02000000</data> 
+	</item>	 	
+	<item cfgitem="UID重数自适应">
+		<data>03000000</data> 
+	</item>	 	
+  </config> 
+  <config CWD="CW7" contex="patch区访问程序区权限"  bit="1A~1A"> 
+    <item cfgitem="关闭">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="开启">
+		<data>04000000</data> 
+	</item>	 
+  </config> 
+  <config CWD="CW7" contex="程序NVM的擦写权限"  bit="1B~1B"> 
+    <item cfgitem="开启">
+		<data>00000000</data> 
+	</item>	 	
+	<item cfgitem="关闭">
+		<data>08000000</data> 
+	</item>	 
+  </config>   
+  <config CWD="CW7" contex="（手写）4bit-ram patch区大小(1KB为单位)"  bit="1C~1F"> 
+    <item cfgitem="0">
+		<data>00000000</data> 
+	</item>	 	
+  </config> 
+  <config CWD="MW" contex="芯片模式字"  bit="0~1F"> 
+    <item cfgitem="编程模式">
+		<data>55AAA55A</data> 
+	</item>	 	
+    <item cfgitem="用户模式">
+		<data>5AA5A55A</data> 
+	</item>	 
+    <item cfgitem="初始模式">
+		<data>00000000</data> 
+	</item>	 	
+  </config> 
+  <config CWD="LW" contex="CW0的锁定态"  bit="0~1"> 
+    <item cfgitem="未锁-01">
+		<data>00000001</data> 
+	</item>	 
+	<item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 			
+	<item cfgitem="已锁-10">
+		<data>00000002</data> 
+	</item>	 	
+	<item cfgitem="已锁-11">
+		<data>00000003</data> 
+	</item>	 	
+  </config> 
+  <config CWD="LW" contex="CW1的锁定态"  bit="2~3"> 
+    <item cfgitem="未锁-01">
+		<data>00000004</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00000008</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>0000000C</data> 
+	</item>	 	
+  </config> 
+  <config CWD="LW" contex="CW2的锁定态"  bit="4~5"> 
+    <item cfgitem="未锁-01">
+		<data>00000010</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00000020</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00000030</data> 
+	</item>	
+  </config> 
+  <config CWD="LW" contex="CW3的锁定态"  bit="6~7"> 
+    <item cfgitem="未锁-01">
+		<data>00000040</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00000080</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>000000C0</data> 
+	</item>	
+  </config> 
+  <config CWD="LW" contex="CW4的锁定态"  bit="8~9"> 
+    <item cfgitem="未锁-01">
+		<data>00000100</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00000200</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00000300</data> 
+	</item>			
+  </config>     
+  <config CWD="LW" contex="CW5的锁定态"  bit="A~B"> 
+    <item cfgitem="未锁-01">
+		<data>00000400</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00000800</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00000C00</data> 
+	</item>			 		
+  </config>    
+  <config CWD="LW" contex="CW6的锁定态"  bit="C~D"> 
+    <item cfgitem="未锁-01">
+		<data>00001000</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00002000</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00003000</data> 
+	</item>		 			
+  </config>   
+  <config CWD="LW" contex="CW7的锁定态"  bit="E~F"> 
+    <item cfgitem="未锁-01">
+		<data>00004000</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00008000</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>0000C000</data> 
+	</item>				
+  </config>   
+  <config CWD="LW" contex="MW的锁定态"  bit="10~11"> 
+    <item cfgitem="未锁-01">
+		<data>00010000</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-10">
+		<data>00020000</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00030000</data> 
+	</item>				
+  </config>   
+  <config CWD="LWF" contex="CW0的锁定反码"  bit="0~1"> 
+    <item cfgitem="未锁-10">
+		<data>00000002</data> 
+	</item>	 
+	<item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 			
+	<item cfgitem="已锁-01">
+		<data>00000001</data> 
+	</item>	 	
+	<item cfgitem="已锁-11">
+		<data>00000003</data> 
+	</item>	 	
+  </config> 
+  <config CWD="LWF" contex="CW1的锁定态反码"  bit="2~3"> 
+    <item cfgitem="未锁-10">
+		<data>00000008</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00000004</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>0000000C</data> 
+	</item>	 	
+  </config> 
+  <config CWD="LWF" contex="CW2的锁定态反码"  bit="4~5"> 
+    <item cfgitem="未锁-10">
+		<data>00000020</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00000010</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00000030</data> 
+	</item>	
+  </config> 
+  <config CWD="LWF" contex="CW3的锁定态反码"  bit="6~7"> 
+    <item cfgitem="未锁-10">
+		<data>00000080</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00000040</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>000000C0</data> 
+	</item>	
+ </config>  
+  <config CWD="LWF" contex="CW4的锁定态反码"  bit="8~9"> 
+    <item cfgitem="未锁-10">
+		<data>00000200</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00000100</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00000300</data> 
+	</item>			
+  </config>     
+  <config CWD="LWF" contex="CW5的锁定态反码"  bit="A~B"> 
+    <item cfgitem="未锁-10">
+		<data>00000800</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00000400</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00000C00</data> 
+	</item>			 		
+  </config>    
+  <config CWD="LWF" contex="CW6的锁定态反码"  bit="C~D"> 
+    <item cfgitem="未锁-10">
+		<data>00002000</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00001000</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00003000</data> 
+	</item>		 			
+  </config>   
+  <config CWD="LWF" contex="CW7的锁定态反码"  bit="E~F"> 
+    <item cfgitem="未锁-10">
+		<data>00008000</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00004000</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>0000C000</data> 
+	</item>				
+  </config>   
+  <config CWD="LWF" contex="MW的锁定态反码"  bit="10~11"> 
+    <item cfgitem="未锁-10">
+		<data>00020000</data> 
+	</item>	 
+   <item cfgitem="已锁-00">
+		<data>00000000</data> 
+	</item>	 	
+    <item cfgitem="已锁-01">
+		<data>00010000</data> 
+	</item>	 
+   <item cfgitem="已锁-11">
+		<data>00030000</data> 
+	</item>				
+  </config>   
+</root> 

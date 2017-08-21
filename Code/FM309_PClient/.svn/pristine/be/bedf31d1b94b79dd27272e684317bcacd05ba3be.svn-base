@@ -1,0 +1,1547 @@
+<root>  
+  <config CWD="CW0" contex="UID重数"  bit="0~1"> 
+    <item cfgitem="一重UID">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="二重UID">
+		<data>01</data>
+	</item>
+	<item cfgitem="三重UID">
+		<data>02</data> 
+	</item>
+	<item cfgitem="RFU（一重UID）">
+		<data>03</data> 
+	</item>
+  </config>    
+  
+  <config CWD="CW0" contex="非接触接口使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>04</data> 
+	</item>
+  </config>  
+
+  <config CWD="CW0" contex="非接触接口类型" bit="3~4">  
+    <item cfgitem="typeA+typeB">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="typeA">
+		<data>08</data> 
+	</item>
+    <item cfgitem="typeB">
+		<data>10</data> 
+	</item>	  
+	<item cfgitem="RFU（typeA+typeB）">
+		<data>18</data> 
+	</item>	
+  </config>  
+ 
+   <config CWD="CW0" contex="程序扩展模式" bit="5~5">  
+    <item cfgitem="整体扩展">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="段后扩展">
+		<data>20</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW0" contex="程序扩展类型" bit="6~6">  
+    <item cfgitem="EEPROM">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="RAM">
+		<data>40</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW0" contex="卡类型" bit="7~7">  
+    <item cfgitem="CPU卡">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="CPU+逻辑加密卡">
+		<data>80</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW1" contex="逻辑加密卡类型" bit="0~0">  
+    <item cfgitem="S50">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="兼容S70">
+		<data>01</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW1" contex="逻辑加密算法类型" bit="1~1">  
+    <item cfgitem="MIFARE">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="SH">
+		<data>02</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW1" contex="逻辑加密区大小" bit="2~2">  
+    <item cfgitem="1K">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="4K">
+		<data>04</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW1" contex="扩展逻辑加密卡数目" bit="3~4">  
+    <item cfgitem="不扩展">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="扩展2张">
+		<data>08</data> 
+	</item>
+	<item cfgitem="扩展4张">
+		<data>10</data> 
+	</item>	  
+	<item cfgitem="扩展8张">
+		<data>18</data> 
+	</item>
+  </config>  
+ 
+  <config CWD="CW1" contex="MMU管理模式" bit="5~5">  
+    <item cfgitem="SM">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="SM+AM">
+		<data>20</data> 
+	</item>
+  </config>  
+ 
+  <config CWD="CW2" contex="频率检测使能" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>01</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW2" contex="光检测使能" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>02</data> 
+	</item>
+  </config>  
+  
+  <config CWD="CW2" contex="Shield检测使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>04</data> 
+	</item>
+  </config>
+  
+  <config CWD="CW2" contex="温度检测使能" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>08</data> 
+	</item>
+  </config>
+
+  <config CWD="CW2" contex="电压检测使能" bit="4~4">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>10</data> 
+	</item>
+  </config>    
+  
+  <config CWD="CW2" contex="安全模块复位使能" bit="5~5">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>20</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW2" contex="shield工作模式配置" bit="6~6">  
+    <item cfgitem="静态">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="动态">
+		<data>40</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW2" contex="CT接口下CPU时钟关闭使能" bit="7~7">  
+    <item cfgitem="不停止">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="停止">
+		<data>80</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW3" contex="低温检测配置" bit="0~2">  
+    <item cfgitem="000 -49.65℃">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="001 -57.45℃">
+		<data>01</data> 
+	</item>
+	<item cfgitem="010 -67.75℃">
+		<data>02</data> 
+	</item>	  
+	<item cfgitem="011 -78.15℃">
+		<data>03</data> 
+	</item>
+	<item cfgitem="100 -39.35℃">
+		<data>04</data> 
+	</item>	  
+	<item cfgitem="101 -28.95℃">
+		<data>05</data> 
+	</item>
+	<item cfgitem="110 -18.65℃">
+		<data>06</data> 
+	</item>	  
+	<item cfgitem="111 -8.35℃">
+		<data>07</data> 
+	</item>	
+  </config>  
+
+  <config CWD="CW3" contex="高温检测配置" bit="3~5">  
+    <item cfgitem="000 121.15℃">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="001 131.05℃">
+		<data>08</data> 
+	</item>
+	<item cfgitem="010 73.35℃">
+		<data>10</data> 
+	</item>	  
+	<item cfgitem="011 63.25℃">
+		<data>18</data> 
+	</item>
+	<item cfgitem="100 111.15℃">
+		<data>20</data> 
+	</item>	  
+	<item cfgitem="101 101.05℃">
+		<data>28</data> 
+	</item>
+	<item cfgitem="110 91.05℃">
+		<data>30</data> 
+	</item>	  
+	<item cfgitem="111 80.95℃">
+		<data>38</data> 
+	</item>	
+  </config>  
+ 
+  <config CWD="CW3" contex="ATQA/SAK源选择" bit="6~6">  
+    <item cfgitem="只能来自EE安全区">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="来自寄存器和EE可选">
+		<data>40</data> 
+	</item>
+  </config> 
+ 
+   <config CWD="CW3" contex="用户UID使能" bit="7~7">  
+    <item cfgitem="禁止">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="使用">
+		<data>80</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW4" contex="随机数采样频率配置" bit="0~1">  
+    <item cfgitem="1MHz">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="2MHz">
+		<data>01</data> 
+	</item>
+	<item cfgitem="4MHz">
+		<data>02</data> 
+	</item>	  
+	<item cfgitem="4MHz(RFU)">
+		<data>03</data> 
+	</item>	
+  </config> 
+  
+  <config CWD="CW4" contex="真随机数源个数配置" bit="2~3">  
+    <item cfgitem="1个Galois">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="2个Galois">
+		<data>04</data> 
+	</item>
+	<item cfgitem="3个Galois">
+		<data>08</data> 
+	</item>	  
+	<item cfgitem="4个Galois">
+		<data>0C</data> 
+	</item>	
+  </config> 
+  
+  <config CWD="CW4" contex="Fibonacci随机数发生器使能" bit="4~4">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>10</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW4" contex="初始化指令使能" bit="5~5">  
+    <item cfgitem="禁止">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="使用">
+		<data>20</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW4" contex="初始化指令读通用程序区使能" bit="6~6">  
+    <item cfgitem="禁止">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="使用">
+		<data>40</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW4" contex="初始化指令读encry_lib使能" bit="7~7">  
+    <item cfgitem="禁止">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="使用">
+		<data>80</data> 
+	</item>
+  </config>   
+  
+  <config CWD="CW5" contex="CT接口使能" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>02</data> 
+	</item>
+  </config> 
+   
+  <config CWD="CW5" contex="SPI接口使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>04</data> 
+	</item>
+  </config>    
+
+  <config CWD="CW5" contex="I2C接口使能" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>08</data> 
+	</item>
+  </config>  
+
+  <config CWD="CW5" contex="UART接口使能" bit="4~4">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>10</data> 
+	</item>
+  </config>
+
+  <config CWD="CW5" contex="SWP接口使能" bit="5~5">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>20</data> 
+	</item>
+  </config>
+
+  <config CWD="CW5" contex="ESWP接口使能" bit="6~6">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>40</data> 
+	</item>
+  </config>
+  
+  <config CWD="CW5" contex="S2C接口使能" bit="7~7">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>80</data> 
+	</item>
+  </config> 
+ 
+  <config CWD="CW6" contex="PAE使能" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>01</data> 
+	</item>
+  </config>
+  
+  <config CWD="CW6" contex="DES使能" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>02</data> 
+	</item>
+  </config> 
+      
+  <config CWD="CW6" contex="AES使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>04</data> 
+	</item>
+  </config> 
+
+  <config CWD="CW6" contex="SSF33使能" bit="3~3">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>08</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW6" contex="SM1使能" bit="4~4">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>10</data> 
+	</item>
+  </config> 
+ 
+  <config CWD="CW6" contex="SM7使能" bit="5~5">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>20</data> 
+	</item>
+  </config> 
+ 
+  <config CWD="CW6" contex="安全区特殊数据区访问权限" bit="6~6">  
+    <item cfgitem="仅encry_lib区程序可以访问">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="所有程序都可以访问">
+		<data>40</data> 
+	</item>
+  </config>
+    
+  <config CWD="CW6" contex="初始化指令认证使能" bit="7~7">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="打开">
+		<data>80</data> 
+	</item>
+  </config>
+  
+  <config CWD="CW7" contex="（手写）数据EEPROM加密key1" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>
+  
+  <config CWD="CW8" contex="（手写）数据EEPROM加密key2" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>
+  
+  <config CWD="CW9" contex="非接触最大工作频率" bit="0~4">  
+    <item cfgitem="00000-1.5M">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="00001-2.9M">
+		<data>01</data> 
+	</item>  
+	<item cfgitem="00010-4.2M">
+		<data>02</data> 
+	</item>  	
+	<item cfgitem="00011-5.6M">
+		<data>03</data> 
+	</item>  	
+	<item cfgitem="00100-6.9M">
+		<data>04</data> 
+	</item>  
+	<item cfgitem="00101-8.1M">
+		<data>05</data> 
+	</item>  	
+	<item cfgitem="00110-9.4M">
+		<data>06</data> 
+	</item>  	
+   <item cfgitem="00111-10.7M">
+		<data>07</data> 
+	</item>
+   <item cfgitem="01000-11.9M">
+		<data>08</data> 
+	</item>	  
+	<item cfgitem="01001-13.2M">
+		<data>09</data> 
+	</item>  
+	<item cfgitem="01010-14.3M">
+		<data>0A</data> 
+	</item>  	
+	<item cfgitem="01011-15.5M">
+		<data>0B</data> 
+	</item>  	
+	<item cfgitem="01100-16.7M">
+		<data>0C</data> 
+	</item>  
+	<item cfgitem="01101-17.8M">
+		<data>0D</data> 
+	</item>  	
+	<item cfgitem="01110-19.0M">
+		<data>0E</data> 
+	</item>  	
+	<item cfgitem="01111-20.1M">
+		<data>0F</data> 
+	</item>
+	<item cfgitem="10000-21.2M">
+		<data>10</data> 
+	</item>  	
+	<item cfgitem="10001-22.4M">
+		<data>11</data> 
+	</item>  	
+	<item cfgitem="10010-23.5M">
+		<data>12</data> 
+	</item>  
+	<item cfgitem="10011-24.6M">
+		<data>13</data> 
+	</item>  
+	<item cfgitem="10100-25.6M">
+		<data>14</data> 
+	</item>  
+	<item cfgitem="10101-26.7M">
+		<data>15</data> 
+	</item>  	
+	<item cfgitem="10110-27.7M">
+		<data>16</data> 
+	</item>  	
+   <item cfgitem="10111-28.8M">
+		<data>17</data> 
+	</item>
+   <item cfgitem="11000-29.9M">
+		<data>18</data> 
+	</item>	  
+	<item cfgitem="11001-30.9M">
+		<data>19</data> 
+	</item>  
+	<item cfgitem="11010-31.9M">
+		<data>1A</data> 
+	</item>  	
+	<item cfgitem="11011-32.9M">
+		<data>1B</data> 
+	</item>  	
+	<item cfgitem="11100-33.9M">
+		<data>1C</data> 
+	</item>  
+	<item cfgitem="11101-35.2M">
+		<data>1D</data> 
+	</item>  	
+	<item cfgitem="11110-36.3M">
+		<data>1E</data> 
+	</item>  	
+	<item cfgitem="11111-37.1M">
+		<data>1F</data> 
+	</item>	
+  </config>
+ 
+  <config CWD="CW9" contex="非接触工作电压" bit="5~7">  
+    <item cfgitem="000-RFU(2.5V)">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="001-2.5V">
+		<data>20</data> 
+	</item>  
+	<item cfgitem="010-2.75V">
+		<data>40</data> 
+	</item>  	
+	<item cfgitem="011-3V">
+		<data>60</data> 
+	</item>  	
+	<item cfgitem="100-3.25V">
+		<data>80</data> 
+	</item>  
+	<item cfgitem="101-3.5V">
+		<data>A0</data> 
+	</item>  	
+	<item cfgitem="110-3.75V">
+		<data>C0</data> 
+	</item>  	
+	<item cfgitem="111-4V">
+		<data>E0</data> 
+	</item>  		
+  </config>
+ 
+  <config CWD="CW10" contex="数据存储器容量" bit="0~1">  
+    <item cfgitem="40k">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="80k">
+		<data>01</data> 
+	</item>  
+    <item cfgitem="160k">
+		<data>02</data> 
+	</item>	  
+	<item cfgitem="RFU（160k）">
+		<data>03</data> 
+	</item>  	
+  </config>
+ 
+  <config CWD="CW10" contex="程序存储器类型" bit="2~2">  
+    <item cfgitem="ROM">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="EEPROM">
+		<data>04</data> 
+	</item>  
+  </config>
+  
+  <config CWD="CW10" contex="光检测配置灵敏度" bit="3~6">  
+    <item cfgitem="0000-178nA">
+		<data>00</data> 
+	</item>	  	
+    <item cfgitem="0001-202nA">
+		<data>08</data> 
+	</item>	  
+    <item cfgitem="0010-239nA">
+		<data>10</data> 
+	</item>	  	
+    <item cfgitem="0011-277nA">
+		<data>18</data> 
+	</item>	 	
+    <item cfgitem="0100-312nA">
+		<data>20</data> 
+	</item>	  	
+    <item cfgitem="0101-350nA">
+		<data>28</data> 
+	</item>	  
+    <item cfgitem="0110-386nA">
+		<data>30</data> 
+	</item>	  	
+    <item cfgitem="0111-426nA">
+		<data>38</data> 
+	</item>		
+    <item cfgitem="1000-455nA">
+		<data>40</data> 
+	</item>	 	
+    <item cfgitem="1001-494nA">
+		<data>48</data> 
+	</item>	  	
+    <item cfgitem="1010-531nA">
+		<data>50</data> 
+	</item>	  
+    <item cfgitem="1011-568nA">
+		<data>58</data> 
+	</item>	  	
+    <item cfgitem="1100-603nA">
+		<data>60</data> 
+	</item>		
+    <item cfgitem="1101-642nA">
+		<data>68</data> 
+	</item>	  	
+    <item cfgitem="1110-677nA">
+		<data>70</data> 
+	</item>	  
+    <item cfgitem="1111-716nA">
+		<data>78</data> 
+	</item>	  		
+  </config>
+  
+  <config CWD="CW10" contex="安全区自动反码使能" bit="7~7">  
+    <item cfgitem="禁止">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="使用">
+		<data>80</data> 
+	</item>
+  </config> 
+  
+  <config CWD="CW11" contex="（手写）调制灵敏度" bit="0~2">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>   
+  
+  <config CWD="CW11" contex="（手写）Encry_LIB区大小配置" bit="3~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config> 
+  
+  <config CWD="CW12" contex="低频区频率阈值设置" bit="0~2">  
+    <item cfgitem="000-DFS小于5.6M属于低频区">
+		<data>00</data> 
+	</item>	  
+    <item cfgitem="001-DFS小于10.7M属于低频区">
+		<data>01</data> 
+	</item>	  	
+    <item cfgitem="010-DFS小于15.5M属于低频区">
+		<data>02</data> 
+	</item>	 
+    <item cfgitem="011-DFS小于20.1M属于低频区">
+		<data>03</data> 
+	</item>	 
+    <item cfgitem="100-DFS小于24.6M属于低频区">
+		<data>04</data> 
+	</item>	 
+    <item cfgitem="101-DFS小于28.8M属于低频区">
+		<data>05</data> 
+	</item>	 
+    <item cfgitem="110-DFS小于32.9M属于低频区">
+		<data>06</data> 
+	</item>	 
+    <item cfgitem="111-DFS小于37.1M属于低频区">
+		<data>07</data> 
+	</item>	 	
+  </config> 
+  
+  <config CWD="CW12" contex="高频区频率阈值设置" bit="3~5">  
+    <item cfgitem="000-DFS大于5.6M属于高频区">
+		<data>00</data> 
+	</item>	  
+    <item cfgitem="001-DFS大于10.7M属于高频区">
+		<data>08</data> 
+	</item>	  	
+    <item cfgitem="010-DFS大于15.5M属于高频区">
+		<data>10</data> 
+	</item>	 
+    <item cfgitem="011-DFS大于20.1M属于高频区">
+		<data>18</data> 
+	</item>	 
+    <item cfgitem="100-DFS大于24.6M属于高频区">
+		<data>20</data> 
+	</item>	 
+    <item cfgitem="101-DFS大于28.8M属于高频区">
+		<data>28</data> 
+	</item>	 
+    <item cfgitem="110-DFS大于32.9M属于高频区">
+		<data>30</data> 
+	</item>	 
+    <item cfgitem="111-DFS大于37.1M属于高频区">
+		<data>38</data> 
+	</item>	 	
+  </config> 
+ 
+  <config CWD="CW12" contex="数字电路电压配置" bit="6~7">  
+    <item cfgitem="1.5V">
+		<data>00</data> 
+	</item>	  
+    <item cfgitem="1.0V">
+		<data>40</data> 
+	</item>	  	
+    <item cfgitem="1.2V">
+		<data>80</data> 
+	</item>	 
+    <item cfgitem="0.8V">
+		<data>C0</data> 
+	</item>	 
+  </config> 
+ 
+  <config CWD="CW13" contex="（手写）Patch区大小配置" bit="0~6">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config> 
+ 
+  <config CWD="CW13" contex="S2C配置模式" bit="7~7">  
+    <item cfgitem="兼容FM295">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="标准S2C">
+		<data>80</data> 
+	</item>	 	
+  </config> 
+ 
+  <config CWD="CW14" contex="RAM加密使能" bit="0~0">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>01</data> 
+	</item>		
+  </config> 
+  
+  <config CWD="CW14" contex="数据EEPROM加密使能" bit="1~1">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>02</data> 
+	</item>		
+  </config> 
+  
+  <config CWD="CW14" contex="程序存储器加密使能" bit="2~2">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>04</data> 
+	</item>		
+  </config> 
+
+  <config CWD="CW14" contex="EEPROM/RAM加解密轮数" bit="3~4">  
+    <item cfgitem="1轮">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="2轮">
+		<data>08</data> 
+	</item>		
+    <item cfgitem="3轮">
+		<data>10</data> 
+	</item>	 
+    <item cfgitem="4轮">
+		<data>18</data> 
+	</item>			
+  </config> 
+  
+  <config CWD="CW14" contex="EEPROM/RAM奇偶校验使能" bit="5~5">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>20</data> 
+	</item>		
+  </config>
+
+  <config CWD="CW14" contex="程序空间奇偶校验使能" bit="6~6">  
+    <item cfgitem="关闭">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="打开">
+		<data>40</data> 
+	</item>		
+  </config>     
+
+   <config CWD="CW14" contex="数据总线加密sbox个数" bit="7~7">  
+    <item cfgitem="连续2次">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="仅1次">
+		<data>40</data> 
+	</item>		
+  </config>   
+  
+  <config CWD="CW15" contex="Vdd15输出电压（对应标准输出1.2v）" bit="0~2">  
+    <item cfgitem="000-1.228V_CT/1.205V_CL">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="001-1.277V_CT/1.254V_CL">
+		<data>01</data> 
+	</item>	 	
+    <item cfgitem="010-1.331V_CT/1.307V_CL">
+		<data>02</data> 
+	</item>	 	
+    <item cfgitem="011-1.375V_CT/1.351V_CL">
+		<data>03</data> 
+	</item>	 	
+    <item cfgitem="100-1.428V_CT/1.404V_CL">
+		<data>04</data> 
+	</item>	 	
+    <item cfgitem="101-1.179V_CT/1.157V_CL">
+		<data>05</data> 
+	</item>	 
+    <item cfgitem="110-1.130V_CT/1.108V_CL">
+		<data>06</data> 
+	</item>	 
+    <item cfgitem="111-1.081V_CT/1.059V_CL">
+		<data>07</data> 
+	</item>	 	
+  </config> 
+  
+  <config CWD="CW16" contex="DFS环振频率TRIM" bit="0~3">  
+    <item cfgitem="0000-10.50M">
+		<data>00</data> 
+	</item>	 
+	<item cfgitem="0001-11.23M">
+		<data>01</data> 
+	</item>	 
+	<item cfgitem="0010-11.92M">
+		<data>02</data> 
+	</item>	 
+	<item cfgitem="0011-12.71M">
+		<data>03</data> 
+	</item>	 
+	<item cfgitem="0100-13.40M">
+		<data>04</data> 
+	</item>	 
+	<item cfgitem="0101-14.18M">
+		<data>05</data> 
+	</item>	 
+	<item cfgitem="0110-14.82M">
+		<data>06</data> 
+	</item>	 
+	<item cfgitem="0111-15.52M">
+		<data>07</data> 
+	</item>	 
+	<item cfgitem="1000-16.28M">
+		<data>08</data> 
+	</item>	 
+	<item cfgitem="1001-17.13M">
+		<data>09</data> 
+	</item>	 
+	<item cfgitem="1010-17.75M">
+		<data>0A</data> 
+	</item>	 
+	<item cfgitem="1011-18.39M">
+		<data>0B</data> 
+	</item>	
+	<item cfgitem="1100-19.10M">
+		<data>0C</data> 
+	</item>	 
+	<item cfgitem="1101-19.86M">
+		<data>0D</data> 
+	</item>	
+	<item cfgitem="1110-20.69M">
+		<data>0E</data> 
+	</item>	 
+	<item cfgitem="1111-21.59M">
+		<data>0F</data> 
+	</item>	
+  </config>
+  
+  <config CWD="CW16" contex="4M环振频率TRIM" bit="4~6">  
+    <item cfgitem="000-3.516M">
+		<data>00</data> 
+	</item>	 
+	<item cfgitem="001-3.675M">
+		<data>10</data> 
+	</item>	 
+	<item cfgitem="010-3.848M">
+		<data>20</data> 
+	</item>	 
+	<item cfgitem="011-4.040M">
+		<data>30</data> 
+	</item>	 
+	<item cfgitem="100-4.259M">
+		<data>40</data> 
+	</item>	 
+	<item cfgitem="101-4.519M">
+		<data>50</data> 
+	</item>	 
+	<item cfgitem="110-4.752M">
+		<data>60</data> 
+	</item>	 
+	<item cfgitem="111-5.044M">
+		<data>70</data> 
+	</item>	 
+  </config>
+
+  <config CWD="CW17" contex="SWP下拉电流配置" bit="0~3">  
+    <item cfgitem="0000-0.607mA">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="0001-0.707mA">
+		<data>01</data> 
+	</item>	 	
+    <item cfgitem="0010-0.806mA">
+		<data>02</data> 
+	</item>	 
+    <item cfgitem="0011-0.905mA">
+		<data>03</data> 
+	</item>	 	
+    <item cfgitem="0100-1.004mA">
+		<data>04</data> 
+	</item>	 
+    <item cfgitem="0101-1.101mA">
+		<data>05</data> 
+	</item>	 	
+    <item cfgitem="0110-1.198mA">
+		<data>06</data> 
+	</item>	 
+    <item cfgitem="0111-1.294mA">
+		<data>07</data> 
+	</item>			
+    <item cfgitem="1000-1.398mA">
+		<data>08</data> 
+	</item>	 
+    <item cfgitem="1001-0.607mA">
+		<data>09</data> 
+	</item>	 	
+    <item cfgitem="1010-0.607mA">
+		<data>0A</data> 
+	</item>	 
+    <item cfgitem="1011-0.607mA">
+		<data>0B</data> 
+	</item>	 	
+    <item cfgitem="1100-0.607mA">
+		<data>0C</data> 
+	</item>	 
+    <item cfgitem="1101-0.607mA">
+		<data>0D</data> 
+	</item>	 	
+    <item cfgitem="1110-0.607mA">
+		<data>0E</data> 
+	</item>	 
+    <item cfgitem="1111-0.607mA">
+		<data>0F</data> 		
+	</item>	 		
+  </config>  
+ 
+  <config CWD="CW17" contex="Vdd15_2输出电压" bit="4~6">  
+    <item cfgitem="000-1.554v">
+		<data>00</data> 
+	</item>	 
+	<item cfgitem="001-1.609v">
+		<data>10</data> 
+	</item>	 
+	<item cfgitem="010-1.658v">
+		<data>20</data> 
+	</item>	 
+	<item cfgitem="011-1.726v">
+		<data>30</data> 
+	</item>	 
+	<item cfgitem="100-1.512v">
+		<data>40</data> 
+	</item>	 
+	<item cfgitem="101-1.458v">
+		<data>50</data> 
+	</item>	 
+	<item cfgitem="110-1.409v">
+		<data>60</data> 
+	</item>	 
+	<item cfgitem="111-1.361v">
+		<data>70</data> 
+	</item>	 
+  </config> 
+ 
+  <config CWD="CW18" contex="CL接口CPU时钟工作模式" bit="0~1">  
+    <item cfgitem="CL收发时停CPU，CT接口有电源则不停">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="强制CL收发时停CPU">
+		<data>01</data> 
+	</item>	
+	<item cfgitem="强制CL收发时不停CPU">
+		<data>02</data> 
+	</item>	
+	<item cfgitem="CL收发时有调制信号时停CPU">
+		<data>03</data> 
+	</item>	
+  </config>
+  
+  <config CWD="CW18" contex="CL解调电路配置" bit="2~2">  
+    <item cfgitem="解调电路0">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="解调电路1">
+		<data>04</data> 
+	</item>		
+  </config>  
+  
+  <config CWD="CW18" contex="shield时钟配置" bit="3~4">  
+    <item cfgitem="00-400k">
+		<data>00</data> 
+	</item>	 
+    <item cfgitem="01-100k">
+		<data>08</data> 
+	</item>	
+	<item cfgitem="10-50k">
+		<data>10</data> 
+	</item>	
+	<item cfgitem="11-400k">
+		<data>18</data> 
+	</item>	
+  </config>
+  
+  <config CWD="Lock0" contex="CW0[1:0]:UID重数" bit="0~0">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>01</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW0[4:2]:非接触接口" bit="1~1">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>02</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW0[5]:程序扩展模式" bit="2~2">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>04</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW0[6]:程序扩展类型" bit="3~3">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>08</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW0[7]:卡类型" bit="4~4">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>10</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW2[6:0]:安全配置" bit="5~5">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>20</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW6[7]:认证使能" bit="6~6">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>40</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock0" contex="CW2[7]:CT接口CPU时钟关闭使能" bit="7~7">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>80</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW1[4:0]:逻辑加密卡配置" bit="0~0">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>01</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW1[5]:MMU管理模式" bit="1~1">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>02</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW3[6]:ATQA/SAK源配置" bit="2~2">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>04</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW3[7]:用户UID使能" bit="3~3">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>08</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW18[7:0]:CL接口CPU时钟模式" bit="4~4">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>10</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW5[1]:CT接口使能" bit="5~5">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>20</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW5[4:2]:通用CT接口配置" bit="6~6">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>40</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock1" contex="CW5[7:5]:通用CL接口配置" bit="7~7">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>80</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW3[5:0]:温度检测配置" bit="0~0">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>01</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW4[4:0]:真随机数配置" bit="1~1">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>02</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW10[7]:安全区自动写反码使能" bit="2~2">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>04</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW4[5]:初始化指令使能" bit="3~3">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>08</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW4[7]:初始化指令读encry_lib使能" bit="4~4">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>10</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW4[6]:初始化指令读encry_lib外ROM使能" bit="5~5">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>20</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW15/16/17[7:0]:芯片操作配置" bit="6~6">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>40</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock2" contex="CW6[6]/CW10[6:0]/CW11[7:0]:芯片制造商配置" bit="7~7">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>80</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW6[5]:SM7使能" bit="0~0">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>01</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW6[1]:DES使能" bit="1~1">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>02</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW6[3]:SSF33使能" bit="2~2">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>04</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW6[0]:PAE使能" bit="3~3">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>08</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW6[4]:SM1使能" bit="4~4">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>10</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW6[2]:AES使能" bit="5~5">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>20</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW7/8[7:0]:数据EEPROM加密密钥" bit="6~6">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>40</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock3" contex="CW14[7:0]:数据总线加密及parity校验配置" bit="7~7">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>80</data> 
+	</item>	 
+  </config>
+
+  <config CWD="Lock4" contex="芯片三重UID" bit="0~0">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>01</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock4" contex="ATQA" bit="1~1">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>02</data> 
+	</item>	 
+  </config>  
+
+  <config CWD="Lock4" contex="建设部认证码" bit="2~2">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>04</data> 
+	</item>	 
+  </config>    
+
+  <config CWD="Lock4" contex="小号信息" bit="3~3">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>08</data> 
+	</item>	 
+  </config>  
+
+  <config CWD="Lock4" contex="CW5[0]/CW1[7:6]:控制字RFU位" bit="4~4">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>10</data> 
+	</item>	 
+  </config>  
+
+  <config CWD="Lock4" contex="信息区中的RFU" bit="5~5">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>20</data> 
+	</item>	 
+  </config>    
+  
+  <config CWD="Lock4" contex="CW9[7:0]:CL接口电压频率配置" bit="6~6">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>40</data> 
+	</item>	 
+  </config>      
+  
+  <config CWD="Lock4" contex="CW12[7:0]:访问周期和数字电压配置" bit="7~7">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>80</data> 
+	</item>	 
+  </config>      
+
+  <config CWD="Lock5" contex="编程模式字" bit="0~0">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>01</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock5" contex="用户模式字" bit="1~1">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>02</data> 
+	</item>	 
+  </config>  
+ 
+  <config CWD="Lock5" contex="模式使能字" bit="2~2">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>04</data> 
+	</item>	 
+  </config>   
+  
+  <config CWD="Lock5" contex="校验字节地址加密密钥" bit="3~3">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>08</data> 
+	</item>	 
+  </config>     
+
+  <config CWD="Lock5" contex="JCA配置字" bit="4~4">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>10</data> 
+	</item>	 
+  </config>   
+  
+  <config CWD="Lock5" contex="CWD_RFU0~RFU3 配置字的4个RFU字节" bit="5~5">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>20</data> 
+	</item>	 
+  </config>     
+  
+  <config CWD="Lock5" contex="CWD13[7:0]:patch区和S2C模式配置" bit="6~6">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>40</data> 
+	</item>	 
+  </config>
+  
+  <config CWD="Lock5" contex="特殊信息区" bit="7~7">  
+    <item cfgitem="可写">
+		<data>00</data> 
+	</item>	  
+	<item cfgitem="Lock">
+		<data>80</data> 
+	</item>	 
+  </config>  
+  
+  <config CWD="CWD_RFU0" contex="（手写）RFU" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>  
+  
+  <config CWD="CWD_RFU1" contex="（手写）RFU" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>
+ 
+  <config CWD="CWD_RFU2" contex="（手写）RFU" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>
+  
+  <config CWD="CWD_RFU3" contex="（手写）RFU" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>
+ 
+  <config CWD="模式字0" contex="（手写）Prog模式字" bit="0~7">  
+    <item cfgitem="55">
+		<data>55</data> 
+	</item>	  
+  </config>
+  
+  <config CWD="模式字1" contex="（手写）User模式字" bit="0~7">  
+    <item cfgitem="00">
+		<data>00</data> 
+	</item>	  
+  </config>
+  
+  <config CWD="模式字2" contex="（手写）模式使能字" bit="0~7">  
+    <item cfgitem="A5">
+		<data>A5</data> 
+	</item>	  
+  </config>
+  
+</root>  
