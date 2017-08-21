@@ -195,11 +195,19 @@ void SC_ClkCmd(u8 stat);
 void SC_SendByte(u8 dat);
 u8 SC_RecvByte(u8 *dat,u32 TimeOut);
 u8 SC_decode_Answer2reset(u8 *card);
+u8 SC_ColdReset(u8 *atr,u8 *len);
+u8 SC_WarmReset(u8 *atr,u8 *len);
+u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen);
+void SC_InterruptHandler(void);
+void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceStatus);
+
 extern SC_ATR SC_A2R;
 extern u8 SC_ATR_Table[40];
 extern SC_ADPU_Commands apdu_commands;
 extern SC_ADPU_Responce apdu_responce;
 extern SC_TimTypeDef sc_tim;
+extern u32 Fi[16];
+extern u8 Di[16];
 
 
 

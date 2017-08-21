@@ -268,9 +268,10 @@ void CCID_handler(void)
 						abAPDUBuffer[9] = 0x32;
 						abAPDUBuffer[10] = 0x36;
 						abAPDUBuffer[11] = 0x0F;
-						iAPDUBufferRecvLen = 12;	
+						iAPDUBufferRecvLen = 12;
 	        break;
 					case ACT_POWER_OFF:
+
 						__nop();
 					break;
 				
@@ -284,10 +285,13 @@ void CCID_handler(void)
 						{ 
 							LEDShow(3, Bit_SET);
 							if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_CT)
-								bTemp=CL_TCL_OK;
-								//bTemp = ContactCardT0APDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
+								//bTemp=CL_TCL_OK;
+								bTemp = ContactCardT0APDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
+							else if(stuInRegs.bCurrentDevice == CURRENT_DEVICE_CL)
+								bTemp = CLTCLAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);
 							else 
-								bTemp = CLTCLAPDU(abAPDUBuffer, iAPDUBufferSendLen, &iAPDUBufferRecvLen);					
+								bTemp=CL_TCL_OK;
+							
 							if(bTemp!=CL_TCL_OK)
 								{
 									iAPDUBufferRecvLen = 0;

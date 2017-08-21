@@ -15,7 +15,7 @@ extern bool bTimeOut;
 *******************************************************************************/
 void InRegsInit(void)
 {
-  stuInRegs.bCurrentDevice = CURRENT_DEVICE_CT;
+  stuInRegs.bCurrentDevice = CURRENT_DEVICE_NO;
 }
 
 /*******************************************************************************
@@ -419,7 +419,8 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 
 void SpecApduCT(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
-	uint8_t b;
+	uint8_t b,ret;
+	u8 recevLen=0;
 	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
   uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
   uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
@@ -427,40 +428,78 @@ void SpecApduCT(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
   uint8_t   *pData = (APDUBuffer+INDEX_DATA);
 	uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
 	SetStatusWords(APDUBuffer, 0x9000);	
-	*APDURecvLen = 2;	
-	
+	*APDURecvLen = 2;
 	switch(iParam)
 	{
 		case 0x010001: //InitCT
 				SC_Init();
-				SC_ColdReset(abBuffer,0x20);
-				SC_WarmReset(abBuffer,0x20);
 			break;
 		case 0x010101: //ColdReset
-				//SC_ColdReset(APDUBuffer,0x20);
+				recevLen=0x20;
+				if(pData[0]==0x01)
+					SC_VoltageConfig(SC_Voltage_5V);
+				else if(pData[0]==0x03)
+					SC_VoltageConfig(SC_Voltage_18V);
+				else 
+					SC_VoltageConfig(SC_Voltage_3V);
+			
+				ret=SC_ColdReset(APDUBuffer,&recevLen);
+				if(ret==SC_SUCCESS)
+				{
+					SetStatusWords(APDUBuffer+recevLen, 0x9000);	
+					*APDURecvLen = recevLen+2;	
+				}
+				else
+				{
+					SetStatusWords(APDUBuffer, 0x6F00);	
+					*APDURecvLen = 2;	
+				}
 				
 			break;
 		case 0x010201: //WarmReset
-				//SC_WarmReset(APDUBuffer,0x20);
+				recevLen=0x20;
+				if(pData[0]==0x01)
+					SC_VoltageConfig(SC_Voltage_5V);
+				else if(pData[0]==0x03)
+					SC_VoltageConfig(SC_Voltage_18V);
+				else 
+					SC_VoltageConfig(SC_Voltage_3V);
+				ret=SC_WarmReset(APDUBuffer,&recevLen);
+				if(ret==SC_SUCCESS)
+				{
+					SetStatusWords(APDUBuffer+recevLen, 0x9000);	
+					*APDURecvLen = recevLen+2;	
+				}
+				else
+				{
+					SetStatusWords(APDUBuffer, 0x6F00);	
+					*APDURecvLen = 2;						
+				}
 			break;
 		default:
-			*APDURecvLen = 0;
-			SetStatusWords(APDUBuffer, 0x9000);	
-			*APDURecvLen = 2;
 			break;
 	}
 }
+
 
 void DataTransmit(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
 {
 	u8 ret=0,i;
 	u8 recevLen=0;
 	u8 tx_crc,rx_crc;
+
+	
 	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
   uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
   uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
   uint16_t  bP3 =  *(APDUBuffer+INDEX_P3);		
   uint8_t   *pData = (APDUBuffer+INDEX_DATA);
+	uint8_t 	CMD0=pData[0];
+	uint8_t 	CMD1=pData[1];	
+	uint8_t 	CMD2=pData[2];
+	uint8_t 	CMD3=pData[3];
+	uint8_t 	CMD4=pData[4];
+
 	uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
 	SetStatusWords(APDUBuffer, 0x9000);	
 	*APDURecvLen = 2;
@@ -510,35 +549,58 @@ void DataTransmit(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvL
 	}
 	else if(stuInRegs.bCurrentDevice==CURRENT_DEVICE_CT)
 	{
-		//TODO
-		
-		
+		if(APDUSendLen>5)
+		{
+			if(bP3!=(APDUSendLen-5))
+			{
+				SetStatusWords(APDUBuffer, 0x6F00);	
+				*APDURecvLen = 2;
+			}
+			else
+			{					
+				recevLen=0xFF;
+				ret=SC_DataTrancive(pData,bP3,&recevLen);
+				if(ret==SC_SUCCESS)
+				{
+					for(i=0;i<recevLen;i++)
+						APDUBuffer[i]=pData[i];
+					*APDURecvLen = recevLen;
+					
+					//Add For FM349 Init CMD(01)
+					if((bP3==5)&&(CMD0==0x00)&&(CMD1==0x01)&&(CMD4==0x00))
+					{
+						sc_tim.D=Di[CMD2&0x0F];
+						sc_tim.F=Fi[CMD2>>4];
+						SC_ETUConfig();
+					}
+				}
+				else
+				{
+					SetStatusWords(APDUBuffer, 0x6F00);
+					*APDURecvLen = 2;
+				}			
+			}
+		}
+		else
+		{
+			SetStatusWords(APDUBuffer, 0x6F00);	
+			*APDURecvLen = 2;
+		}				
 	}
 	
 }
 
 
 
-void DataReceive(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
-{
-	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
-  uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
-  uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
-  uint16_t  bP3 =  *(APDUBuffer+INDEX_P3);		
-  uint8_t   *pData = (APDUBuffer+INDEX_DATA);
-	uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
-	uint8_t ret;
-	
-
-	
-	SetStatusWords(APDUBuffer, 0x9000);	
-	*APDURecvLen=2;
-	
-		
-	
-	
-}
-
+/*******************************************************************************
+* Function Name  : SpecialAPDU.
+* Description    : Special APDU process.
+* Input          : APDUBuffer   : APDU bytes are stored here.
+                   APDUSendLen  : How many bytes will be sent to card.
+                   APDURecvLen  : How many bytes received from card.
+* Output         : None
+* Return         : None                   
+*******************************************************************************/
 /*******************************************************************************
 * Function Name  : SpecialAPDU.
 * Description    : Special APDU process.
@@ -555,7 +617,8 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
   uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
   uint16_t  bP3 =  *(APDUBuffer+INDEX_P3);		
   uint8_t   *pData = (APDUBuffer+INDEX_DATA);
-	
+	uint8_t ret;
+	uint16_t i;
 	uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
 	*APDURecvLen=0;
 	
@@ -612,8 +675,7 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 			}
 			else if(iParam==0x000101)//CT PPS
 			{
-				//if(ContactCardPPS(pData[0])==CT_T0_OK)
-				if(1)
+				if(ContactCardPPS(pData[0])==CT_T0_OK)
 				{	
 					SetStatusWords(APDUBuffer, 0x9000);	
 					*APDURecvLen = 2;	
@@ -631,18 +693,37 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 			}
 			break;			
 		case INS_DATA_RECEIVE:
-			DataReceive(APDUBuffer,APDUSendLen,APDURecvLen);
+			if(APDUSendLen>5)
+			{
+				if(bP3!=(APDUSendLen-5))
+				{
+					SetStatusWords(APDUBuffer, 0x6F00);	
+					*APDURecvLen = 2;
+				}
+				else
+				{
+					ret=ContactCardT0APDU(pData,bP3,APDURecvLen);
+					if(ret==CT_T0_OK)
+					{
+						for(i=0;i<*APDURecvLen;i++)
+							APDUBuffer[i]=pData[i];
+					}
+					else
+					{
+						SetStatusWords(APDUBuffer, 0x6F00);
+						*APDURecvLen = 2;
+					}
+				}
+			}
+			else
+			{
+				SetStatusWords(APDUBuffer, 0x6F00);
+				*APDURecvLen = 2;
+			}	
 			break;		
 		default:
 			SetStatusWords(APDUBuffer, 0x9000);	
 			*APDURecvLen = 2;		
 			break;		
 	}
-
-
-
-
-		
 }
-
-

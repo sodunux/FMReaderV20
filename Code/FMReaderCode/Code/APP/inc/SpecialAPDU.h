@@ -25,7 +25,7 @@
 /* bCurrentDevice constants */
 #define CURRENT_DEVICE_CT  0x01
 #define CURRENT_DEVICE_CL   0x02
-
+#define CURRENT_DEVICE_NO		0x03
 /* Timerout Status */
 #define TMO_STANDARD  0x01
 #define TMO_NONE_STANDARD  0x02

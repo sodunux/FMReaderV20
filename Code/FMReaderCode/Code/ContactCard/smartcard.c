@@ -138,8 +138,8 @@ u8 SC_PPS(u8 PPS1)
       /* PTS Confirm */
       if(PTSConfirmStatus == 0x01)
       {				
-				sc_tim.D=PPS1 & 0x0F;
-				sc_tim.F=(PPS1 >> 4) & 0x0F;
+				sc_tim.D=Di[PPS1 & 0x0F];
+				sc_tim.F=Fi[(PPS1 >> 4) & 0x0F];
 				SC_ETUConfig();
 				return SC_SUCCESS;
       }
@@ -162,6 +162,45 @@ void SC_ClkCmd(u8 stat)
 }
 
 
+/*******************************************************************************
+* Function Name  : SC_DataTrancive
+* Description    : Send Data and Receive Data
+* Input 		 : DataBuffer; sendlen,recevlen;
+* Return         : SC_SUCCESS, SC_ERROR
+*******************************************************************************/
+u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen)
+{
+	u8 i;
+	u8 ret,locData;
+	
+	USART_DMACmd(USART3, USART_DMAReq_Rx, ENABLE);
+	for(i=0;i<sendlen;i++)
+		SC_SendByte(buffer[i]);
+	(void)USART_ReceiveData(USART3);
+	
+	ret=SC_RecvByte(&locData, sc_tim.WaitTimeout);
+	if(ret==SC_ERROR)
+		return SC_ERROR;
+	else
+	{
+		buffer[0]=locData;
+		for(i=1;i<*recelen;i++)
+		{
+			ret=SC_RecvByte(&locData, sc_tim.WaitTimeout);
+			if(ret==SC_SUCCESS)
+				buffer[i]=locData;
+			else
+			{
+				*recelen=i;
+				return SC_SUCCESS;
+			}
+		}
+		return SC_SUCCESS;
+	}
+
+}
+
+
 
 void SC_Init(void)
 {
@@ -174,7 +213,7 @@ void SC_Init(void)
   	sc_tim.FreqDiv=SC_CLK_3P6M;
   	sc_tim.GuardTime=0x02; //2etu
   	sc_tim.AtrTimeout=400; //400ETU
-  	sc_tim.WaitTimeout=9600; //9600ETU
+  	sc_tim.WaitTimeout=100; //9600ETU
   	sc_tim.clk_cnt=0;
 
   	/* Enable GPIOB, GPIOD and GPIOE clocks */	
@@ -277,30 +316,65 @@ void SC_Init(void)
 
 
 
-u8 SC_ColdReset(u8 *atr,u8 len)
+u8 SC_ColdReset(u8 *atr,u8 *len)
 {	
 	u8 ret,i;
+	
+  USART_InitTypeDef USART_InitStructure;
+	sc_tim.F=Fi[0];
+  sc_tim.D=Di[0];
+  sc_tim.FreqDiv=SC_CLK_3P6M;
+  sc_tim.GuardTime=0x02; //2etu
+  sc_tim.AtrTimeout=400; //400ETU
+  sc_tim.WaitTimeout=100; //9600ETU
+  sc_tim.clk_cnt=0;
+	SC_ETUConfig();
+
 	SC_PowerOFF;
 	SC_ResetOFF;
 	SC_mDelay(10);	
 	SC_PowerON;
 	SC_ClkCmd(1);
+	SC_mDelay(5);
 	SC_ResetON;	
 	ret=SC_RecvByte(atr,sc_tim.AtrTimeout);
 	if(ret==SC_ERROR)
 		return SC_ERROR;
 	else
 	{
-		for(i=1;i<len;i++)
+		for(i=1;i<*len;i++)
 			SC_RecvByte(atr+i,20);
-		return SC_SUCCESS;
+
+		SC_decode_Answer2reset(atr);
+		if((SC_A2R.TS==0x3B)||(SC_A2R.TS==0x3F))
+		{
+			*len=SC_A2R.Hlength+SC_A2R.Tlength+2;
+			return SC_SUCCESS;
+		}
+		else
+		{
+			return SC_ERROR;
+		}
+
+
 	}
 }
 
 
-u8 SC_WarmReset(u8 *atr,u8 len)
+u8 SC_WarmReset(u8 *atr,u8 *len)
 {
 	u8 ret,i;
+	
+  USART_InitTypeDef USART_InitStructure;
+	sc_tim.F=Fi[0];
+  sc_tim.D=Di[0];
+  sc_tim.FreqDiv=SC_CLK_3P6M;
+  sc_tim.GuardTime=0x02; //2etu
+  sc_tim.AtrTimeout=400; //400ETU
+  sc_tim.WaitTimeout=100; //9600ETU
+  sc_tim.clk_cnt=0;
+	SC_ETUConfig();
+	
 	SC_ResetOFF;
 	SC_mDelay(5);
 	SC_ResetON;	
@@ -309,9 +383,18 @@ u8 SC_WarmReset(u8 *atr,u8 len)
 		return SC_ERROR;
 	else
 	{
-		for(i=1;i<len;i++)
-			SC_RecvByte(atr+i,10);
-		return SC_SUCCESS;
+		for(i=1;i<*len;i++)
+			SC_RecvByte(atr+i,20);
+		SC_decode_Answer2reset(atr);
+		if((SC_A2R.TS==0x3B)||(SC_A2R.TS==0x3F))
+		{
+			*len=SC_A2R.Hlength+SC_A2R.Tlength+2;
+			return SC_SUCCESS;
+		}
+		else
+		{
+			return SC_ERROR;
+		}
 	}
 }
 
@@ -378,9 +461,15 @@ void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceSta
 	
   if((SC_RecvByte(&locData, sc_tim.WaitTimeout)) == SC_SUCCESS)
   {
+		while(locData==0x60)
+		{
+			locData=0;
+			SC_RecvByte(&locData, sc_tim.WaitTimeout);
+		}
+					
     if(((locData & (u8)0xF0) == 0x60) || ((locData & (u8)0xF0) == 0x90))
     {
-      /* SW1 received */
+      /* SW1 received */			
       SC_ResponceStatus->SW1 = locData;
       if((SC_RecvByte(&locData, sc_tim.WaitTimeout)) == SC_SUCCESS)
       {
@@ -392,6 +481,7 @@ void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceSta
     {
       SC_ResponceStatus->Data[0] = locData;/* ACK received */
     }
+		
   }
 
   /* If no status bytes received ---------------------------------------------*/
@@ -420,35 +510,30 @@ void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceSta
         }
       }
     }
-    /* Wait SW1 --------------------------------------------------------------*/
-    i = 0;
-    while(i < 10)
-    {
-      if(SC_RecvByte(&locData, sc_tim.WaitTimeout) == SC_SUCCESS)
-      {
-        SC_ResponceStatus->SW1 = locData;
-        i = 11;
-      }
-      else
-      {
-        i++;
-      }
-    }
-    /* Wait SW2 ------------------------------------------------------------*/   
-    i = 0;
-    while(i < 10)
-    {
-      if(SC_RecvByte(&locData, sc_tim.WaitTimeout) == SC_SUCCESS)
-      {
-        SC_ResponceStatus->SW2 = locData;
-        i = 11;
-      }
-      else
-      {
-        i++;
-      }
-    }
-  }
+	}
+  /* Wait SW1 --------------------------------------------------------------*/
+	while(locData==0x60)
+	{
+		locData=0;
+		SC_RecvByte(&locData, sc_tim.WaitTimeout);
+	}
+	
+	if(SC_RecvByte(&locData, sc_tim.WaitTimeout) == SC_SUCCESS)
+	{
+		SC_ResponceStatus->SW1 = locData;
+	 
+	}
+
+
+/* Wait SW2 ------------------------------------------------------------*/   
+
+
+	if(SC_RecvByte(&locData, sc_tim.WaitTimeout) == SC_SUCCESS)
+	{
+		SC_ResponceStatus->SW2 = locData;
+	 
+	}
+
 }
 
 /*******************************************************************************
@@ -461,7 +546,8 @@ void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceSta
 u8 SC_decode_Answer2reset(u8 *card)
 {
   u32 i = 0, flag = 0, buf = 0, protocol = 0;
-
+	SC_A2R.Hlength=0;
+	SC_A2R.Tlength=0;
   SC_A2R.TS = card[0];  /* Initial character */
   SC_A2R.T0 = card[1];  /* Format character */
 
