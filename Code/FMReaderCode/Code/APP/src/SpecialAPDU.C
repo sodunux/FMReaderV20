@@ -693,26 +693,19 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 			}
 			break;			
 		case INS_DATA_RECEIVE:
-			if(APDUSendLen>5)
+			if(APDUSendLen==5)
 			{
-				if(bP3!=(APDUSendLen-5))
+				APDUBuffer[0]=0x00;
+				ret=ContactCardT0APDU(APDUBuffer,APDUSendLen,APDURecvLen);
+				if(ret==CT_T0_OK)
 				{
-					SetStatusWords(APDUBuffer, 0x6F00);	
-					*APDURecvLen = 2;
+					for(i=0;i<*APDURecvLen;i++)
+						APDUBuffer[i]=pData[i];
 				}
 				else
 				{
-					ret=ContactCardT0APDU(pData,bP3,APDURecvLen);
-					if(ret==CT_T0_OK)
-					{
-						for(i=0;i<*APDURecvLen;i++)
-							APDUBuffer[i]=pData[i];
-					}
-					else
-					{
-						SetStatusWords(APDUBuffer, 0x6F00);
-						*APDURecvLen = 2;
-					}
+					SetStatusWords(APDUBuffer, 0x6F00);
+					*APDURecvLen = 2;
 				}
 			}
 			else

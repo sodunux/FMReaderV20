@@ -458,6 +458,23 @@ namespace PcSc
             KeyFilter(e);
         }
 
+        public bool IsFMReaderV2() //判断是否为FMReader新卡机   
+        {
+            if (readers_cbox.Text.Contains("FMSH Reader V2."))
+            {
+                FM12XX_Card.isFMV02 = 1;
+                return true;
+            }
+
+            else 
+            {
+                FM12XX_Card.isFMV02 = 0;
+                return false;
+            }
+               
+        }
+ 
+
         string[] getReaders()
         {
            string[] ListReaders;
@@ -524,6 +541,7 @@ namespace PcSc
                 {
                     FM12XX_Card = new SmartCard(cardPtr);
                 }
+                IsFMReaderV2(); //Check FMReaderV20
 
             }
             catch (Exception ex)
@@ -11077,6 +11095,7 @@ namespace PcSc
             DisplayMessageLine("v1.160  2017-07-03   兼容 NXP MIFARE Classic EV1，认证时可选UID为第一重还是第二重。（陈楠楠）");
             DisplayMessageLine("v1.161  2017-07-13   新增FM347的CC认证关闭NVM加密选项。（杨松川）");
             DisplayMessageLine("v1.162  2017-08-02   增加FM347内部发卡初始化一键式。（杨松川）");
+            DisplayMessageLine("v1.163  2017-08-22   新增对新卡机的支持，主要对TransceiveCL、TransceiveCT和M1认证进行修改。（严鹏飞）");
 
         }
 
@@ -13411,40 +13430,74 @@ namespace PcSc
 
         private void Auth_button_Click(object sender, EventArgs e)
         {
-            string StrReceived, AuthBlockAddr;
-            byte AuthType, KeyMode;
-            int result;
+            if (IsFMReaderV2() == false)
+            {
+                string StrReceived, AuthBlockAddr;
+                byte AuthType, KeyMode;
+                int result;
+                if (auth_uidlevel_textBox.Text == "2")
+                    FM12XX_Card.auth_falg = 2;
+                else
+                    FM12XX_Card.auth_falg = 0;
+                display = "";
+                AuthType = (byte)(AuthType_comboBox.SelectedIndex == 1 ? 0x01 : 0x00);
+                KeyMode = (byte)(KeyMode_comboBox.SelectedIndex == 1 ? 0x61 : 0x60);
+                AuthBlockAddr = AuthBlock_textBox.Text;
+                result = FM12XX_Card.AUTH(AuthType, KeyMode, AuthBlockAddr, out StrReceived);
+                if (result != 0)
+                    display = result.ToString();
+                display = "认证:  \t<-\t" + StrReceived + display;
+                display = AuthType_comboBox.SelectedIndex == 1 ? "SH" : "Mifare" + display;
+                DisplayMessageLine(display);
+            }
+            else 
+            {
+                string keymode,AuthBlockAddr,StrReceived,key;
+                string command,display;
+                if (KeyMode_comboBox.SelectedIndex == 1)
+                    keymode ="01";
+                else
+                    keymode = "00";
+                AuthBlockAddr = AuthBlock_textBox.Text;
+                key =AuthKey_textBox.Text;
 
-            if(auth_uidlevel_textBox.Text=="2")
-                FM12XX_Card.auth_falg = 2;
-            else
-                FM12XX_Card.auth_falg = 0;
 
-            display = "";
-            AuthType = (byte)(AuthType_comboBox.SelectedIndex == 1 ? 0x01 : 0x00);
-            KeyMode = (byte)(KeyMode_comboBox.SelectedIndex == 1 ? 0x61 : 0x60);
-            AuthBlockAddr = AuthBlock_textBox.Text;
-            result = FM12XX_Card.AUTH(AuthType, KeyMode, AuthBlockAddr, out StrReceived);
-            if (result != 0)
-                display = result.ToString();
-            display = "认证:  \t<-\t" + StrReceived + display;
-            display = AuthType_comboBox.SelectedIndex == 1 ? "SH" : "Mifare" + display;
-            DisplayMessageLine(display);
+      
+                command = SmartCardCmd.MI_Authent + keymode + AuthBlockAddr + key;
 
+                FM12XX_Card.SendCommand(DeleteSpaceString(command), out StrReceived);
+                if (StrReceived == "9000")
+                    display = "Authent: Success!";
+                else
+                    display = "Authen: Failed!";
 
+                DisplayMessageLine(display);
+                   
+            }
         }
 
         private void Ldkey_button_Click(object sender, EventArgs e)
         {
-            string AuthKeys, StrReceived;
-            int result;
-            display = "";
-            AuthKeys = AuthKey_textBox.Text;
-            result = FM12XX_Card.LOADKEY(AuthKeys, out StrReceived);
-            if (result != 0)
-                display = result.ToString();
-            display = "加载密钥:  \t<-\t" + StrReceived + display;
-            DisplayMessageLine(display);
+
+            if (IsFMReaderV2() == false) //Old FMReader
+            {
+                string AuthKeys, StrReceived;
+                int result;
+                display = "";
+                AuthKeys = AuthKey_textBox.Text;
+                result = FM12XX_Card.LOADKEY(AuthKeys, out StrReceived);
+                if (result != 0)
+                    display = result.ToString();
+                display = "加载密钥:  \t<-\t" + StrReceived + display;
+                DisplayMessageLine(display);
+            }
+            else 
+            {
+                //Do Nothing
+                DisplayMessageLine("加载密钥: Success");
+            }
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)

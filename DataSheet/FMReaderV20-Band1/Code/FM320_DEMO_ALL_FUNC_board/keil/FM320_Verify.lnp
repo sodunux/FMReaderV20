@@ -1,3 +1,0 @@
---device DARMSTM ".\cortexm3_macro.o" ".\stm32f10x.o" "device_cfg.o" "global.o" "i2c.o" "main.o" "stm32f10x_it.o" "uart.o" "stm32f10x_usart.o" "stm32f10x_exti.o" "stm32f10x_flash.o" "stm32f10x_gpio.o" "stm32f10x_lib.o" "stm32f10x_nvic.o" "stm32f10x_rcc.o" "stm32f10x_systick.o" "stm32f10x_tim1.o" "stm32f10x_tim.o" "stm32f10x_spi.o" "regctrl.o" "readerapi.o" "cardapi.o" "basicapi.o" "test.o" "lpcd_regctrl.o" "lpcd_api.o" --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
---info sizes --info totals --info unused --info veneers 
- --list ".\list\FM320_Verify.map" -o "FM320_Verify.axf"

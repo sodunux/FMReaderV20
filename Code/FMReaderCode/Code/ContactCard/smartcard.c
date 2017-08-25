@@ -326,15 +326,16 @@ u8 SC_ColdReset(u8 *atr,u8 *len)
   sc_tim.FreqDiv=SC_CLK_3P6M;
   sc_tim.GuardTime=0x02; //2etu
   sc_tim.AtrTimeout=400; //400ETU
-  sc_tim.WaitTimeout=100; //9600ETU
+  sc_tim.WaitTimeout=100; //100ETU
   sc_tim.clk_cnt=0;
 	SC_ETUConfig();
-
+	
+	SC_mDelay(10);	
 	SC_PowerOFF;
 	SC_ResetOFF;
 	SC_mDelay(10);	
 	SC_PowerON;
-	SC_ClkCmd(1);
+	//SC_ClkCmd(1);
 	SC_mDelay(5);
 	SC_ResetON;	
 	ret=SC_RecvByte(atr,sc_tim.AtrTimeout);

@@ -115,7 +115,6 @@ void  BSP_Init (void)
 	CLCardInit();
   Set_USBClock();
   USB_Init();
-
   while(bUsbStatus < 1);
 
   CCIDInit();

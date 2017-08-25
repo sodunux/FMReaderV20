@@ -38,6 +38,7 @@ namespace PcSc
         string receive = "";
         string send = "";
         int CurrentInterface = 0; //1为CL 2为CT,0为开机状态
+        public int isFMV02 = 0; //Add for FMReaderV20
         public int auth_falg = 0;//CNN 20170703
         //card activation相关_cjn20151020
         public int UID_level = 0;
@@ -728,7 +729,24 @@ namespace PcSc
 
         }
 
+        public virtual int MiAUTH(string KeyMode, string AuthBlockAddr,string key, out string StrReceived) 
+        {
+            receive = "";
+            send = SmartCardCmd.MI_Authent + KeyMode + AuthBlockAddr+key;
+            SendCommand(send, out receive);
+            if (receive.Substring((receive.Length - 4), 4) != "9000")
+            {
+                StrReceived = "Error";// +receive;
+                return 1;
+            }
+            else
+            {
+                StrReceived = "Succeeded";
+                return 0;
+            }
 
+
+        }
         public virtual int AUTH(byte AuthType, byte KeyMode, string AuthBlockAddr, out string StrReceived)
         {
             byte tmp, block;
@@ -1525,10 +1543,20 @@ namespace PcSc
             SendCommand(send, out receive);
             if (receive.Length != 0)
             {
-                if (receive.Substring((receive.Length - 4), 4) == "9000") //无等待延时，需手动去取数据
+
+                if (isFMV02 == 0)
                 {
-                    StrReceived = receive.Substring((receive.Length - 4), 4);
+                    if (receive.Substring((receive.Length - 4), 4) == "9000") //无等待延时，需手动去取数据
+                    {
+                        StrReceived = receive.Substring((receive.Length - 4), 4);
+                        return 0;
+                    }
+                }
+                else
+                {
+                    StrReceived = receive; //FMReaderV20
                     return 0;
+
                 }
 
                 if (receive.Substring((receive.Length - 4), 2) == "61")//有数据返回，取出到dataReceive中 SW：61XX
@@ -1605,6 +1633,12 @@ namespace PcSc
             int ret = SendReceiveCL("E081", out ATR);
             return ret;
         }
+
+
+
+       
+
+
         /// <summary>
         /// TransceiveCT(string sendData,string TimeOut, ref string StrReceived)
         /// </summary>
@@ -1612,6 +1646,7 @@ namespace PcSc
         /// <param name="TimeOut"></param>
         /// <param name="StrReceived"></param>
         /// <returns></returns>
+        /// 
         public virtual int TransceiveCT(string sendData, string TimeOut, out string StrReceived)
         {
             string sendData_noSpace, len;
@@ -1639,12 +1674,21 @@ namespace PcSc
 
             SendCommand(send, out receive);
 
-            if (receive.Substring((receive.Length - 4), 4) == "9000") //无等待延时，需手动去取数据
-            {                
-                //StrReceived = receive.Substring((receive.Length - 4), 4);
-                StrReceived = receive;
-                return 0;
+            if (isFMV02 == 0)
+            {
+                if (receive.Substring((receive.Length - 4), 4) == "9000") //无等待延时，需手动去取数据
+                {
+                    StrReceived = receive.Substring((receive.Length - 4), 4);
+                    return 0;
+                }
             }
+            else
+            {
+                StrReceived = receive; //FMReaderV20
+                return 0;
+               
+            }
+               
             
             if (receive.Substring((receive.Length - 4), 2) == "61")//有数据返回，取出到dataReceive中 SW：61XX
             {

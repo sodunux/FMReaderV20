@@ -1,5 +1,5 @@
 Dependencies for Project 'CCID Reader uCos-II', Target 'CCID Reader uCos-II': (DO NOT MODIFY !)
-F (..\Code\APP\src\app.c)(0x599A8850)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\app.o --omf_browse .\output\app.crf --depend .\output\app.d)
+F (..\Code\APP\src\app.c)(0x599F8708)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\app.o --omf_browse .\output\app.crf --depend .\output\app.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
@@ -58,7 +58,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\APP\src\CCID.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\ccid.o --omf_browse .\output\ccid.crf --depend .\output\ccid.d)
 I (..\Code\STM32_USB-FS-Device_Driver\inc\usb_lib.h)(0x599A3065)
@@ -119,9 +119,9 @@ I (..\Code\ContactlessCard\ContactlessCard.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
-F (..\Code\APP\src\SpecialAPDU.C)(0x599A9165)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\specialapdu.o --omf_browse .\output\specialapdu.crf --depend .\output\specialapdu.d)
+F (..\Code\APP\src\SpecialAPDU.C)(0x599F8155)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\specialapdu.o --omf_browse .\output\specialapdu.crf --depend .\output\specialapdu.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
@@ -180,7 +180,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\APP\src\stm32f10x_it.c)(0x599A3170)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\stm32f10x_it.o --omf_browse .\output\stm32f10x_it.crf --depend .\output\stm32f10x_it.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
@@ -241,7 +241,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 I (..\Code\APP\inc\stm32f10x_it.h)(0x599A3065)
 F (..\Code\STM32F10x_StdPeriph_Driver\src\misc.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\misc.o --omf_browse .\output\misc.crf --depend .\output\misc.d)
@@ -950,7 +950,7 @@ I (..\Code\uCOS-II_Source\ucos_ii.h)(0x599A3065)
 I (..\Code\APP\inc\app_cfg.h)(0x599A3065)
 I (..\Code\APP\inc\os_cfg.h)(0x599A3065)
 I (..\Code\uCOS-II_Ports\os_cpu.h)(0x599A3065)
-F (..\Code\BSP\bsp.c)(0x599A3170)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\bsp.o --omf_browse .\output\bsp.crf --depend .\output\bsp.d)
+F (..\Code\BSP\bsp.c)(0x599F86F1)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\bsp.o --omf_browse .\output\bsp.crf --depend .\output\bsp.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
@@ -1009,15 +1009,15 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\BSP\retarget.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\retarget.o --omf_browse .\output\retarget.crf --depend .\output\retarget.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\rt_misc.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-F (..\Code\ContactCard\smartcard.c)(0x599A8F3D)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\smartcard.o --omf_browse .\output\smartcard.crf --depend .\output\smartcard.d)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+F (..\Code\ContactCard\smartcard.c)(0x599F85B2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\smartcard.o --omf_browse .\output\smartcard.crf --depend .\output\smartcard.d)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\APP\inc\stm32f10x.h)(0x599A3065)
 I (..\Code\CM3\core_cm3.h)(0x599A3065)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
@@ -1045,7 +1045,7 @@ I (..\Code\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h)(0x599A3065)
 I (..\Code\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h)(0x599A3065)
 I (..\Code\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h)(0x599A3065)
 I (..\Code\STM32F10x_StdPeriph_Driver\inc\misc.h)(0x599A3065)
-F (..\Code\ContactCard\ContactCard.C)(0x599A8162)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\contactcard.o --omf_browse .\output\contactcard.crf --depend .\output\contactcard.d)
+F (..\Code\ContactCard\ContactCard.C)(0x599A989F)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\contactcard.o --omf_browse .\output\contactcard.crf --depend .\output\contactcard.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
@@ -1104,7 +1104,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\ContactlessCard\ContactlessCard.C)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\contactlesscard.o --omf_browse .\output\contactlesscard.crf --depend .\output\contactlesscard.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
@@ -1165,7 +1165,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\ContactlessCard\FM320.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\fm320.o --omf_browse .\output\fm320.crf --depend .\output\fm320.d)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
@@ -1226,7 +1226,7 @@ I (..\Code\ContactlessCard\ContactlessCard.h)(0x599A3065)
 I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\STM32_USB-FS-Device_Driver\src\usb_core.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\usb_core.o --omf_browse .\output\usb_core.crf --depend .\output\usb_core.d)
 I (..\Code\STM32_USB-FS-Device_Driver\inc\usb_lib.h)(0x599A3065)
@@ -1364,7 +1364,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\STM32_USB-FS-Device_Driver\src\usb_init.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\usb_init.o --omf_browse .\output\usb_init.crf --depend .\output\usb_init.d)
 I (..\Code\STM32_USB-FS-Device_Driver\inc\usb_lib.h)(0x599A3065)
@@ -1580,7 +1580,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\STM32_USB-FS-Device_Driver\src\usb_pwr.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\usb_pwr.o --omf_browse .\output\usb_pwr.crf --depend .\output\usb_pwr.d)
 I (..\Code\APP\inc\includes.h)(0x599A3365)
@@ -1641,7 +1641,7 @@ I (..\Code\APP\inc\CCID.h)(0x599A3065)
 I (..\Code\APP\inc\SpecialAPDU.h)(0x599A4456)
 I (..\Code\ContactlessCard\FM320.h)(0x599A3065)
 I (..\Code\APP\inc\PICCCmdConst.h)(0x599A3065)
-I (..\Code\ContactCard\smartcard.h)(0x599A8890)
+I (..\Code\ContactCard\smartcard.h)(0x599A989F)
 I (..\Code\ContactCard\ContactCard.h)(0x599A803F)
 F (..\Code\STM32_USB-FS-Device_Driver\src\usb_regs.c)(0x599A3065)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Code\APP\inc -I..\Code\BSP -I..\Code\CM3 -I..\Code\ContactCard -I..\Code\ContactlessCard -I..\Code\STM32F10x_StdPeriph_Driver\inc -I..\Code\STM32_USB-FS-Device_Driver\inc -I..\Code\uCOS-II_Ports -I..\Code\uCOS-II_Source-I C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.0.0\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\usb_regs.o --omf_browse .\output\usb_regs.crf --depend .\output\usb_regs.d)
 I (..\Code\STM32_USB-FS-Device_Driver\inc\usb_lib.h)(0x599A3065)

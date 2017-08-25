@@ -269,10 +269,11 @@ void CCID_handler(void)
 						abAPDUBuffer[10] = 0x36;
 						abAPDUBuffer[11] = 0x0F;
 						iAPDUBufferRecvLen = 12;
+						SC_Init();
 	        break;
 					case ACT_POWER_OFF:
-
-						__nop();
+						SC_DeInit();
+						FM320_POWEROFF;
 					break;
 				
 					//指令交换的分支
