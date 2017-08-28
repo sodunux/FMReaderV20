@@ -200,7 +200,7 @@ u8 SC_WarmReset(u8 *atr,u8 *len);
 u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen);
 void SC_InterruptHandler(void);
 void SC_ApduExchange(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceStatus);
-
+void SC_TimConfig(void);
 extern SC_ATR SC_A2R;
 extern u8 SC_ATR_Table[40];
 extern SC_ADPU_Commands apdu_commands;

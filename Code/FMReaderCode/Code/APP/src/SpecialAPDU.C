@@ -431,6 +431,7 @@ void SpecApduCT(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 	*APDURecvLen = 2;
 	switch(iParam)
 	{
+		
 		case 0x010001: //InitCT
 				SC_Init();
 			break;

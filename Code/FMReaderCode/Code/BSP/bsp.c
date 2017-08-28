@@ -116,7 +116,7 @@ void  BSP_Init (void)
   Set_USBClock();
   USB_Init();
   while(bUsbStatus < 1);
-
+	SC_TimConfig();
   CCIDInit();
   InRegsInit();
 	

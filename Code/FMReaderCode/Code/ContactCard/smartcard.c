@@ -200,7 +200,26 @@ u8 SC_DataTrancive(u8 *buffer,u8 sendlen,u8* recelen)
 
 }
 
-
+void SC_TimConfig(void)
+{
+		TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+		sc_tim.F=Fi[0];
+  	sc_tim.D=Di[0];
+  	sc_tim.FreqDiv=SC_CLK_3P6M;
+  	sc_tim.GuardTime=0x02; //2etu
+  	sc_tim.AtrTimeout=400; //400ETU
+  	sc_tim.WaitTimeout=100; //9600ETU
+  	sc_tim.clk_cnt=0;
+		/*********************TIM3 timeout**********************/
+		TIM_TimeBaseStructure.TIM_Period=(sc_tim.F/sc_tim.D)-1;
+		TIM_TimeBaseStructure.TIM_Prescaler =(sc_tim.FreqDiv*4)-1;
+		TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+		TIM_TimeBaseInit(TIM3, & TIM_TimeBaseStructure);
+		TIM_ARRPreloadConfig(TIM3, ENABLE);
+		TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);
+		TIM_Cmd(TIM3,ENABLE);
+	
+}
 
 void SC_Init(void)
 {
@@ -293,13 +312,13 @@ void SC_Init(void)
   	/* Enable the Smartcard Interface */
   	USART_SmartCardCmd(USART3, ENABLE);
 		/*********************TIM3 timeout**********************/
-		TIM_TimeBaseStructure.TIM_Period=(sc_tim.F/sc_tim.D)-1;
-		TIM_TimeBaseStructure.TIM_Prescaler =(sc_tim.FreqDiv*4)-1;
-		TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-		TIM_TimeBaseInit(TIM3, & TIM_TimeBaseStructure);
-		TIM_ARRPreloadConfig(TIM3, ENABLE);
-		TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);
-		TIM_Cmd(TIM3,ENABLE);
+//		TIM_TimeBaseStructure.TIM_Period=(sc_tim.F/sc_tim.D)-1;
+//		TIM_TimeBaseStructure.TIM_Prescaler =(sc_tim.FreqDiv*4)-1;
+//		TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+//		TIM_TimeBaseInit(TIM3, & TIM_TimeBaseStructure);
+//		TIM_ARRPreloadConfig(TIM3, ENABLE);
+//		TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);
+//		TIM_Cmd(TIM3,ENABLE);
 
   	SC_VoltageConfig(SC_Voltage_3V);
   	/* Set  CLKDIV=div1 */
@@ -309,8 +328,8 @@ void SC_Init(void)
 		SC_ResetOFF;		
 		SC_PowerOFF;
 		SC_mDelay(100);
-		SC_PowerON;
-		SC_mDelay(100);
+//		SC_PowerOFF;
+//		SC_mDelay(100);
   	SC_VoltageConfig(SC_Voltage_3V);		
 }
 

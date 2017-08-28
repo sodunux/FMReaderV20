@@ -166,22 +166,6 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>118</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134241710</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Code\BSP\bsp.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\CCID_Reader_uCos_II\../Code/BSP/bsp.c\118</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
           <LineNumber>192</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>134219056</Address>
@@ -194,6 +178,38 @@
           <Filename>..\Code\APP\src\CCID.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/CCID.c\192</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>632</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221864</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Code\APP\src\SpecialAPDU.C</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/SpecialAPDU.C\632</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>634</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221870</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Code\APP\src\SpecialAPDU.C</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CCID_Reader_uCos_II\../Code/APP/src/SpecialAPDU.C\634</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -286,6 +302,11 @@
           <count>17</count>
           <WinNumber>1</WinNumber>
           <ItemText>recelen</ItemText>
+        </Ww>
+        <Ww>
+          <count>18</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>stuInRegs.bCurrentDevice</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -492,11 +513,11 @@
       <bLintAuto>0</bLintAuto>
       <SystemViewers>
         <Entry>
-          <Name>System Viewer\GPIOD</Name>
+          <Name>System Viewer\RCC</Name>
           <WinId>35905</WinId>
         </Entry>
         <Entry>
-          <Name>System Viewer\USART3</Name>
+          <Name>System Viewer\TIM3</Name>
           <WinId>35904</WinId>
         </Entry>
       </SystemViewers>
@@ -558,7 +579,7 @@
       <GroupNumber>1</GroupNumber>
       <FileNumber>4</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
+      <tvExp>1</tvExp>
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
@@ -1076,7 +1097,7 @@
       <GroupNumber>4</GroupNumber>
       <FileNumber>42</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
