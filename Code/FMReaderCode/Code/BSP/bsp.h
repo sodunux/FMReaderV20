@@ -121,6 +121,8 @@ void Set_USBClock(void);
 void SPI_Config(void);
 void RCC_Config(void);
 void GPIO_Config(void);
+void IIC_Config(void);
+void SPI_Config(void);
 
 /*
 *********************************************************************************************************

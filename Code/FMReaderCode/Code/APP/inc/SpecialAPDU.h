@@ -66,6 +66,9 @@ void SpecApduCT(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
 void DataTransmit(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
 void DataReceive(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+void IIC_Handler(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+void SPI_Handler(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen);
+
 
 extern uint8_t InitCmd04Flag;
 extern uint8_t InitCmd00Flag;

@@ -22,7 +22,7 @@ Dialog DLL:      TARMSTM.DLL V1.64.0.0
  
 <h2>Project:</h2>
 C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\CCID Reader uCos-II.uvprojx
-Project File Date:  08/21/2017
+Project File Date:  11/01/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.05 update 2 (build 169)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -30,56 +30,225 @@ Build target 'CCID Reader uCos-II'
 compiling app.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\APP\src\app.c: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\APP\src\app.c: 8 warnings, 0 errors
 compiling CCID.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\APP\src\CCID.c: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\APP\src\CCID.c: 8 warnings, 0 errors
 compiling SpecialAPDU.C...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
 ..\Code\APP\src\SpecialAPDU.C(41): warning:  #177-D: variable "bINS" was declared but never referenced
         uint8_t   bINS = *(APDUBuffer+INDEX_INS);
-..\Code\APP\src\SpecialAPDU.C(422): warning:  #177-D: variable "b" was declared but never referenced
+..\Code\APP\src\SpecialAPDU.C(424): warning:  #177-D: variable "b" was declared but never referenced
         uint8_t b,ret;
-..\Code\APP\src\SpecialAPDU.C(424): warning:  #177-D: variable "bINS" was declared but never referenced
+..\Code\APP\src\SpecialAPDU.C(426): warning:  #177-D: variable "bINS" was declared but never referenced
         uint8_t   bINS = *(APDUBuffer+INDEX_INS);
-..\Code\APP\src\SpecialAPDU.C(493): warning:  #177-D: variable "bINS" was declared but never referenced
+..\Code\APP\src\SpecialAPDU.C(495): warning:  #177-D: variable "bINS" was declared but never referenced
         uint8_t   bINS = *(APDUBuffer+INDEX_INS);
-..\Code\APP\src\SpecialAPDU.C(501): warning:  #177-D: variable "CMD3" was declared but never referenced
+..\Code\APP\src\SpecialAPDU.C(503): warning:  #177-D: variable "CMD3" was declared but never referenced
         uint8_t         CMD3=pData[3];
-..\Code\APP\src\SpecialAPDU.C(504): warning:  #177-D: variable "iParam" was declared but never referenced
+..\Code\APP\src\SpecialAPDU.C(506): warning:  #177-D: variable "iParam" was declared but never referenced
         uint32_t iParam=(bP1<<16)|(bP2<<8)|(bP3<<0);
-..\Code\APP\src\SpecialAPDU.C: 7 warnings, 0 errors
+..\Code\APP\src\SpecialAPDU.C(599): warning:  #177-D: variable "bINS" was declared but never referenced
+        uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+..\Code\APP\src\SpecialAPDU.C(600): warning:  #177-D: variable "bP1" was declared but never referenced
+    uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
+..\Code\APP\src\SpecialAPDU.C(601): warning:  #177-D: variable "bP2" was declared but never referenced
+    uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
+..\Code\APP\src\SpecialAPDU.C(638): warning:  #177-D: variable "bINS" was declared but never referenced
+        uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+..\Code\APP\src\SpecialAPDU.C(639): warning:  #177-D: variable "bP1" was declared but never referenced
+    uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
+..\Code\APP\src\SpecialAPDU.C(640): warning:  #177-D: variable "bP2" was declared but never referenced
+    uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
+..\Code\APP\src\SpecialAPDU.C(641): warning:  #177-D: variable "bRxlen" was declared but never referenced
+    uint8_t     bRxlen =  *(APDUBuffer+INDEX_P3);               
+..\Code\APP\src\SpecialAPDU.C(642): warning:  #177-D: variable "SPI_Mode" was declared but never referenced
+    uint8_t     SPI_Mode = *(APDUBuffer+INDEX_DATA);
+..\Code\APP\src\SpecialAPDU.C(643): warning:  #177-D: variable "pSendData" was declared but never referenced
+        uint8_t         *pSendData=(APDUBuffer+INDEX_DATA+1);   
+..\Code\APP\src\SpecialAPDU.C: 23 warnings, 0 errors
 compiling stm32f10x_it.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\APP\src\stm32f10x_it.c: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\APP\src\stm32f10x_it.c: 8 warnings, 0 errors
 compiling bsp.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\BSP\bsp.c: 1 warning, 0 errors
-compiling smartcard.c...
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\BSP\bsp.c: 8 warnings, 0 errors
+compiling IIC.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\ContactCard\smartcard.c(228): warning:  #177-D: variable "TIM_TimeBaseStructure" was declared but never referenced
-                TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-..\Code\ContactCard\smartcard.c(342): warning:  #177-D: variable "USART_InitStructure" was declared but never referenced
-    USART_InitTypeDef USART_InitStructure;
-..\Code\ContactCard\smartcard.c(388): warning:  #177-D: variable "USART_InitStructure" was declared but never referenced
-    USART_InitTypeDef USART_InitStructure;
-..\Code\ContactCard\smartcard.c: 4 warnings, 0 errors
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\BSP\IIC.c(38): warning:  #188-D: enumerated type mixed with another type
+        if(!
+DA_READ)return 
+ALSE;   //SDA?????????,??
+..\Code\BSP\IIC.c(41): warning:  #188-D: enumerated type mixed with another type
+        if(
+DA_READ) return 
+ALSE;   //SDA??????????,??
+..\Code\BSP\IIC.c(44): warning:  #188-D: enumerated type mixed with another type
+        return 
+RUE;
+..\Code\BSP\IIC.c(130): warning:  #188-D: enumerated type mixed with another type
+                return 
+ALSE;
+..\Code\BSP\IIC.c(134): warning:  #188-D: enumerated type mixed with another type
+        return 
+RUE;
+..\Code\BSP\IIC.c(218): warning:  #188-D: enumerated type mixed with another type
+                return 0;
+..\Code\BSP\IIC.c(225): warning:  #188-D: enumerated type mixed with another type
+                        return 0;
+..\Code\BSP\IIC.c(229): warning:  #188-D: enumerated type mixed with another type
+        return 1;
+..\Code\BSP\IIC.c(211): warning:  #177-D: variable "bccvalue" was declared but never referenced
+        u8 i,bccvalue;
+..\Code\BSP\IIC.c(254): warning:  #188-D: enumerated type mixed with another type
+                        return 0;
+..\Code\BSP\IIC.c(266): warning:  #188-D: enumerated type mixed with another type
+        return 1;
+..\Code\BSP\IIC.c: 20 warnings, 0 errors
 compiling ContactCard.C...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\ContactCard\ContactCard.C: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\ContactCard\ContactCard.C: 8 warnings, 0 errors
 compiling ContactlessCard.C...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\ContactlessCard\ContactlessCard.C: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\ContactlessCard\ContactlessCard.C: 8 warnings, 0 errors
 compiling FM320.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
 ..\Code\ContactlessCard\FM320.c(108): warning:  #188-D: enumerated type mixed with another type
                 return 
 alse;
@@ -124,27 +293,69 @@ alse;
 ..\Code\ContactlessCard\FM320.c(1140): warning:  #188-D: enumerated type mixed with another type
         return 
 rue;    
-..\Code\ContactlessCard\FM320.c: 19 warnings, 0 errors
+..\Code\ContactlessCard\FM320.c: 26 warnings, 0 errors
 compiling usb_endp.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\STM32_USB-FS-Device_Driver\src\usb_endp.c: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\STM32_USB-FS-Device_Driver\src\usb_endp.c: 8 warnings, 0 errors
 compiling usb_prop.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
-..\Code\STM32_USB-FS-Device_Driver\src\usb_prop.c: 1 warning, 0 errors
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Code\STM32_USB-FS-Device_Driver\src\usb_prop.c: 8 warnings, 0 errors
 compiling usb_pwr.c...
 ..\Code\ContactCard\smartcard.h(193): warning:  #1295-D: Deprecated declaration SC_ETUConfig - give arg types
   void SC_ETUConfig();
+..\Code\BSP\IIC.h(17): warning:  #1295-D: Deprecated declaration IIC_Start - give arg types
+  bool IIC_Start();
+..\Code\BSP\IIC.h(18): warning:  #1295-D: Deprecated declaration IIC_Stop - give arg types
+  void IIC_Stop();
+..\Code\BSP\IIC.h(19): warning:  #1295-D: Deprecated declaration IIC_Ack - give arg types
+  void IIC_Ack();
+..\Code\BSP\IIC.h(20): warning:  #1295-D: Deprecated declaration IIC_NoAck - give arg types
+  void IIC_NoAck();
+..\Code\BSP\IIC.h(21): warning:  #1295-D: Deprecated declaration IIC_WaitAck - give arg types
+  bool IIC_WaitAck();
+..\Code\BSP\IIC.h(23): warning:  #1295-D: Deprecated declaration IIC_ReadByte - give arg types
+  u8 IIC_ReadByte();
+..\Code\BSP\IIC.h(27): warning:  #1-D: last line of file ends without a newline
+  #endif
 ..\Code\STM32_USB-FS-Device_Driver\src\usb_pwr.c(24): warning:  #188-D: enumerated type mixed with another type
   
 _IO bool fSuspendEnabled = 
 RUE;  /* true when suspend is possible */
-..\Code\STM32_USB-FS-Device_Driver\src\usb_pwr.c: 2 warnings, 0 errors
+..\Code\STM32_USB-FS-Device_Driver\src\usb_pwr.c: 9 warnings, 0 errors
 linking...
-Program Size: Code=39700 RO-data=812 RW-data=476 ZI-data=8268  
+Program Size: Code=40748 RO-data=812 RW-data=476 ZI-data=8268  
 FromELF: creating hex file...
-".\output\CCID Reader uCos-II.axf" - 0 Error(s), 40 Warning(s).
+".\output\CCID Reader uCos-II.axf" - 0 Error(s), 142 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\a\Documents\GitHub\FMReaderV20\Code\FMReaderCode\project\RTE

@@ -61,4 +61,5 @@
 .\output\usb_endp.o: ..\Code\APP\inc\PICCCmdConst.h
 .\output\usb_endp.o: ..\Code\ContactCard\smartcard.h
 .\output\usb_endp.o: ..\Code\ContactCard\ContactCard.h
+.\output\usb_endp.o: ..\Code\BSP\IIC.h
 .\output\usb_endp.o: ..\Code\APP\inc\CCID.h

@@ -62,3 +62,4 @@
 .\output\fm320.o: ..\Code\APP\inc\PICCCmdConst.h
 .\output\fm320.o: ..\Code\ContactCard\smartcard.h
 .\output\fm320.o: ..\Code\ContactCard\ContactCard.h
+.\output\fm320.o: ..\Code\BSP\IIC.h

@@ -61,3 +61,4 @@
 .\output\specialapdu.o: ..\Code\APP\inc\PICCCmdConst.h
 .\output\specialapdu.o: ..\Code\ContactCard\smartcard.h
 .\output\specialapdu.o: ..\Code\ContactCard\ContactCard.h
+.\output\specialapdu.o: ..\Code\BSP\IIC.h

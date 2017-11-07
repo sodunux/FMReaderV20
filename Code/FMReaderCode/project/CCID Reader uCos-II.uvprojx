@@ -642,6 +642,11 @@
               <FileType>1</FileType>
               <FilePath>..\Code\BSP\retarget.c</FilePath>
             </File>
+            <File>
+              <FileName>IIC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Code\BSP\IIC.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

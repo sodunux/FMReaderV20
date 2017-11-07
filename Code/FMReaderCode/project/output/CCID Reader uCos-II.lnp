@@ -42,6 +42,7 @@
 ".\output\os_tmr.o"
 ".\output\bsp.o"
 ".\output\retarget.o"
+".\output\iic.o"
 ".\output\smartcard.o"
 ".\output\contactcard.o"
 ".\output\contactlesscard.o"

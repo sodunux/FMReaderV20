@@ -61,4 +61,5 @@
 .\output\stm32f10x_it.o: ..\Code\APP\inc\PICCCmdConst.h
 .\output\stm32f10x_it.o: ..\Code\ContactCard\smartcard.h
 .\output\stm32f10x_it.o: ..\Code\ContactCard\ContactCard.h
+.\output\stm32f10x_it.o: ..\Code\BSP\IIC.h
 .\output\stm32f10x_it.o: ..\Code\APP\inc\stm32f10x_it.h

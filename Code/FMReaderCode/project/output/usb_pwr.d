@@ -61,3 +61,4 @@
 .\output\usb_pwr.o: ..\Code\APP\inc\PICCCmdConst.h
 .\output\usb_pwr.o: ..\Code\ContactCard\smartcard.h
 .\output\usb_pwr.o: ..\Code\ContactCard\ContactCard.h
+.\output\usb_pwr.o: ..\Code\BSP\IIC.h

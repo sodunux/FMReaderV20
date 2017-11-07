@@ -119,7 +119,7 @@ void  BSP_Init (void)
 	SC_TimConfig();
   CCIDInit();
   InRegsInit();
-	
+	IIC_Config();
 	for(i=1; i<5; i++)
 	{
 		LEDShow(i,Bit_SET);	
@@ -218,6 +218,9 @@ void RCC_Config(void)
 }
 
 
+
+
+
 /*******************************************************************************
 * Function Name  : GPIOPinxConfig
 * Description    : Configures one GPIO pin used by MCU.
@@ -234,6 +237,43 @@ void GPIOPinxConfig(GPIO_TypeDef* GPIOx, INT16U GPIOPinx, GPIOSpeed_TypeDef Spee
 	GPIO_InitStructure.GPIO_Speed = Speed;
 	GPIO_InitStructure.GPIO_Mode = Mode;
 	GPIO_Init(GPIOx, &GPIO_InitStructure);      
+}
+
+
+void IIC_Config(void)
+{
+	GPIOPinxConfig(IIC_PORT, IIC_SCL, GPIO_Speed_50MHz, GPIO_Mode_Out_OD);
+	GPIOPinxConfig(IIC_PORT, IIC_SDA, GPIO_Speed_50MHz, GPIO_Mode_Out_OD);
+}
+
+void SPI_Config(void)
+{
+	GPIO_InitTypeDef   	GPIO_InitStructure;	
+	//enable the SPI Clock
+	//config SPI GPIO
+	//FM320_NRSTPD
+	GPIO_InitStructure.GPIO_Pin = FM320_NRSTPD;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+  GPIO_Init(FM320_NRSTPD_PORT, &GPIO_InitStructure);//NRSTPD
+	FM320_POWEROFF;
+	// Configure SPI1 NSS (PA.4)¡¢SCK(PA.5)¡¢MISO(PA.6)¡¢MOSI(PA.7) as alternate function push-pull  
+  GPIO_InitStructure.GPIO_Pin = FM320_MISO | FM320_MOSI | FM320_SCK; 
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 
+	GPIO_Init(FM320_SCK_PORT, &GPIO_InitStructure);  
+	//	FM320_NSS 
+  GPIO_InitStructure.GPIO_Pin = FM320_NSS;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
+  GPIO_Init(FM320_NSS_PORT, &GPIO_InitStructure);
+  /* Enable SPI1 */
+	FM320_NSS_CLR;
+	SPI_I2S_ITConfig(SPI1,SPI_I2S_IT_TXE|SPI_I2S_IT_RXNE,DISABLE);	
+  SPI_Cmd(SPI1, ENABLE);
+
+	
+	
 }
 
 /*******************************************************************************
@@ -266,7 +306,7 @@ void GPIO_Config(void)
 	GPIOPinxConfig(LED_PORT, LED_PIN_3, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
 	GPIOPinxConfig(LED_PORT, LED_PIN_4, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);
 	
-	GPIOPinxConfig(GPIOB, GPIO_Pin_7, GPIO_Speed_50MHz, GPIO_Mode_Out_PP);	
+
 	
 }
 

@@ -61,4 +61,5 @@
 //#include "SCard.h"
 #include "smartcard.h"
 #include "ContactCard.h"
+#include "IIC.h"
 #endif

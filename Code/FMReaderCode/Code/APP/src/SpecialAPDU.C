@@ -208,7 +208,9 @@ void SpecApduCL(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen
 				*APDURecvLen=2;
 			}			
 			break;
-
+		
+		
+			
 		case 0x010701://MI_HALT
 			ret=FM320_ReaderA_HALT();
 			if(ret)
@@ -592,6 +594,62 @@ void DataTransmit(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvL
 }
 
 
+void IIC_Handler(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
+{
+	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+  uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
+  uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
+  uint8_t   bRxlen =  *(APDUBuffer+INDEX_P3);		
+  uint8_t   IIC_Addr = *(APDUBuffer+INDEX_DATA);
+	uint8_t 	*pSendData=(APDUBuffer+INDEX_DATA+1);
+	uint8_t ret;
+	
+	SetStatusWords(APDUBuffer, 0x9000);	
+	*APDURecvLen = 2;
+	
+	ret=IIC_SendData(IIC_Addr,pSendData,(u8)APDUSendLen);
+	if(ret!=true)
+	{
+		SetStatusWords(APDUBuffer, 0x6700);	
+		*APDURecvLen = 2;		
+	}
+	else
+	{
+		ret=IIC_ReadData(IIC_Addr,APDUBuffer,bRxlen);
+		if(ret!=true)
+		{
+			SetStatusWords(APDUBuffer, 0x6700);
+			*APDURecvLen = 2;			
+		}
+		else
+		{
+			SetStatusWords(APDUBuffer+bRxlen, 0x9000);
+			*APDURecvLen = bRxlen+2;
+		}
+	}
+	
+	
+	
+	
+	
+}
+void SPI_Handler(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLen)
+{
+	uint8_t   bINS = *(APDUBuffer+INDEX_INS);
+  uint8_t   bP1 =  *(APDUBuffer+INDEX_P1);
+  uint8_t   bP2 =  *(APDUBuffer+INDEX_P2);
+  uint8_t  	bRxlen =  *(APDUBuffer+INDEX_P3);		
+  uint8_t  	SPI_Mode = *(APDUBuffer+INDEX_DATA);
+	uint8_t 	*pSendData=(APDUBuffer+INDEX_DATA+1);	
+	
+	SPI_Config();
+	
+	
+	
+	
+	
+}
+
 
 /*******************************************************************************
 * Function Name  : SpecialAPDU.
@@ -714,7 +772,16 @@ void SpecialAPDU(uint8_t *APDUBuffer, uint16_t APDUSendLen, uint16_t *APDURecvLe
 				SetStatusWords(APDUBuffer, 0x6F00);
 				*APDURecvLen = 2;
 			}	
-			break;		
+			break;
+			
+		case INS_SPI_OPERATION:
+			SPI_Handler(APDUBuffer,APDUSendLen,APDURecvLen);
+			break;
+		
+		case INS_I2C_OPERATION:
+			IIC_Handler(APDUBuffer,APDUSendLen,APDURecvLen);
+			break;
+		
 		default:
 			SetStatusWords(APDUBuffer, 0x9000);	
 			*APDURecvLen = 2;		
